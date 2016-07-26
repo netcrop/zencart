@@ -1,10 +1,17 @@
 <?php
 /**
  * @package admin
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version GIT: $Id: Author: DrByte  Jun 30 2014 Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Thu Mar 3 12:16:32 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
   require('includes/application_top.php');
@@ -325,8 +332,12 @@ if ($_GET['debug']=='ON') echo $line . '<br />';
       } //endif ! # or -
     } // end foreach $lines
     zen_record_admin_activity('Admin SQL Patch tool executed a query.', 'notice');
+<<<<<<< HEAD
     $zco_notifier->notify('ADMIN_SQLPATCH_APPLIED', $string, $results, $return_output, $ignored_count, $errors);
     return array('queries'=> $results, 'string'=>$string, 'output'=>$return_output, 'ignored'=>($ignored_count), 'errors'=>$errors);
+=======
+   return array('queries'=> $results, 'string'=>$string, 'output'=>$return_output, 'ignored'=>($ignored_count), 'errors'=>$errors);
+>>>>>>> upstream/master
   } //end function
 
   function zen_table_exists($tablename, $pre_install=false) {

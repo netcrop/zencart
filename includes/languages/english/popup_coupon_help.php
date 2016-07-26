@@ -1,10 +1,14 @@
 <?php
 /**
  * @package languageDefines
+<<<<<<< HEAD
  * @copyright Copyright 2003-2014 Zen Cart Development Team
+=======
+ * @copyright Copyright 2003-2013 Zen Cart Development Team
+>>>>>>> upstream/master
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version $Id: popup_coupon_help.php 14141 2009-08-10 19:34:47Z wilt $
+ * @version GIT: $Id: Author: DrByte  Wed Nov 6 20:54:59 2013 -0500 Modified in v1.5.2 $
  */
 
 define('TEXT_COUPON_HELP_HEADER', '<strong>The Discount Coupon Redemption Code you have entered is for</strong> ');
@@ -33,3 +37,7 @@ define('TEXT_NO_PROD_SALES', '<p>This coupon is not valid for products on sale.<
 define('TEXT_COUPON_GV_RESTRICTION','Discount Coupons may not be applied towards the purchase of ' . TEXT_GV_NAMES . '.');
 
 define('TEXT_COUPON_GV_RESTRICTION_ZONES', 'Billing Address Restrictions apply.');
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/master

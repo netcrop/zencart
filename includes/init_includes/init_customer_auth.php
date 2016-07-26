@@ -4,10 +4,17 @@
  * see {@link  http://www.zen-cart.com/wiki/index.php/Developers_API_Tutorials#InitSystem wikitutorials} for more details.
  *
  * @package initSystem
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version GIT: $Id: Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Sun Oct 18 23:45:35 2015 -0400 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 if (!defined('IS_ADMIN_FLAG')) {
   die('Illegal Access');
@@ -60,7 +67,11 @@ if ((int)$_SESSION['customer_id'] > 0) {
     zen_session_destroy();
     zen_redirect(zen_href_link(FILENAME_LOGIN));
   }
+<<<<<<< HEAD
   if ($_SESSION['customers_authorization'] != 0 && in_array(zcRequest::readGet('main_page'), array(FILENAME_CHECKOUT_FLOW))) {
+=======
+  if ($_SESSION['customers_authorization'] != 0 && in_array($_GET['main_page'], array(FILENAME_CHECKOUT_SHIPPING, FILENAME_CHECKOUT_PAYMENT, FILENAME_CHECKOUT_CONFIRMATION))) {
+>>>>>>> upstream/master
     // this account is not valid for checkout
     global $messageStack;
     $messageStack->add_session('header', TEXT_AUTHORIZATION_PENDING_CHECKOUT, 'caution');
@@ -86,7 +97,10 @@ switch (true) {
   case (preg_match('|ajax\.php$|', $_SERVER['SCRIPT_NAME'])):
   break;
 
+<<<<<<< HEAD
   // if DFM is in strict mode, then block access to all pages:
+=======
+>>>>>>> upstream/master
   case ($down_for_maint_flag && DOWN_FOR_MAINTENANCE_TYPE == 'strict'):
     zen_redirect(zen_href_link(DOWN_FOR_MAINTENANCE_FILENAME));
   break;
@@ -146,13 +160,21 @@ switch (true) {
  * check store status before authorizations
  */
   case (STORE_STATUS != 0):
+<<<<<<< HEAD
   break;
+=======
+    break;
+>>>>>>> upstream/master
 
   case (CUSTOMERS_APPROVAL_AUTHORIZATION == '1' and (int)$_SESSION['customer_id'] == 0):
   /**
    * customer must be logged in to browse
    */
+<<<<<<< HEAD
   if (!in_array(zcRequest::readGet('main_page'), array(FILENAME_ORDER_STATUS, FILENAME_LOGIN, FILENAME_LOGOFF, FILENAME_CREATE_ACCOUNT, FILENAME_PASSWORD_FORGOTTEN, FILENAME_CONTACT_US, FILENAME_PRIVACY, DOWN_FOR_MAINTENANCE_FILENAME))) {
+=======
+  if (!in_array($_GET['main_page'], array(FILENAME_LOGIN, FILENAME_LOGOFF, FILENAME_CREATE_ACCOUNT, FILENAME_PASSWORD_FORGOTTEN, FILENAME_CONTACT_US, FILENAME_PRIVACY, DOWN_FOR_MAINTENANCE_FILENAME))) {
+>>>>>>> upstream/master
     if (!isset($_GET['set_session_login'])) {
       $_GET['set_session_login'] = 'true';
       $_SESSION['navigation']->set_snapshot();
@@ -180,8 +202,13 @@ switch (true) {
    * customer must be logged in to browse
    * customer is logged in and changed to must be authorized to browse
    */
+<<<<<<< HEAD
   if (!in_array(zcRequest::readGet('main_page'), array(FILENAME_ORDER_STATUS, FILENAME_LOGIN, FILENAME_LOGOFF, FILENAME_CONTACT_US, FILENAME_PRIVACY))) {
     if (zcRequest::readGet('main_page') != CUSTOMERS_AUTHORIZATION_FILENAME) {
+=======
+  if (!in_array($_GET['main_page'], array(FILENAME_LOGIN, FILENAME_LOGOFF, FILENAME_CONTACT_US, FILENAME_PRIVACY))) {
+    if ($_GET['main_page'] != CUSTOMERS_AUTHORIZATION_FILENAME) {
+>>>>>>> upstream/master
       zen_redirect(zen_href_link(preg_replace('/[^a-z_]/', '', CUSTOMERS_AUTHORIZATION_FILENAME)));
     }
   }

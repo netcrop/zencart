@@ -1,10 +1,17 @@
 <?php
 /**
  * @package admin
+<<<<<<< HEAD
  * @copyright Copyright 2003-2015 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id:  Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2014 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version GIT: $Id: Author: DrByte  Jun 30 2014 Modified in v1.5.4 $
+>>>>>>> upstream/master
  */
 
   require('includes/application_top.php');
@@ -25,8 +32,12 @@
         $sql = $db->bindVars($sql, ':maxcount:', $_POST['products_attributes_maxcount'], 'string');
         $db->Execute($sql);
         zen_record_admin_activity('Downloads-manager details added/updated for ' . $_POST['products_attributes_filename'], 'info');
+<<<<<<< HEAD
         $zco_notifier->notify('ADMIN_DOWNLOADS_MANAGER_UPDATE', $_POST['products_attributes_filename']);
         zen_redirect(zen_admin_href_link(FILENAME_DOWNLOADS_MANAGER, 'padID=' . (int)$_GET['padID'] . '&page=' . (int)$_GET['page']));
+=======
+        zen_redirect(zen_href_link(FILENAME_DOWNLOADS_MANAGER, 'padID=' . (int)$_GET['padID'] . '&page=' . (int)$_GET['page']));
+>>>>>>> upstream/master
         break;
     }
   }

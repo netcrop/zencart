@@ -5,7 +5,11 @@
  * @package templateSystem
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+<<<<<<< HEAD
  * @version GIT: $Id: Author: Ian Wilson  Modified in v1.6.0 $
+=======
+ * @version $Id: Author: zcwilt  Fri Feb 5 10:22:33 2016 +0000 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 class zcAjaxPayment extends base
 {
@@ -163,7 +167,11 @@ class zcAjaxPayment extends base
     if (isset (${$_SESSION['payment']}->form_action_url)) {
       $form_action_url = ${$_SESSION['payment']}->form_action_url;
     } else {
+<<<<<<< HEAD
       $form_action_url = zen_href_link (FILENAME_CHECKOUT_FLOW, 'step=process', 'SSL');
+=======
+      $form_action_url = zen_href_link (FILENAME_CHECKOUT_PROCESS, '', 'SSL');
+>>>>>>> upstream/master
     }
 
     // if shipping-edit button should be overridden, do so

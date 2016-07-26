@@ -1,9 +1,15 @@
 <?php
 /**
  * @package Installer
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: Author: zcwilt  Sat Dec 5 18:49:20 2015 +0000 Modified in v1.5.5 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: zcwilt  Sat Dec 5 18:49:20 2015 +0000 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
 $otherConfigErrors = FALSE;
@@ -26,9 +32,16 @@ if (isset($_POST['updateConfigure'])) {
     require_once (DIR_FS_INSTALL . 'includes/classes/class.zcConfigureFileWriter.php');
     if ($_POST['btnsubmit'] != TEXT_REFRESH) {
         $storeConfigureFileReader = new zcConfigureFileReader(DIR_FS_ROOT .'includes/configure.php');
+<<<<<<< HEAD
         $storeConfigureFileReader = new zcConfigureFileReader(DIR_FS_ROOT . $selectedAdminDir . '/includes/configure.php');
         $configureInputs = $storeConfigureFileReader->getStoreInputsFromLegacy();
         $configureInputs['http_server_admin'] = trim($storeConfigureFileReader->getRawDefine('ADMIN_HTTP_SERVER'), "'");
+=======
+        $adminConfigureFileReader = new zcConfigureFileReader(DIR_FS_ROOT . $selectedAdminDir . '/includes/configure.php');
+        $configureInputs = $storeConfigureFileReader->getStoreInputsFromLegacy();
+        $configureInputs['enable_ssl_admin'] = trim($adminConfigureFileReader->getRawDefine('ENABLE_SSL_ADMIN'), "'");
+        $configureInputs['http_server_admin'] = trim($adminConfigureFileReader->getRawDefine( ($configureInputs['enable_ssl_admin'] == 'true' ? 'HTTPS_SERVER' : 'HTTP_SERVER') ), "'");
+>>>>>>> upstream/master
         $configureInputs['adminDir'] = $selectedAdminDir;
         $storeConfigureFileWriter = new zcConfigureFileWriter($configureInputs);
     }

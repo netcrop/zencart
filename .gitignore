@@ -1,11 +1,17 @@
 configure.php
+<<<<<<< HEAD
 /vendor
 dbencdata*.ini
 clover.xml
+=======
+local/configure.php
+/vendor
+>>>>>>> upstream/master
 
 *.php1
 *.bak
 *.old
+<<<<<<< HEAD
 Thumbs.db
 .DS_Store
 
@@ -22,3 +28,8 @@ dev-*.*
 .idea
 # dbv
 /data/meta/revision
+=======
+devtools.php
+Thumbs.db
+clover.xml
+>>>>>>> upstream/master

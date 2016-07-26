@@ -4,6 +4,7 @@
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+<<<<<<< HEAD
  * @version $Id: freeoptions.php  ajeh  Modified in v1.6.0 $
  */
 
@@ -49,6 +50,19 @@ class freeoptions extends base {
    * @return freeoptions
    */
   function __construct() {
+=======
+ * @version $Id: Author: DrByte  Sat Oct 17 22:52:38 2015 -0400 Modified in v1.5.5 $
+ */
+
+  class freeoptions extends base {
+    var $code, $title, $description, $icon, $enabled;
+    var $ck_freeoptions_total, $ck_freeoptions_weight, $ck_freeoptions_items;
+
+// class constructor
+    function __construct() {
+      global $order, $db;
+
+>>>>>>> upstream/master
       $this->code = 'freeoptions';
       $this->title = MODULE_SHIPPING_FREEOPTIONS_TEXT_TITLE;
       $this->description = MODULE_SHIPPING_FREEOPTIONS_TEXT_DESCRIPTION;

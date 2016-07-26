@@ -1,11 +1,39 @@
 <?php
 /**
  * @package shippingMethod
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: flat.php  ajeh  Modified in v1.6.0 $
  */
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Sat Oct 17 22:52:38 2015 -0400 Modified in v1.5.5 $
+ */
+
+  class flat {
+    var $code, $title, $description, $icon, $enabled;
+
+// class constructor
+    function __construct() {
+      global $order, $db;
+
+      $this->code = 'flat';
+      $this->title = MODULE_SHIPPING_FLAT_TEXT_TITLE;
+      $this->description = MODULE_SHIPPING_FLAT_TEXT_DESCRIPTION;
+      $this->sort_order = MODULE_SHIPPING_FLAT_SORT_ORDER;
+      $this->icon = '';
+      $this->tax_class = MODULE_SHIPPING_FLAT_TAX_CLASS;
+      $this->tax_basis = MODULE_SHIPPING_FLAT_TAX_BASIS;
+
+      // disable only when entire cart is free shipping
+      if (zen_get_shipping_enabled($this->code)) {
+        $this->enabled = ((MODULE_SHIPPING_FLAT_STATUS == 'True') ? true : false);
+      }
+>>>>>>> upstream/master
 
 class flat extends base {
   /**
@@ -192,4 +220,7 @@ class flat extends base {
   function keys() {
     return array('MODULE_SHIPPING_FLAT_STATUS', 'MODULE_SHIPPING_FLAT_COST', 'MODULE_SHIPPING_FLAT_TAX_CLASS', 'MODULE_SHIPPING_FLAT_TAX_BASIS', 'MODULE_SHIPPING_FLAT_ZONE', 'MODULE_SHIPPING_FLAT_SORT_ORDER');
   }
+<<<<<<< HEAD
 }
+=======
+>>>>>>> upstream/master

@@ -73,7 +73,11 @@ class authorizenet_aim extends base {
    * Given that this module can be used to interact with other gateways (authnet emulators),
    * this var is used to declare which gateway to work with
    */
+<<<<<<< HEAD
   private $emulation_mode = 'AIM';
+=======
+  private $mode = 'AIM';
+>>>>>>> upstream/master
   /**
    * @var string the currency enabled in this gateway's merchant account
    */
@@ -297,6 +301,7 @@ class authorizenet_aim extends base {
     return $process_button_string;
   }
   function process_button_ajax() {
+<<<<<<< HEAD
     $processButton = array('ccFields'=>array('cc_number'=>'authorizenet_aim_cc_number',
       'cc_owner'=>'authorizenet_aim_cc_owner',
       'cc_cvv'=>'authorizenet_aim_cc_cvv',
@@ -306,6 +311,10 @@ class authorizenet_aim extends base {
       'cc_type' => $this->cc_card_type), 
       'extraFields'=>array(zen_session_name()=>zen_session_id()));
     return $processButton;
+=======
+    $processButton = array('ccFields'=>array('cc_number'=>'authorizenet_aim_cc_number', 'cc_owner'=>'authorizenet_aim_cc_owner', 'cc_cvv'=>'authorizenet_aim_cc_cvv', 'cc_expires'=>array('name'=>'concatExpiresFields', 'args'=>"['authorizenet_aim_cc_expires_month','authorizenet_aim_cc_expires_year']"), 'cc_expires_month'=>'authorizenet_aim_cc_expires_month', 'cc_expires_year'=>'authorizenet_aim_cc_expires_year', 'cc_type' => $this->cc_card_type), 'extraFields'=>array(zen_session_name()=>zen_session_id()));
+        return $processButton;
+>>>>>>> upstream/master
   }
   /**
    * Store the CC info to the order and process any results that come back from the payment gateway
@@ -348,13 +357,13 @@ class authorizenet_aim extends base {
                          'x_login' => trim(MODULE_PAYMENT_AUTHORIZENET_AIM_LOGIN),
                          'x_tran_key' => trim(MODULE_PAYMENT_AUTHORIZENET_AIM_TXNKEY),
                          'x_relay_response' => 'FALSE', // AIM uses direct response, not relay response
-                         'x_delim_data' => 'TRUE',
                          'x_delim_char' => $this->delimiter,  // The default delimiter is a comma
                          'x_encap_char' => $this->encapChar,  // The divider to encapsulate response fields
                          'x_version' => '3.1',  // 3.1 is required to use CVV codes
                          'x_method' => 'CC',
                          'x_amount' => number_format($order->info['total'], 2),
                          'x_currency_code' => $order->info['currency'],
+                         'x_market_type' => 0,
                          'x_card_num' => $_POST['cc_number'],
                          'x_exp_date' => $_POST['cc_expires'],
                          'x_card_code' => $_POST['cc_cvv'],
@@ -387,6 +396,7 @@ class authorizenet_aim extends base {
                          'x_tax_exempt' => 'FALSE', /* 'TRUE' or 'FALSE' */
                          'x_tax' => number_format((float)$order->info['tax'],2),
                          'x_duty' => '0',
+                         'x_device_type' => 8,
                          'x_allow_partial_Auth' => 'FALSE', // unable to accept partial authorizations at this time
 
                          // Additional Merchant-defined variables go here
@@ -399,12 +409,15 @@ class authorizenet_aim extends base {
       $submit_data['x_type'] = MODULE_PAYMENT_AUTHORIZENET_AIM_AUTHORIZATION_TYPE == 'Authorize' ? 'AUTH_ONLY': 'AUTH_CAPTURE';
     }
 
+<<<<<<< HEAD
     // set parameters for compatibility with 2014 API updates, to identify this transaction as ecommerce+web
     if ($this->emulation_mode == 'AIM') {
       $submit_data['x_device_type'] = 8;
       $submit_data['x_market_type'] = 0;
     }
 
+=======
+>>>>>>> upstream/master
     // force conversion to supported currencies: USD, GBP, CAD, EUR, AUD, NZD
     if ($order->info['currency'] != $this->gateway_currency) {
       global $currencies;
@@ -567,7 +580,7 @@ class authorizenet_aim extends base {
    */
   function remove() {
     global $db;
-    $db->Execute("delete from " . TABLE_CONFIGURATION . " where configuration_key like 'MODULE\_PAYMENT\_AUTHORIZENET_AIM\_%'");
+    $db->Execute("delete from " . TABLE_CONFIGURATION . " where configuration_key like 'MODULE\_PAYMENT\_AUTHORIZENET\_AIM\_%'");
   }
 
   /**
@@ -616,6 +629,7 @@ class authorizenet_aim extends base {
                          'x_delim_char' => $this->delimiter,  // The default delimiter is a comma
                          'x_encap_char' => $this->encapChar,  // The divider to encapsulate response fields
                          'x_version' => '3.1',  // 3.1 is required to use CVV codes
+                         'x_solution_id' => 'A1000003', // used by authorize.net
                          ), $submit_data);
 
     if(MODULE_PAYMENT_AUTHORIZENET_AIM_TESTMODE == 'Test') {
@@ -623,9 +637,16 @@ class authorizenet_aim extends base {
     }
 
     // set URL
+<<<<<<< HEAD
     $this->notify('NOTIFY_PAYMENT_AUTHNET_MODE_SELECTION', $this->emulation_mode, $submit_data);
 
     switch ($this->emulation_mode) {
+=======
+    $this->mode = 'AIM';
+    $this->notify('NOTIFY_PAYMENT_AUTHNET_MODE_SELECTION', $this->mode, $submit_data);
+
+    switch ($this->mode) {
+>>>>>>> upstream/master
       case 'eProcessing':
         //eProcessing sometimes uses an AIM emulator, in which case if you're using this module for that purpose, use the notifier point above to have an observer class change the $class->mode to 'eProcessing', which will trigger the correct URL to be used.
         $url = 'https://www.eprocessingnetwork.com/cgi-bin/an/order.pl';
@@ -637,13 +658,21 @@ class authorizenet_aim extends base {
         break;
       default:
       case 'AIM':
+<<<<<<< HEAD
         $submit_data['x_solution_id'] = 'A1000003'; // used by authorize.net
         $url = 'https://secure2.authorize.net/gateway/transact.dll';
+=======
+        $url = 'https://secure.authorize.net/gateway/transact.dll';
+>>>>>>> upstream/master
         $devurl = 'https://test.authorize.net/gateway/transact.dll';
         $certurl = 'https://certification.authorize.net/gateway/transact.dll';
         if (MODULE_PAYMENT_AUTHORIZENET_AIM_TESTMODE == 'Sandbox') $url = $devurl;
         if (defined('AUTHORIZENET_DEVELOPER_MODE') && AUTHORIZENET_DEVELOPER_MODE == 'certify') $url = $certurl;
+<<<<<<< HEAD
         break;
+=======
+      break;
+>>>>>>> upstream/master
     }
 
     // concatenate the submission data into $data variable after sanitizing to protect delimiters

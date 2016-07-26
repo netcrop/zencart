@@ -6,7 +6,7 @@
  * @copyright Copyright 2003-2013 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version $Id: header_php.php 19517 2011-09-14 21:28:12Z wilt $
+ * @version GIT: $Id: Author: ajeh  Fri Jun 28 10:09:45 2013 -0400 Modified in v1.5.2 $
  */
 
   require(DIR_WS_MODULES . zen_get_module_directory('require_languages.php'));
@@ -59,6 +59,7 @@
           $text_coupon_help .= TEXT_COUPON_GV_RESTRICTION_ZONES;
         }
 
+<<<<<<< HEAD
         $text_coupon_help .= TEXT_COUPON_HELP_CATEGORIES;
         $get_result=$db->Execute("select * from " . TABLE_COUPON_RESTRICT . "  where coupon_id='" . (int)$lookup_coupon_id . "' and category_id !='0'");
         $cats = array();
@@ -104,6 +105,48 @@
           pd.language_id = '" . (int)$_SESSION['languages_id'] . "' and p.products_id = '" . $get_result->fields['product_id'] . "'");
           $prods[] = array("validity" => ($get_result->fields['coupon_restrict'] =='N' ? 'A' : 'D'), 'name'=> $result->fields["products_name"], 'link'=> '<a href="' . zen_href_link(zen_get_info_page($result->fields['products_id']), 'cPath=' . zen_get_generated_category_path_rev($result->fields['master_categories_id']) . '&products_id=' . $result->fields['products_id']) . '">' . $result->fields['products_name'] . '</a>' . $restrict);
           $get_result->MoveNext();
+=======
+      $text_coupon_help .= TEXT_COUPON_HELP_CATEGORIES;
+      $get_result=$db->Execute("select * from " . TABLE_COUPON_RESTRICT . "  where coupon_id='" . (int)$lookup_coupon_id . "' and category_id !='0'");
+      $cats = array();
+      if ($get_result->RecordCount() == 1 && $get_result->fields['category_id'] == '-1') {
+        $cats[] = array("link" => TEXT_NO_CAT_TOP_ONLY_DENY);
+      } else {
+        $skip_cat_restriction = true;
+        while (!$get_result->EOF) {
+          if ($get_result->fields['coupon_restrict'] == 'N') {
+            $restrict = TEXT_CAT_ALLOWED;
+          } else {
+            $restrict = TEXT_CAT_DENIED;
+          }
+          if ($get_result->RecordCount() >= 1 and $get_result->fields['category_id'] != '-1') {
+            $result = $db->Execute("SELECT * FROM " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd WHERE c.categories_id = cd.categories_id
+            and cd.language_id = '" . (int)$_SESSION['languages_id'] . "' and c.categories_id='" . $get_result->fields['category_id'] . "'");
+            $cats[] = array("validity"=> ($get_result->fields['coupon_restrict'] =='N' ? 'A' : 'D'), 'name'=> $result->fields["categories_name"], 'link'=>'<a href="' . zen_href_link(FILENAME_DEFAULT, 'cPath=' . (int)$result->fields['categories_id']) . '">' . $result->fields["categories_name"] . '</a>' . $restrict);
+          }
+          $get_result->MoveNext();
+        }
+  //echo 'CAT SIZE: ' . sizeof($cats) . ' - ' . ' $restrict: ' . $restrict . '<br>';
+
+        if ($skip_cat_restriction == false || sizeof($cats) == 0) $cats[] = array("link" => TEXT_NO_CAT_RESTRICTIONS);
+      }
+      sort($cats);
+      $mycats = array();
+      foreach($cats as $key=>$value) {
+        $mycats[] = $value["link"];
+      }
+      $cats = '<ul id="couponCatRestrictions">' . '<li>' . implode('<li>', $mycats) . '</ul>';
+      $text_coupon_help .= $cats;
+
+      $text_coupon_help .= TEXT_COUPON_HELP_PRODUCTS;
+      $get_result=$db->Execute("select * from " . TABLE_COUPON_RESTRICT . "  where coupon_id='" . (int)$lookup_coupon_id . "' and product_id !='0'");
+      $prods = array();
+      while (!$get_result->EOF) {
+        if ($get_result->fields['coupon_restrict'] == 'N') {
+          $restrict = TEXT_PROD_ALLOWED;
+        } else {
+          $restrict = TEXT_PROD_DENIED;
+>>>>>>> upstream/master
         }
 
         if (sizeof($prods) == 0) $prods[] = array("link"=>TEXT_NO_PROD_RESTRICTIONS);

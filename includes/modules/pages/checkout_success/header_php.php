@@ -3,10 +3,17 @@
  * checkout_success header_php.php
  *
  * @package page
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version GIT: $Id: Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: zcwilt  Sat Jan 2 18:06:28 2016 +0000 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
 // This should be first line of the script:
@@ -112,6 +119,7 @@ if ($flag_global_notifications != '1') {
 }
 
 $flag_show_products_notification = (CUSTOMERS_PRODUCTS_NOTIFICATION_STATUS == '1' and sizeof($notificationsArray)>0 and $flag_global_notifications != '1') ? true : false ;
+<<<<<<< HEAD
 
 
 $customer_has_gv_balance = false;
@@ -125,7 +133,21 @@ if (!$gv_result->EOF && $gv_result->fields['amount'] > 0 ) {
   $customer_has_gv_balance = true;
   $customer_gv_balance = $currencies->format($gv_result->fields['amount']);
 }
+=======
 
+
+$customer_has_gv_balance = false;
+$gv_query = "SELECT amount
+             FROM " . TABLE_COUPON_GV_CUSTOMER . "
+             WHERE customer_id = :customersID ";
+$gv_query = $db->bindVars($gv_query, ':customersID', $_SESSION['customer_id'], 'integer');
+$gv_result = $db->Execute($gv_query);
+>>>>>>> upstream/master
+
+if (!$gv_result->EOF && $gv_result->fields['amount'] > 0 ) {
+  $customer_has_gv_balance = true;
+  $customer_gv_balance = $currencies->format($gv_result->fields['amount']);
+}
 
 // include template specific file name defines
 $define_page = zen_get_file_directory(DIR_WS_LANGUAGES . $_SESSION['language'] . '/html_includes/', FILENAME_DEFINE_CHECKOUT_SUCCESS, 'false');

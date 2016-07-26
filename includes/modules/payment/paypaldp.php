@@ -7,9 +7,13 @@
  * @copyright Portions Copyright 2005 CardinalCommerce
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+<<<<<<< HEAD
  * @version GIT: $Id: Author: DrByte   Modified in v1.6.0 $
  *
  * Optional @TODO: card verification instead of auth/capt. Ref: https://developer.paypal.com/docs/classic/release-notes/merchant/PayPal_Merchant_API_Release_Notes_109/
+=======
+ * @version $Id: Author: DrByte  Wed Mar 16 10:28:02 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 /**
  * The transaction URL for the Cardinal Centinel 3D-Secure service.
@@ -134,7 +138,11 @@ class paypaldp extends base {
     global $order;
     $this->code = 'paypaldp';
     $this->codeTitle = MODULE_PAYMENT_PAYPALDP_TEXT_ADMIN_TITLE_WPP;
+<<<<<<< HEAD
     $this->codeVersion = '1.6.0';
+=======
+    $this->codeVersion = '1.5.5';
+>>>>>>> upstream/master
     $this->enableDirectPayment = true;
     $this->enabled = (MODULE_PAYMENT_PAYPALDP_STATUS == 'True');
     // Set the title & description text based on the mode we're in
@@ -172,8 +180,12 @@ class paypaldp extends base {
     $this->zone = (int)MODULE_PAYMENT_PAYPALDP_ZONE;
     if (is_object($order)) $this->update_status();
 
+<<<<<<< HEAD
     // compatibility
     if (PROJECT_VERSION_MAJOR != '1' || substr(PROJECT_VERSION_MINOR, 0, 3) < '5.5') $this->enabled = false;
+=======
+    if (PROJECT_VERSION_MAJOR != '1' && substr(PROJECT_VERSION_MINOR, 0, 3) != '5.5') $this->enabled = false;
+>>>>>>> upstream/master
 
     // offer credit card choices for pull-down menu -- only needed for UK version
     $this->cards = array();
@@ -596,7 +608,11 @@ class paypaldp extends base {
         'wpp_cc_checkcode'=>'paypalwpp_cc_checkcode',
         'wpp_payer_firstname'=>'paypalwpp_cc_firstname',
         'wpp_payer_lastname'=>'paypalwpp_cc_lastname',
+<<<<<<< HEAD
       ), 'extraFields'=>array(zen_session_name()=>zen_session_id()));
+=======
+    ), 'extraFields'=>array(zen_session_name()=>zen_session_id()));
+>>>>>>> upstream/master
     return $processButton;
   }
   /**

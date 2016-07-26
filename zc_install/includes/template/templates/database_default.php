@@ -98,7 +98,10 @@
         <select name="sql_cache_method" id="sql_cache_method" tabindex="8" ><?php echo $sqlCacheTypeOptions; ?></select>
       </div>
     </div>
+<<<<<<< HEAD
     <div class="row"><div class="small-12 columns mainContent"><div class="alert-box"><?php echo TEXT_DATABASE_ADVANCED_TIPS; ?></div></div></div>
+=======
+>>>>>>> upstream/master
   </fieldset>
   <input type="submit" class="radius button" id="btnsubmit" name="btnsubmit" value="<?php echo TEXT_CONTINUE; ?>" tabindex="10" >
 </form>
@@ -200,11 +203,14 @@ function updateStatus() {
           $("#progress-bar").html('<span class="meter" style="width:'+data.progress+'%;"></span>');
           t = setTimeout("updateStatus()", 200);
         }
+<<<<<<< HEAD
         if(data.error_message)
         {
             $('#error-message').html(data.error_message);
             clearTimeout(t);
         }    
+=======
+>>>>>>> upstream/master
       } else
       {
         t = setTimeout("updateStatus()", 10);

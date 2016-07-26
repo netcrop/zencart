@@ -3,9 +3,15 @@
  * ipncheck.php diagnostic tool
  *
  * @package utility
+<<<<<<< HEAD
  * @copyright Copyright 2007-2015 Zen Cart Development Team
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version GIT: $Id: Author: DrByte  Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Tue Oct 13 15:33:54 2015 -0400 Modified in v1.5.5 $
+>>>>>>> upstream/master
  *
  * This utility is intended to be used to check whether this webserver is able to connect TO PayPal in order to RESPOND to an incoming IPN notification.
  * Unfortunately it cannot test whether PayPal's servers can successfully post an IPN *to* your store.  To do that one should test a live transaction.
@@ -42,7 +48,11 @@ $_POST['ipn_mode'] = 'communication_test';
 if ($testSandbox) $_POST['test_ipn'] = 1;
 define('ENABLE_SSL','true');
 
+<<<<<<< HEAD
 echo 'IPNCHECK.PHP - Version 1.6.0';
+=======
+echo 'IPNCHECK.PHP - Version 1.5.5';
+>>>>>>> upstream/master
 echo '<br /><br /><pre>';
     $defaultMethod = $altMethod = '';
     $info = '';

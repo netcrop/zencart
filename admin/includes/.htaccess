@@ -1,7 +1,13 @@
 #
+<<<<<<< HEAD
 # @copyright Copyright 2003-2016 Zen Cart Development Team
 # @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
 # @version $Id: Author: DrByte  Thu Mar 3 13:00:42 2016 -0500 Modified in v1.6.0 $
+=======
+# @copyright Copyright 2003-2016 Zen Cart Development Team
+# @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+# @version $Id: Author: DrByte  Thu Mar 3 13:00:42 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
 #
 # This is used with Apache WebServers
 #
@@ -29,6 +35,7 @@
 </FilesMatch>
 
 # but now allow just *certain* necessary files:
+<<<<<<< HEAD
 <FilesMatch "(?i).*\.(js|css|jpg|gif|png|otf|cur|map|eot|svg|ttf|woff2?)$">
   <IfModule mod_authz_core.c>
     Require all granted
@@ -37,6 +44,11 @@
     Order Allow,Deny
     Allow from all
   </IfModule>
+=======
+<FilesMatch "(?i).*\.(js|css|jpg|gif|png|otf|cur|map|eot|svg|ttf|woff2?)$">
+  Order Allow,Deny
+  Allow from all
+>>>>>>> upstream/master
 </FilesMatch>
 
 IndexIgnore */*

@@ -1,10 +1,17 @@
 <?php
 /**
  * @package admin
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id:   Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Sat Jan 9 23:02:19 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 if (!defined('IS_ADMIN_FLAG')) {
   die('Illegal Access');
@@ -21,6 +28,23 @@ require(DIR_WS_FUNCTIONS . 'functions_crud.php');
 require(DIR_WS_FUNCTIONS . 'functions_system.php');
 require(DIR_WS_FUNCTIONS . 'html_output.php');
 require(DIR_FS_CATALOG . DIR_WS_FUNCTIONS . 'functions_email.php');
+
+<<<<<<< HEAD
+/**
+ * require the plugin support functions
+ */
+require(DIR_FS_CATALOG . DIR_WS_FUNCTIONS . 'plugin_support.php');
+=======
+// include the database functions
+  require(DIR_WS_FUNCTIONS . 'database.php');
+
+// define our general functions used application-wide
+  require(DIR_WS_FUNCTIONS . 'general.php');
+  require(DIR_WS_FUNCTIONS . 'functions_prices.php');
+  require(DIR_WS_FUNCTIONS . 'html_output.php');
+  require(DIR_WS_FUNCTIONS . 'functions_customers.php'); // partial copy of catalog functions customers for now
+  require(DIR_FS_CATALOG . DIR_WS_FUNCTIONS . 'functions_email.php');
+>>>>>>> upstream/master
 
 /**
  * require the plugin support functions
@@ -50,7 +74,11 @@ if (isset($_GET) & sizeof($_GET) > 0 ) {
 
 // check for SSL configuration changes:
 if (!defined('SSLPWSTATUSCHECK')) die('database upgrade required. please run the 1.3.9-to-1.5.0 upgrade via zc_install');
+<<<<<<< HEAD
 $e = (substr(ADMIN_HTTP_SERVER, 0, 5) == 'https') ? '1' : '0';
+=======
+$e = (substr(HTTP_SERVER, 0, 5) == 'https') ? '1' : '0';
+>>>>>>> upstream/master
 if (SSLPWSTATUSCHECK == '') {
   $sql = "UPDATE " . TABLE_CONFIGURATION . " set configuration_value = '".$e.':'.$e."', last_modified = now() where configuration_key = 'SSLPWSTATUSCHECK'";
   $db->Execute($sql);
@@ -80,4 +108,7 @@ if ($a == 0) {
 }
 unset($a,$c,$e);
 // end ssl config change detection
+<<<<<<< HEAD
 
+=======
+>>>>>>> upstream/master

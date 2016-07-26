@@ -1,10 +1,17 @@
 <?php
 /**
  * @package admin
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Thu Mar 3 12:16:32 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
   require('includes/application_top.php');
@@ -198,7 +205,11 @@
         if (zen_admin_demo()) {
           $_GET['action']= '';
           $messageStack->add_session(ERROR_ADMIN_DEMO, 'caution');
+<<<<<<< HEAD
           zen_redirect(zen_admin_href_link(FILENAME_OPTIONS_NAME_MANAGER, $_SESSION['page_info'] . '&option_order_by=' . $option_order_by));
+=======
+          zen_redirect(zen_href_link(FILENAME_OPTIONS_NAME_MANAGER, $_SESSION['page_info'] . '&option_order_by=' . $option_order_by));
+>>>>>>> upstream/master
         }
         $option_id = zen_db_prepare_input($_GET['option_id']);
 
@@ -332,7 +343,11 @@
             $db->Execute($sql);
             $copy_from_values->MoveNext();
             if ($copy_from_values->fields['products_options_values_id'] != $current_id or $copy_from_values->EOF) {
+<<<<<<< HEAD
               $sql = "insert into " . TABLE_PRODUCTS_OPTIONS_VALUES_TO_PRODUCTS_OPTIONS . " (products_options_id, products_options_values_id) values (" . (int)$options_id_to . ", " . (int)$next_id . ")";
+=======
+              $sql = "insert into " . TABLE_PRODUCTS_OPTIONS_VALUES_TO_PRODUCTS_OPTIONS . " (products_options_id, products_options_values_id) values ('" . (int)$options_id_to . "', '" . (int)$next_id . "')";
+>>>>>>> upstream/master
               $db->Execute($sql);
               $next_id++;
             }
@@ -404,8 +419,13 @@ function go_option() {
           <table width="100%" border="0" cellspacing="0" cellpadding="2">
             <tr>
               <td height="40" valign="bottom">
+<<<<<<< HEAD
                 <a href="<?php echo  zen_admin_href_link(FILENAME_ATTRIBUTES_CONTROLLER) ?>"><?php echo zen_image_button('button_edit_attribs.gif', IMAGE_EDIT_ATTRIBUTES); ?></a> &nbsp;
                 <a href="<?php echo  zen_admin_href_link(FILENAME_OPTIONS_VALUES_MANAGER) ?>"><?php echo zen_image_button('button_option_values.gif', IMAGE_OPTION_VALUES); ?></a>
+=======
+                <a href="<?php echo  zen_href_link(FILENAME_ATTRIBUTES_CONTROLLER, '', 'NONSSL') ?>"><?php echo zen_image_button('button_edit_attribs.gif', IMAGE_EDIT_ATTRIBUTES); ?></a> &nbsp;
+                <a href="<?php echo  zen_href_link(FILENAME_OPTIONS_VALUES_MANAGER, '', 'NONSSL') ?>"><?php echo zen_image_button('button_option_values.gif', IMAGE_OPTION_VALUES); ?></a>
+>>>>>>> upstream/master
               </td>
               <td class="main" height="40" valign="bottom">
                 <?php

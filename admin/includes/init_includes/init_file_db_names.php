@@ -1,10 +1,17 @@
 <?php
 /**
  * @package admin
+<<<<<<< HEAD
  * @copyright Copyright 2003-2015 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id:  Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Sun Feb 22 16:26:10 2015 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 if (!defined('IS_ADMIN_FLAG')) {
   die('Illegal Access');
@@ -24,6 +31,12 @@ $request_type = (((isset($_SERVER['HTTPS']) && (strtolower($_SERVER['HTTPS']) ==
                  (isset($_SERVER['HTTP_SSLSESSIONID']) && $_SERVER['HTTP_SSLSESSIONID'] != '') ||
                  (isset($_SERVER['HTTP_X_FORWARDED_PORT']) && $_SERVER['HTTP_X_FORWARDED_PORT'] == '443') ||
                  (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443')) ? 'SSL' : 'NONSSL';
+<<<<<<< HEAD
+=======
+
+// set php_self in the local scope
+  if (!isset($PHP_SELF)) $PHP_SELF = $_SERVER['PHP_SELF'];
+>>>>>>> upstream/master
 
 // include the list of project filenames
   require(DIR_FS_CATALOG . DIR_WS_INCLUDES . 'filenames.php');

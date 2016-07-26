@@ -2,6 +2,7 @@
 /**
  * dist-configure.php - SAMPLE FILE!
  *
+<<<<<<< HEAD
  * @package Configuration Settings circa 1.6.0
  * @copyright Copyright 2003-2013 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
@@ -10,6 +11,19 @@
  * @private
  */
 
+=======
+ * @package Configuration Settings
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Thu Dec 17 11:49:31 2015 -0500 Modified in v1.5.5 $
+ * @private
+ */
+
+/*************** NOTE: This file is VERY similar to, but DIFFERENT from the "admin" version of configure.php. ***********/
+/***************       The 2 files should be kept separate and not used to overwrite each other.              ***********/
+
+>>>>>>> upstream/master
 /**
  * Enter the domain for your store
  * HTTP_SERVER is your Main webserver: eg-http://www.yourdomain.com
@@ -39,11 +53,19 @@ define('DIR_FS_CATALOG', '/var/www/vhost/accountname/public_html/store/');
 
 /**
  * The following settings define your database connection.
+<<<<<<< HEAD
  * NOTE: If you are moving a database from another server, DB_PREFIX should be the same as you had on the old server.
  */
 define('DB_TYPE', 'mysql'); // always 'mysql'
 define('DB_PREFIX', ''); // prefix for database table names -- preferred to be left empty
 define('DB_CHARSET', 'utf8'); // 'utf8' is default
+=======
+ * These must be the SAME as you're using in your non-admin copy of configure.php
+ */
+define('DB_TYPE', 'mysql'); // always 'mysql'
+define('DB_PREFIX', ''); // prefix for database table names -- preferred to be left empty
+define('DB_CHARSET', 'utf8'); // 'utf8' or 'latin1' are most common
+>>>>>>> upstream/master
 define('DB_SERVER', 'localhost');  // address of your db server
 define('DB_SERVER_USERNAME', '');
 define('DB_SERVER_PASSWORD', '');
@@ -58,7 +80,11 @@ define('SQL_CACHE_METHOD', 'none');
 /**
  * Reserved for future use
  */
+<<<<<<< HEAD
 define('SESSION_STORAGE', 'temporary value added by v160 installer');
+=======
+define('SESSION_STORAGE', 'temporary value added by zc_install');
+>>>>>>> upstream/master
 
 /**
  * Advanced use only:

@@ -7,6 +7,10 @@
  * @version $Id: Author: DrByte  Mon Feb 15 00:31:01 2016 -0500 New in v1.5.5 $
  */
 define('IS_ADMIN_FLAG', false);
+<<<<<<< HEAD
+=======
+if (!defined('__DIR__')) define('__DIR__', dirname(__FILE__));
+>>>>>>> upstream/master
 define('DIR_FS_INSTALL', __DIR__ . '/');
 define('DIR_FS_ROOT', realpath(__DIR__ . '/../') . '/');
 

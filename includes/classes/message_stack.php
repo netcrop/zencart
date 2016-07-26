@@ -3,10 +3,17 @@
  * messageStack Class.
  *
  * @package classes
+<<<<<<< HEAD
  * @copyright Copyright 2003-2015 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: message_stack.php drbyte  Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Sat Oct 17 22:52:38 2015 -0400 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 if (!defined('IS_ADMIN_FLAG')) {
   die('Illegal Access');
@@ -21,6 +28,10 @@ class messageStack extends base {
 
   // class constructor
   function __construct() {
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/master
     $this->messages = array();
 
     if (isset($_SESSION['messageToStack']) && $_SESSION['messageToStack']) {

@@ -16,7 +16,11 @@
 
 function zen_update_currencies($cli_Output = FALSE)
 {
+<<<<<<< HEAD
   global $db, $messageStack, $zco_notifier;
+=======
+  global $db, $messageStack;
+>>>>>>> upstream/master
   zen_set_time_limit(600);
   $currency = $db->Execute("select currencies_id, code, title, decimal_places from " . TABLE_CURRENCIES);
   while (!$currency->EOF) {
@@ -39,10 +43,15 @@ function zen_update_currencies($cli_Output = FALSE)
     }
     if (zen_not_null($rate) && $rate > 0) {
       /* Add currency uplift */
+<<<<<<< HEAD
       $multiplier = (defined('CURRENCY_UPLIFT_RATIO') && (int)CURRENCY_UPLIFT_RATIO != 0) ? CURRENCY_UPLIFT_RATIO : 0;
       $zco_notifier->notify('ADMIN_CURRENCY_EXCHANGE_RATE_MULTIPLIER', $currency->fields['code'], $multiplier, $rate);
       if ($rate != 1 && $multiplier > 0) {
         $rate = (string)((float)$rate * (float)$multiplier);
+=======
+      if ($rate != 1 && defined('CURRENCY_UPLIFT_RATIO') && (int)CURRENCY_UPLIFT_RATIO != 0) {
+        $rate = (string)((float)$rate * (float)CURRENCY_UPLIFT_RATIO);
+>>>>>>> upstream/master
       }
 
       // special handling for currencies which don't support decimal places
@@ -51,7 +60,10 @@ function zen_update_currencies($cli_Output = FALSE)
       }
 
       if (zen_not_null($rate) && $rate > 0) {
+<<<<<<< HEAD
         $zco_notifier->notify('ADMIN_CURRENCY_EXCHANGE_RATE_SINGLE', $currency->fields['code'], $rate);
+=======
+>>>>>>> upstream/master
         $db->Execute("update " . TABLE_CURRENCIES . "
                             set value = '" . (float)$rate . "', last_updated = now()
                             where currencies_id = '" . (int)$currency->fields['currencies_id'] . "'");
@@ -73,7 +85,10 @@ function zen_update_currencies($cli_Output = FALSE)
     $currency->MoveNext();
   }
   zen_record_admin_activity('Currency exchange rates updated.', 'info');
+<<<<<<< HEAD
   $zco_notifier->notify('ADMIN_CURRENCY_EXCHANGE_RATES_UPDATED');
+=======
+>>>>>>> upstream/master
 }
 
 function quote_ecb_currency($currencyCode = '', $base = DEFAULT_CURRENCY)

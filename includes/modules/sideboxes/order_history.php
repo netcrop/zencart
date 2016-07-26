@@ -3,10 +3,17 @@
  * order_history sidebox - if enabled, shows customers' most recent orders
  *
  * @package templateSystem
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: Author: DrByte  Fri Jan 8 15:00:45 2016 -0500 Modified in v1.5.5 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Fri Jan 8 15:00:45 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
   if (isset($_SESSION['customer_id']) && (int)$_SESSION['customer_id'] != 0) {

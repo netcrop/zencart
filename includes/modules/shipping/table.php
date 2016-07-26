@@ -1,10 +1,21 @@
 <?php
 /**
  * @package shippingMethod
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: table.php  ajeh  Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Sat Oct 17 22:52:38 2015 -0400 Modified in v1.5.5 $
+ */
+/**
+ * Enter description here...
+ *
+>>>>>>> upstream/master
  */
 
 class table extends base {
@@ -45,6 +56,11 @@ class table extends base {
    * @return table
    */
   function __construct() {
+<<<<<<< HEAD
+=======
+    global $order, $db;
+
+>>>>>>> upstream/master
     $this->code = 'table';
     $this->title = MODULE_SHIPPING_TABLE_TEXT_TITLE;
     $this->description = MODULE_SHIPPING_TABLE_TEXT_DESCRIPTION;

@@ -6,16 +6,25 @@
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+<<<<<<< HEAD
  * @version $Id: meta_tags.php drbyte  Modified in v1.6.0 $
+=======
+ * @version $Id: Author: DrByte  Mon Feb 8 15:28:43 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 $meta_tags_over_ride = false;
 $metatag_page_name = $current_page_base;
 if (!defined('IS_ADMIN_FLAG')) {
   die('Illegal Access');
 }
+<<<<<<< HEAD
 // array to remove specific characters from meta-data
 $bad_characters = array('"','*');
 $zco_notifier->notify('NOTIFY_MODULE_START_META_TAGS', $current_page_base, $metatag_page_name, $meta_tags_over_ride, $bad_characters);
+=======
+// This should be first line of the script:
+$zco_notifier->notify('NOTIFY_MODULE_START_META_TAGS', $current_page_base, $metatag_page_name, $meta_tags_over_ride);
+>>>>>>> upstream/master
 
 // Add tertiary section to site tagline
 if (strlen(SITE_TAGLINE) > 1) {
@@ -35,7 +44,11 @@ while (!$keywords_metatags->EOF) {
   $keywords_metatags->MoveNext();
 }
 $zco_notifier->notify('NOTIFY_MODULE_META_TAGS_BUILDKEYWORDS', CUSTOM_KEYWORDS, $keywords_string_metatags);
+<<<<<<< HEAD
 define('KEYWORDS', str_replace($bad_characters,'',zen_clean_html($keywords_string_metatags) . CUSTOM_KEYWORDS));
+=======
+define('KEYWORDS', str_replace('"','',zen_clean_html($keywords_string_metatags) . CUSTOM_KEYWORDS));
+>>>>>>> upstream/master
 
 // if per-page metatags overrides have been defined, use those, otherwise use usual defaults:
 if ($metatag_page_name != 'index') {

@@ -9,10 +9,17 @@
  * - The expiry date is not reached
  *
  * @package templateSystem
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: tpl_modules_downloads.php  Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Fri Jan 8 13:28:51 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 /**
  * require the downloads module

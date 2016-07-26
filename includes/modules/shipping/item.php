@@ -1,10 +1,17 @@
 <?php
 /**
  * @package shippingMethod
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: item.php  ajeh  Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Sat Oct 17 22:52:38 2015 -0400 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
 class item extends base {
@@ -64,8 +71,14 @@ class item extends base {
     global $order, $db;
     if (IS_ADMIN_FLAG == TRUE) return;
 
+<<<<<<< HEAD
     // disable only when entire cart is free shipping
     if (zen_get_shipping_enabled($this->code) == FALSE) $this->enabled = FALSE;
+=======
+// class constructor
+    function __construct() {
+      global $order, $db;
+>>>>>>> upstream/master
 
     /** CUSTOM ENABLE/DISABLE LOGIC CAN BE ADDED IN THE AREA SPECIFIED BELOW **/
     if ($this->enabled) {

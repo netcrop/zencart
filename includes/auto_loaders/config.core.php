@@ -4,9 +4,15 @@
  * see  {@link  http://www.zen-cart.com/wiki/index.php/Developers_API_Tutorials#InitSystem wikitutorials} for more details.
  *
  * @package initSystem
+<<<<<<< HEAD
  * @copyright Copyright 2003-2015 Zen Cart Development Team
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version GIT: $Id: Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Mon Dec 7 14:53:08 2015 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 if (!defined('IS_ADMIN_FLAG')) {
  die('Illegal Access');
@@ -15,24 +21,91 @@ if (!defined('USE_PCONNECT')) define('USE_PCONNECT', 'false');
 /**
  *
  * require(DIR_WS_INCLUDES . 'version.php');
+<<<<<<< HEAD
  * $zco_notifier = new notifier();
+=======
+ * require(DIR_WS_CLASSES . 'class.base.php');
+ * require(DIR_WS_CLASSES . 'class.notifier.php');
+ * $zco_notifier = new notifier()'
+ * require(DIR_WS_CLASSES . 'class.phpmailer.php');
+ * require(DIR_WS_CLASSES . 'boxes.php');
+ * require(DIR_WS_CLASSES . 'category_tree.php');
+ * require(DIR_WS_CLASSES . 'cache.php');
+ * require(DIR_WS_CLASSES . 'sniffer.php');
+ * require(DIR_WS_CLASSES . 'shopping_cart.php');
+ * require(DIR_WS_CLASSES . 'navigation_history.php');
+ * require(DIR_WS_CLASSES . 'currencies.php');
+ * require(DIR_WS_CLASSES . 'message_stack.php');
+ * require(DIR_WS_CLASSES . 'template_func.php');
+ * require(DIR_WS_CLASSES . 'split_page_results.php');
+ * require(DIR_WS_CLASSES . 'breadcrumb.php');
+ * require(DIR_WS_CLASSES . 'language.php');
+>>>>>>> upstream/master
  *
  */
   $autoLoadConfig[0][] = array('autoType'=>'include',
                                'loadFile'=> DIR_WS_INCLUDES . 'version.php');
+<<<<<<< HEAD
   $autoLoadConfig[0][] = array('autoType'=>'classInstantiate',
                                 'className'=>'notifier',
                                 'objectName'=>'zco_notifier');
+=======
+  $autoLoadConfig[0][] = array('autoType'=>'class',
+                                'loadFile'=>'class.base.php');
+  $autoLoadConfig[0][] = array('autoType'=>'class',
+                                'loadFile'=>'class.notifier.php');
+  $autoLoadConfig[0][] = array('autoType'=>'classInstantiate',
+                                'className'=>'notifier',
+                                'objectName'=>'zco_notifier');
+  $autoLoadConfig[0][] = array('autoType'=>'class',
+                                'loadFile'=> 'class.phpmailer.php');
+  $autoLoadConfig[0][] = array('autoType'=>'class',
+                                'loadFile'=> 'boxes.php');
+  $autoLoadConfig[0][] = array('autoType'=>'class',
+                                'loadFile'=>'category_tree.php');
+  $autoLoadConfig[0][] = array('autoType'=>'class',
+                                'loadFile'=>'template_func.php');
+  $autoLoadConfig[0][] = array('autoType'=>'class',
+                                'loadFile'=>'split_page_results.php');
+  $autoLoadConfig[0][] = array('autoType'=>'class',
+                                'loadFile'=>'language.php');
+  $autoLoadConfig[0][] = array('autoType'=>'class',
+                                'loadFile'=>'cache.php');
+  $autoLoadConfig[0][] = array('autoType'=>'class',
+                                'loadFile'=>'sniffer.php');
+  $autoLoadConfig[0][] = array('autoType'=>'class',
+                                'loadFile'=>'shopping_cart.php');
+  $autoLoadConfig[0][] = array('autoType'=>'class',
+                                'loadFile'=>'navigation_history.php');
+  $autoLoadConfig[0][] = array('autoType'=>'class',
+                                'loadFile'=>'currencies.php');
+  $autoLoadConfig[0][] = array('autoType'=>'class',
+                                'loadFile'=>'message_stack.php');
+  $autoLoadConfig[0][] = array('autoType'=>'class',
+                                'loadFile'=>'breadcrumb.php');
+  $autoLoadConfig[0][] = array('autoType'=>'class',
+                               'loadFile'=>'query_cache.php');
+>>>>>>> upstream/master
   $autoLoadConfig[0][] = array('autoType'=>'classInstantiate',
                                'className'=>'QueryCache',
                                'objectName'=>'queryCache',
                                'checkInstantiated'=>true);
+<<<<<<< HEAD
   $autoLoadConfig[0][] = array('autoType'=>'classInstantiate',
                                'className'=>'zcPassword',
                                'objectName'=>'zcPassword');
 //  $autoLoadConfig[0][] = array('autoType'=>'classInstantiate',
 //                             'className'=>'\\ZenCart\\Request\\Request',
 //                             'objectName'=>'zcRequest');
+=======
+  $autoLoadConfig[0][] = array('autoType'=>'class',
+                               'loadFile'=>'class.zcPassword.php');
+  $autoLoadConfig[0][] = array('autoType'=>'classInstantiate',
+                               'className'=>'zcPassword',
+                               'objectName'=>'zcPassword');
+
+
+>>>>>>> upstream/master
 
 /**
  * Breakpoint 10.
@@ -45,7 +118,10 @@ if (!defined('USE_PCONNECT')) define('USE_PCONNECT', 'false');
                                 'loadFile'=> 'init_file_db_names.php');
   $autoLoadConfig[10][] = array('autoType'=>'init_script',
                                 'loadFile'=>'init_database.php');
+<<<<<<< HEAD
 
+=======
+>>>>>>> upstream/master
 /**
  * Breakpoint 30.
  *
@@ -77,11 +153,14 @@ if (!defined('USE_PCONNECT')) define('USE_PCONNECT', 'false');
                                 'loadFile'=> 'init_gzip.php');
   $autoLoadConfig[50][] = array('autoType'=>'init_script',
                                 'loadFile'=> 'init_sefu.php');
+<<<<<<< HEAD
 $autoLoadConfig[60][] = array('autoType'=>'init_script',
                               'loadFile'=> 'init_di_container.php');
 $autoLoadConfig[60][] = array('autoType'=>'init_script',
                               'loadFile'=> 'init_checkout_flow_routes.php');
 
+=======
+>>>>>>> upstream/master
 /**
  * Breakpoint 60.
  *
@@ -139,8 +218,11 @@ $autoLoadConfig[60][] = array('autoType'=>'init_script',
                                 'objectName'=>'navigation',
                                 'checkInstantiated'=>true,
                                 'classSession'=>true);
+<<<<<<< HEAD
   $autoLoadConfig[100][] = array('autoType'=>'init_script',
                                  'loadFile'=> 'init_counter.php');
+=======
+>>>>>>> upstream/master
 /**
  * Breakpoint 110.
  *
@@ -236,6 +318,7 @@ $autoLoadConfig[60][] = array('autoType'=>'init_script',
   $autoLoadConfig[180][] = array('autoType'=>'init_script',
                                  'loadFile'=> 'init_header.php');
 
+<<<<<<< HEAD
 /**
  * Breakpoint 185.
  *
@@ -244,6 +327,8 @@ $autoLoadConfig[60][] = array('autoType'=>'init_script',
  */
   $autoLoadConfig[185][] = array('autoType'=>'class',
                                  'loadFile'=> 'class.phpmailer.php');
+=======
+>>>>>>> upstream/master
 
 /**
  * NOTE: Most plugins should be added from point 200 onward.

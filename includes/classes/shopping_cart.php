@@ -6,7 +6,11 @@
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+<<<<<<< HEAD
  * @version GIT: $Id: Author: ajeh  Modified in v1.6.0 $
+=======
+ * @version $Id: Author: DrByte  Sun Oct 18 01:35:35 2015 -0400 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
 if (!defined('IS_ADMIN_FLAG')) {
@@ -55,18 +59,30 @@ class shoppingCart extends base {
   var $free_shipping_price;
   /**
    * total downloads in cart
+<<<<<<< HEAD
    * @var float
+=======
+   * @var decimal
+>>>>>>> upstream/master
    */
   var $download_count;
   /**
    * shopping cart total price before Specials, Sales and Discounts
+<<<<<<< HEAD
    * @var float
+=======
+   * @var decimal
+>>>>>>> upstream/master
    */
   var $total_before_discounts;
   /**
    * set to TRUE to see debug messages for developer use when troubleshooting add/update cart
    * Then, Logout/Login to reset cart for change
+<<<<<<< HEAD
    * @var boolean
+=======
+   * @var string
+>>>>>>> upstream/master
    */
   var $display_debug_messages = FALSE;
   var $flag_duplicate_msgs_set = FALSE;
@@ -796,7 +812,11 @@ class shoppingCart extends base {
         // adjust for downloads
             // adjust products price
               $check_attribute = $attribute_price->fields['products_attributes_id'];
+<<<<<<< HEAD
               $sql = "select products_attributes_id
+=======
+              $sql = "select *
+>>>>>>> upstream/master
                       from " . TABLE_PRODUCTS_ATTRIBUTES_DOWNLOAD . "
                       where products_attributes_id = '" . $check_attribute . "'";
               $check_download = $db->Execute($sql);
@@ -1201,8 +1221,12 @@ class shoppingCart extends base {
                                   p.products_price, p.products_weight, p.products_tax_class_id,
                                   p.products_quantity_order_min, p.products_quantity_order_units, p.products_quantity_order_max,
                                   p.product_is_free, p.products_priced_by_attribute,
+<<<<<<< HEAD
                                   p.products_discount_type, p.products_discount_type_from, p.products_virtual, p.product_is_always_free_shipping,
                                   p.products_quantity_mixed, p.products_mixed_discount_quantity
+=======
+                                  p.products_discount_type, p.products_discount_type_from, p.products_virtual, p.product_is_always_free_shipping
+>>>>>>> upstream/master
                            from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd
                            where p.products_id = '" . (int)$products_id . "'
                            and pd.products_id = p.products_id
@@ -1351,6 +1375,13 @@ class shoppingCart extends base {
           $new_qty = round($new_qty, 0);
         }
 
+<<<<<<< HEAD
+=======
+//@@TODO - should be okay to remove
+        if (false && $new_qty == (int)$new_qty) {
+          $new_qty = (int)$new_qty;
+        }
+>>>>>>> upstream/master
         $products_array[] = array('id' => $products_id,
                                   'category' => $products->fields['master_categories_id'],
                                   'name' => $products->fields['products_name'],
@@ -1371,12 +1402,16 @@ class shoppingCart extends base {
                                   'products_discount_type' => $products->fields['products_discount_type'],
                                   'products_discount_type_from' => $products->fields['products_discount_type_from'],
                                   'products_virtual' => $products->fields['products_virtual'],
+<<<<<<< HEAD
                                   'product_is_always_free_shipping' => $products->fields['product_is_always_free_shipping'],
                                   'products_quantity_order_min' => $products->fields['products_quantity_order_min'],
                                   'products_quantity_order_units' => $products->fields['products_quantity_order_units'],
                                   'products_quantity_order_max' => $products->fields['products_quantity_order_max'],
                                   'products_quantity_mixed' => $products->fields['products_quantity_mixed'],
                                   'products_mixed_discount_quantity' => $products->fields['products_mixed_discount_quantity']
+=======
+                                  'product_is_always_free_shipping' => $products->fields['product_is_always_free_shipping']
+>>>>>>> upstream/master
                                   );
       }
     }
@@ -1398,7 +1433,11 @@ class shoppingCart extends base {
   /**
    * Method to calculate total price of items in cart before Specials, Sales, Discounts
    *
+<<<<<<< HEAD
    * @return float Total Price before Specials, Sales, Discounts
+=======
+   * @return decimal Total Price before Specials, Sales, Discounts
+>>>>>>> upstream/master
    */
   function show_total_before_discounts() {
     $this->notify('NOTIFIER_CART_SHOW_TOTAL_BEFORE_DISCOUNT_START');
@@ -1723,7 +1762,11 @@ class shoppingCart extends base {
   /**
    * Method to return the total number of downloads in the cart
    *
+<<<<<<< HEAD
    * @return float
+=======
+   * @return decimal
+>>>>>>> upstream/master
    */
   function download_counts() {
     $this->calculate();
@@ -1839,7 +1882,11 @@ class shoppingCart extends base {
    * @param string forward destination
    * @param url parameters
    */
+<<<<<<< HEAD
   function actionAddProduct($goto, $parameters, $allowRedirect = true) {
+=======
+  function actionAddProduct($goto, $parameters) {
+>>>>>>> upstream/master
     global $db, $messageStack;
     if ($this->display_debug_messages) $messageStack->add_session('header', 'A: FUNCTION ' . __FUNCTION__, 'caution');
 
@@ -1989,9 +2036,15 @@ class shoppingCart extends base {
 // display message if all is good and not on shopping_cart page
       if (DISPLAY_CART == 'false' && $_GET['main_page'] != FILENAME_SHOPPING_CART && $messageStack->size('shopping_cart') == 0) {
         $messageStack->add_session('header', ($this->display_debug_messages ? 'FUNCTION ' . __FUNCTION__ . ': ' : '') . SUCCESS_ADDED_TO_CART_PRODUCT, 'success');
+<<<<<<< HEAD
         if ($allowRedirect) zen_redirect(zen_href_link($goto, zen_get_all_get_params($parameters)));
       } else {
         if ($allowRedirect) zen_redirect(zen_href_link(FILENAME_SHOPPING_CART));
+=======
+        zen_redirect(zen_href_link($goto, zen_get_all_get_params($parameters)));
+      } else {
+        zen_redirect(zen_href_link(FILENAME_SHOPPING_CART));
+>>>>>>> upstream/master
       }
     } else {
       // errors found with attributes - perhaps display an additional message here, using an observer class to add to the messageStack
@@ -2008,7 +2061,11 @@ class shoppingCart extends base {
     global $messageStack;
     if ($this->display_debug_messages) $messageStack->add_session('header', 'FUNCTION ' . __FUNCTION__ . ' $_GET[products_id]: ' . $_GET['products_id'], 'caution');
 
+<<<<<<< HEAD
     $this->flag_duplicate_msgs_set = false;
+=======
+    $this->flag_duplicate_msgs_set = FALSE;
+>>>>>>> upstream/master
     if (isset($_GET['products_id'])) {
 
       $requiresAttributeChoices = zen_requires_attribute_selection($_GET['products_id']);
@@ -2080,6 +2137,7 @@ class shoppingCart extends base {
     $addCount = 0;
     if (is_array($_POST['products_id']) && sizeof($_POST['products_id']) > 0) {
 //echo '<pre>'; echo var_dump($_POST['products_id']); echo '</pre>';
+<<<<<<< HEAD
       $products_list = $_POST['products_id'];
       while ( list( $key, $val ) = each($products_list) ) {
         $prodId = preg_replace('/[^0-9a-f:.]/', '', $key);
@@ -2101,6 +2159,11 @@ class shoppingCart extends base {
           }
 
           // else carry on as usual
+=======
+      while ( list( $key, $val ) = each($_POST['products_id']) ) {
+        $prodId = preg_replace('/[^0-9a-f:.]/', '', $key);
+        if (is_numeric($val) && $val > 0) {
+>>>>>>> upstream/master
           $adjust_max = false;
           $qty = $val;
           $add_max = zen_get_products_quantity_order_max($prodId);

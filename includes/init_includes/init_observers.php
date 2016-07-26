@@ -17,7 +17,11 @@
  * @package initSystem
  * @copyright Copyright 2003-2013 Zen Cart Development Team
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+<<<<<<< HEAD
  * @version $Id: init_observers.php $
+=======
+ * @version GIT: $Id: Author: DrByte  Thu Oct 31 15:57:31 2013 -0400 New in v1.5.3 $
+>>>>>>> upstream/master
  */
   if (!defined('IS_ADMIN_FLAG')) {
    die('Illegal Access');

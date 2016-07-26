@@ -1,10 +1,17 @@
 <?php
 /**
  * @package admin
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version GIT: $Id: Author: DrByte  Jun 30 2014 Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Mon Oct 19 13:08:52 2015 -0400 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 if (!defined('USE_PCONNECT')) define('USE_PCONNECT', 'false');
 /**
@@ -75,6 +82,10 @@ if (!defined('USE_PCONNECT')) define('USE_PCONNECT', 'false');
   $autoLoadConfig[0][] = array('autoType'=>'classInstantiate',
                                'className'=>'zcPassword',
                                'objectName'=>'zcPassword');
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/master
 /**
  * Breakpoint 10.
  *
@@ -127,6 +138,14 @@ if (!defined('USE_PCONNECT')) define('USE_PCONNECT', 'false');
                                 'loadFile'=> 'init_general_funcs.php');
   $autoLoadConfig[40][] = array('autoType'=>'init_script',
                                 'loadFile'=> 'init_tlds.php');
+/**
+ * Breakpoint 50.
+ *
+ * require('includes/init_includes/init_cache_key_check.php');
+ *
+ */
+  $autoLoadConfig[50][] = array('autoType'=>'init_script',
+                                'loadFile'=> 'init_cache_key_check.php');
 /**
  * Breakpoint 60.
  *

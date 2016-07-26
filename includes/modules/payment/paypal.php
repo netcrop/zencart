@@ -6,7 +6,11 @@
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+<<<<<<< HEAD
  * @version GIT: $Id: Author: DrByte  Modified in v1.6.0 $
+=======
+ * @version $Id: Author: DrByte  Tue Feb 16 22:22:40 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
 define('MODULE_PAYMENT_PAYPAL_TAX_OVERRIDE', 'true');
@@ -54,7 +58,11 @@ class paypal extends base {
   function __construct($paypal_ipn_id = '') {
     global $order, $messageStack;
     $this->code = 'paypal';
+<<<<<<< HEAD
     $this->codeVersion = '1.6.0';
+=======
+    $this->codeVersion = '1.5.5';
+>>>>>>> upstream/master
     if (IS_ADMIN_FLAG === true) {
       // Payment Module title in Admin
       $this->title = STORE_COUNTRY != '223' ? MODULE_PAYMENT_PAYPAL_TEXT_ADMIN_TITLE_NONUSA : MODULE_PAYMENT_PAYPAL_TEXT_ADMIN_TITLE;
@@ -80,7 +88,11 @@ class paypal extends base {
       $this->form_action_url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
     }
 
+<<<<<<< HEAD
     if (PROJECT_VERSION_MAJOR != '1' && substr(PROJECT_VERSION_MINOR, 0, 3) != '6.0') $this->enabled = false;
+=======
+    if (PROJECT_VERSION_MAJOR != '1' && substr(PROJECT_VERSION_MINOR, 0, 3) != '5.5') $this->enabled = false;
+>>>>>>> upstream/master
 
     // verify table structure
     if (IS_ADMIN_FLAG === true) $this->tableCheckup();

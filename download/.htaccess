@@ -1,7 +1,11 @@
 #
+<<<<<<< HEAD
 # @copyright Copyright 2003-2016 Zen Cart Development Team
+=======
+# @copyright Copyright 2003-2013 Zen Cart Development Team
+>>>>>>> upstream/master
 # @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
-# @version $Id: .htaccess 18695 2011-05-04 05:24:19Z drbyte $
+# @version GIT: $Id: Author: DrByte  Fri May 17 14:29:18 2013 -0400 Modified in v1.5.2 $
 #
 
 AuthType Basic
@@ -40,6 +44,7 @@ AuthGroupFile /dev/null
 
 # but now allow just *certain* necessary files:
 <FilesMatch "(?i).*\.(zip|gzip|pdf|mp3|swf|wma|wmv|wav|epub|ogg|webm|m4v|m4a)$">
+<<<<<<< HEAD
   <IfModule mod_authz_core.c>
     Require all granted
   </IfModule>
@@ -47,6 +52,10 @@ AuthGroupFile /dev/null
     Order Allow,Deny
     Allow from all
   </IfModule>
+=======
+  Order Allow,Deny
+  Allow from all
+>>>>>>> upstream/master
 </FilesMatch>
 
 <IfModule mod_headers.c>

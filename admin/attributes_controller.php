@@ -1,10 +1,17 @@
 <?php
 /**
  * @package admin
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: drbyte  Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Thu Mar 3 12:16:32 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
   require('includes/application_top.php');
 
@@ -22,7 +29,11 @@
     foreach ($chk_option_names as $chk_option_name) {
       if (!zen_option_name_base_expects_no_values($chk_option_name->fields['products_options_id'])) {
         $messageStack->add_session(ERROR_DEFINE_OPTION_VALUES, 'caution');
+<<<<<<< HEAD
         zen_redirect(zen_admin_href_link(FILENAME_OPTIONS_VALUES_MANAGER));
+=======
+        zen_redirect(zen_href_link(FILENAME_OPTIONS_VALUES_MANAGER));
+>>>>>>> upstream/master
       }
     }
   }
@@ -32,16 +43,27 @@
     zen_redirect(zen_admin_href_link(FILENAME_CATEGORIES));
   }
   // check for damaged database, caused by users indiscriminately deleting table data
+<<<<<<< HEAD
   $ary = array();
+=======
+  $ary = array();
+>>>>>>> upstream/master
   $chk_option_values = $db->Execute("select * from " . TABLE_PRODUCTS_OPTIONS_VALUES . " where products_options_values_id=" . (int)PRODUCTS_OPTIONS_VALUES_TEXT_ID);
   while (!$chk_option_values->EOF) {
     $ary[] = $chk_option_values->fields['language_id'];
     $chk_option_values->MoveNext();
   }
+<<<<<<< HEAD
   $languages = zen_get_languages();
   for ($i=0, $n=sizeof($languages); $i<$n; $i ++) {
     if ((int)$languages[$i]['id'] > 0 && !in_array((int)$languages[$i]['id'], $ary)) {
       $db->Execute("INSERT INTO " . TABLE_PRODUCTS_OPTIONS_VALUES . " (products_options_values_id, language_id, products_options_values_name) VALUES (" . (int)PRODUCTS_OPTIONS_VALUES_TEXT_ID . ", " . (int)$languages[$i]['id'] . ", 'TEXT')");
+=======
+  $languages = zen_get_languages();
+  for ($i=0, $n=sizeof($languages); $i<$n; $i ++) {
+    if ((int)$languages[$i]['id'] > 0 && !in_array((int)$languages[$i]['id'], $ary)) {
+      $db->Execute("INSERT INTO " . TABLE_PRODUCTS_OPTIONS_VALUES . " (products_options_values_id, language_id, products_options_values_name) VALUES (" . (int)PRODUCTS_OPTIONS_VALUES_TEXT_ID . ", " . (int)$languages[$i]['id'] . ", 'TEXT')");
+>>>>>>> upstream/master
     }
   }
 
@@ -73,7 +95,11 @@
     order by pd.products_name";
     $new_product_query = $db->Execute($sql);
     $products_filter = (!$new_product_query->EOF) ? $new_product_query->fields['products_id'] : '';
+<<<<<<< HEAD
     zen_redirect(zen_admin_href_link(FILENAME_ATTRIBUTES_CONTROLLER, 'products_filter=' . $products_filter . '&current_category_id=' . $current_category_id));
+=======
+    zen_redirect(zen_href_link(FILENAME_ATTRIBUTES_CONTROLLER, 'products_filter=' . $products_filter . '&current_category_id=' . $current_category_id));
+>>>>>>> upstream/master
   }
 
 // set categories and products if not set
@@ -898,6 +924,94 @@ function popupWindow(url) {
 }
 ?>
 
+<<<<<<< HEAD
+=======
+<?php
+// fix here
+// preview shot of attributes
+if ($action == 'attributes_preview') {
+  $_GET['products_id'] = $products_filter;
+  $pInfo = new stdClass();
+  $pInfo->products_id = $products_filter;
+
+  include(DIR_WS_INCLUDES . 'attributes_preview.php');
+?>
+      <tr>
+        <td colspan="2" class="main" align="center" height= "40" valign="middle"><?php echo '<a href="' . zen_href_link(FILENAME_ATTRIBUTES_CONTROLLER, 'products_filter=' . $products_filter . '&current_category_id=' . $current_category_id . (isset($_GET['page']) ? '&page=' . $_GET['page'] : '')) . '">' . zen_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
+      </tr>
+      <tr>
+        <td colspan="2"><table border="1" cellspacing="0" cellpadding="2" align="center" class="main_page">
+          <tr>
+            <td class="main">
+<?php
+//            where    patrib.products_id='" . $pInfo->products_id . "'
+//            where    patrib.products_id='" . (int)$_GET['products_id'] . "'
+  $check_template = $db->Execute("select template_dir from " . TABLE_TEMPLATE_SELECT);
+  echo '<link rel="stylesheet" type="text/css" href="' . str_replace('index.php?main_page=NONE', 'includes/templates/' . $check_template->fields['template_dir'] . '/css/stylesheet.css', zen_catalog_href_link('NONE', '', 'SSL')) . '" />';
+?>
+
+  <tr>
+    <td colspan="2" class="main" align="center">
+<?php
+  if ($pr_attr->fields['total'] > 0) {
+?>
+      <table border="0" width="90%" cellspacing="0" cellpadding="2">
+        <tr>
+          <td colspan="2" class="main" align="left"><?php echo TEXT_PRODUCT_OPTIONS; ?></td>
+        </tr>
+<?php
+    for($i=0;$i<sizeof($options_name);$i++) {
+?>
+<?php
+  if ($options_comment[$i] != '' and $options_comment_position[$i] == '0') {
+?>
+        <tr>
+          <td colspan="2" class="ProductInfoComments" align="left" valign="bottom"><?php echo $options_comment[$i]; ?></td>
+        </tr>
+<?php
+  }
+?>
+        <tr>
+          <td class="main" align="left" valign="top"><?php echo $options_name[$i] . ':'; ?></td>
+          <td class="main" align="left" valign="top" width="75%"><?php echo $options_menu[$i]; ?></td>
+        </tr>
+<?php if ($options_comment[$i] != '' and $options_comment_position[$i] == '1') { ?>
+        <tr>
+          <td colspan="2" class="ProductInfoComments" align="left" valign="top"><?php echo $options_comment[$i]; ?></td>
+        </tr>
+<?php } ?>
+
+<?php
+if ($options_attributes_image[$i] != '') {
+?>
+        <tr><td colspan="2"><table border= "0" align="center" valign="top" cellpadding="2" cellspacing="2"><tr>
+          <?php echo $options_attributes_image[$i]; ?>
+        </tr></table></td></tr>
+<?php
+}
+?>
+<?php
+    }
+?>
+      </table>
+<?php
+  }
+?>
+    </td>
+  </tr>
+            </td>
+          </tr>
+        </table></td>
+      </tr>
+
+      <tr>
+        <td colspan="2" class="main" align="center" height= "40" valign="middle"><?php echo '<a href="' . zen_href_link(FILENAME_ATTRIBUTES_CONTROLLER, 'products_filter=' . $products_filter . '&current_category_id=' . $current_category_id . (isset($_GET['page']) ? '&page=' . $_GET['page'] : '')) . '">' . zen_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
+      </tr>
+<?php
+} // eof: attributes preview
+?>
+
+>>>>>>> upstream/master
       <tr>
         <td colspan="3" class="main" height="20" align="center"><?php echo zen_draw_separator('pixel_black.gif', '90%', '2'); ?></td>
       </tr>
@@ -1004,7 +1118,11 @@ if ($action == '') {
 // fix here border width
 ?>
       <tr>
+<<<<<<< HEAD
         <td><form name="attributes" action="<?php echo zen_admin_href_link(FILENAME_ATTRIBUTES_CONTROLLER, 'action=' . $form_action . (isset($_GET['option_page']) ? '&option_page=' . $_GET['option_page'] . '&' : '') . (isset($_GET['value_page']) ? '&value_page=' . $_GET['value_page'] . '&' : '') . (isset($_GET['attribute_page']) ? '&attribute_page=' . $_GET['attribute_page'] : '') . '&products_filter=' . $products_filter ); ?>" method="post" enctype="multipart/form-data"><?php echo zen_draw_hidden_field('securityToken', $_SESSION['securityToken']); ?><table border="0" cellspacing="0" cellpadding="2">
+=======
+        <td><form name="attributes" action="<?php echo zen_href_link(FILENAME_ATTRIBUTES_CONTROLLER, 'action=' . $form_action . (isset($_GET['option_page']) ? '&option_page=' . $_GET['option_page'] . '&' : '') . (isset($_GET['value_page']) ? '&value_page=' . $_GET['value_page'] . '&' : '') . (isset($_GET['attribute_page']) ? '&attribute_page=' . $_GET['attribute_page'] : '') . '&products_filter=' . $products_filter ); ?>" method="post" enctype="multipart/form-data"><?php echo zen_draw_hidden_field('securityToken', $_SESSION['securityToken']); ?><table border="0" cellspacing="0" cellpadding="2">
+>>>>>>> upstream/master
           <tr>
             <td colspan="10" class="smallText">
 <?php

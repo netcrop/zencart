@@ -54,12 +54,19 @@
 /**
  * Parse the data used in the html tags to ensure the tags will not break.
  * Basically just an extension to the php strtr function
+<<<<<<< HEAD
  *
  * @param string $data string to be parsed
  * @param array $parse needle to find
  * @return string
  */
   function zen_parse_input_field_data($data, array $parse) {
+=======
+ * @param string The string to be parsed
+ * @param string The needle to find
+*/
+  function zen_parse_input_field_data($data, $parse) {
+>>>>>>> upstream/master
     return strtr(trim($data), $parse);
   }
 
@@ -143,10 +150,16 @@
  *
  * The return is a urlencoded string
  *
+<<<<<<< HEAD
  * @param mixed $exclude_array either a single or array of parameter names to be excluded from output
  * @return mixed|string
  */
   function zen_get_all_get_params($exclude_array = array()) {
+=======
+ * @param mixed either a single or array of parameter names to be excluded from output
+*/
+  function zen_get_all_get_params($exclude_array = array(), $search_engine_safe = true) {
+>>>>>>> upstream/master
     if (!is_array($exclude_array)) $exclude_array = array();
     $exclude_array = array_merge($exclude_array, array('main_page', 'cmd', 'error', 'x', 'y')); // de-duplicating this is less performant than just letting it repeat the loop on duplicates
     if (function_exists('zen_session_name')) {
@@ -177,13 +190,22 @@
   }
 /**
  * Return all GET params as (usually hidden) POST params
+<<<<<<< HEAD
  * @param array $exclude_array parameters to exclude
  * @param boolean $hidden post as hidden
+=======
+ * @param array $exclude_array
+ * @param boolean $hidden
+>>>>>>> upstream/master
  * @return string
  */
   function zen_post_all_get_params($exclude_array = array(), $hidden = true) {
     if (!is_array($exclude_array)) $exclude_array = array();
+<<<<<<< HEAD
     $exclude_array = array_merge($exclude_array, array(zen_session_name(), 'cmd', 'error', 'x', 'y'));
+=======
+    $exclude_array = array_merge($exclude_array, array(zen_session_name(), 'error', 'x', 'y'));
+>>>>>>> upstream/master
     $fields = '';
     if (is_array($_GET) && (sizeof($_GET) > 0)) {
       reset($_GET);
@@ -923,6 +945,17 @@ function zen_get_minutes_since($timestamp) {
      * sanitize for validity as an IPv4 or IPv6 address
      */
     $ip = preg_replace('~[^a-fA-F0-9.:%/,]~', '', $ip);
+<<<<<<< HEAD
+=======
+
+    /**
+     *  if it's still blank, set to a single dot
+     */
+    if (trim($ip) == '') $ip = '.';
+
+    return $ip;
+  }
+>>>>>>> upstream/master
 
     /**
      *  if it's still blank, set to a single dot
@@ -1325,7 +1358,11 @@ function zen_get_minutes_since($timestamp) {
 
 // show case only superceeds all other settings
     if (STORE_STATUS != '0') {
+<<<<<<< HEAD
       return '<a class="btn-contactus" href="' . zen_href_link(FILENAME_CONTACT_US, '', 'SSL') . '">' .  TEXT_SHOWCASE_ONLY . '</a>';
+=======
+      return '<a href="' . zen_href_link(FILENAME_CONTACT_US, '', 'SSL') . '">' .  TEXT_SHOWCASE_ONLY . '</a>';
+>>>>>>> upstream/master
     }
 
 // 0 = normal shopping
@@ -1362,10 +1399,21 @@ function zen_get_minutes_since($timestamp) {
         // customer must be logged in to browse
         $login_for_price = TEXT_AUTHORIZATION_PENDING_BUTTON_REPLACE;
         return $login_for_price;
+<<<<<<< HEAD
+=======
+        break;
+>>>>>>> upstream/master
         case ((int)$_SESSION['customers_authorization'] >= 2):
         // customer is logged in and was changed to must be approved to buy
         $login_for_price = TEXT_AUTHORIZATION_PENDING_BUTTON_REPLACE;
         return $login_for_price;
+<<<<<<< HEAD
+=======
+        break;
+        default:
+        // proceed normally
+        break;
+>>>>>>> upstream/master
       }
 
     $button_check = $db->Execute("select product_is_call, products_quantity from " . TABLE_PRODUCTS . " where products_id = " . (int)$product_id);
@@ -1374,8 +1422,12 @@ function zen_get_minutes_since($timestamp) {
     case (zen_get_products_allow_add_to_cart($product_id) == 'N'):
       return $additional_link;
     case ($button_check->fields['product_is_call'] == '1'):
+<<<<<<< HEAD
       $return_button = '<a class="btn-callforprice" href="' . zen_href_link(FILENAME_CONTACT_US, '', 'SSL') . '">' . TEXT_CALL_FOR_PRICE . '</a>';
 //      $return_button = '';
+=======
+      $return_button = '<a href="' . zen_href_link(FILENAME_CONTACT_US, '', 'SSL') . '">' . TEXT_CALL_FOR_PRICE . '</a>';
+>>>>>>> upstream/master
       break;
     case ($button_check->fields['products_quantity'] <= 0 and SHOW_PRODUCTS_SOLD_OUT_IMAGE == '1'):
       if ($_GET['main_page'] == zen_get_info_page($product_id)) {
@@ -1403,7 +1455,11 @@ function zen_get_minutes_since($timestamp) {
  * @return bool
  */
   function zen_get_shipping_enabled($shipping_module) {
+<<<<<<< HEAD
     global $zcRequest;
+=======
+    global $PHP_SELF, $order;
+>>>>>>> upstream/master
 
     // for admin always true if installed
     if (IS_ADMIN_FLAG === true && $zcRequest->readGet('cmd') == FILENAME_MODULES) {
@@ -1462,7 +1518,11 @@ function zen_get_minutes_since($timestamp) {
 
     $clean_it= nl2br($clean_it);
 
+<<<<<<< HEAD
   // update breaks with a space for text displays in all listings with descriptions
+=======
+// update breaks with a space for text displays in all listings with descriptions
+>>>>>>> upstream/master
     $clean_it = preg_replace('~(<br ?/?>|</?p>)~', ' ', $clean_it);
 
 // temporary fix more for reviews than anything else
@@ -1561,6 +1621,7 @@ function zen_get_minutes_since($timestamp) {
     return $retVal;
   }
 
+<<<<<<< HEAD
 /**
  * replacement for fmod to manage values < 1
  *
@@ -1568,6 +1629,9 @@ function zen_get_minutes_since($timestamp) {
  * @param float $y
  * @return int|number
  */
+=======
+  // replacement for fmod to manage values < 1
+>>>>>>> upstream/master
   function fmod_round($x, $y) {
     if ($y == 0) {
       return 0;
@@ -1578,7 +1642,7 @@ function zen_get_minutes_since($timestamp) {
     $zc_round_ceil = round($zc_round,0);
     $multiplier = $zc_round_ceil * $y;
     $results = abs(round($x - $multiplier, 6));
-     return $results;
+    return $results;
   }
 
 /**
@@ -1850,12 +1914,15 @@ function zen_get_minutes_since($timestamp) {
       echo $val;
     }
   }
+<<<<<<< HEAD
 
 /**
  * Prepend 'http://' to the specified URL if not already http:// or https://
  * @param string $url
  * @return string
  */
+=======
+>>>>>>> upstream/master
   function fixup_url($url)
   {
     if (!preg_match('#^https?://#', $url)) {
@@ -1863,6 +1930,26 @@ function zen_get_minutes_since($timestamp) {
     }
     return $url;
   }
+<<<<<<< HEAD
+=======
+  function zen_update_music_artist_clicked($artistId, $languageId)
+  {
+    global $db;
+    $sql = "UPDATE " . TABLE_RECORD_ARTISTS_INFO . " set url_clicked = url_clicked +1, date_last_click = NOW() WHERE artists_id = :artistId: AND languages_id = :languageId:";
+    $sql = $db->bindVars($sql, ':artistId:', $artistId, 'integer');
+    $sql = $db->bindVars($sql, ':languageId:', $languageId, 'integer');
+    $db->execute($sql);
+  }
+  function zen_update_record_company_clicked($recordCompanyId, $languageId)
+  {
+    global $db;
+    $sql = "UPDATE " . TABLE_RECORD_COMPANY_INFO . " set url_clicked = url_clicked +1, date_last_click = NOW() WHERE record_company_id = :rcId: AND languages_id = :languageId:";
+    $sql = $db->bindVars($sql, ':rcId:', $recordCompanyId, 'integer');
+    $sql = $db->bindVars($sql, ':languageId:', $languageId, 'integer');
+    $db->execute($sql);
+  }
+
+>>>>>>> upstream/master
   /**
    * function issetorArray
    *
@@ -1873,6 +1960,7 @@ function zen_get_minutes_since($timestamp) {
    * @param null $default
    * @return mixed
    */
+<<<<<<< HEAD
   function issetorArray(array $array, $key, $default = null) {
       return isset($array[$key]) ? $array[$key] : $default;
   }
@@ -1902,6 +1990,14 @@ function zen_get_minutes_since($timestamp) {
   }
 
 /////////////////////////////////////////////
+=======
+  function issetorArray(array $array, $key, $default = null)
+  {
+    return isset($array[$key]) ? $array[$key] : $default;
+  }
+
+  /////////////////////////////////////////////
+>>>>>>> upstream/master
 ////
 // call additional function files
 // prices and quantities

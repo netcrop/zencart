@@ -40,7 +40,10 @@ define('TEXT_SYSTEM_SETUP_ERROR_CATALOG_PHYSICAL_PATH', 'There appears to be a p
 
 define('TEXT_PAGE_HEADING_DATABASE', 'Database Setup');
 define('TEXT_DATABASE_HEADER_MAIN', 'NOTE: You must create your MySQL database and corresponding Database user, and grant permissions to that user, before proceeding on this page. Click the left-column titles below for help with understanding each component.');
+<<<<<<< HEAD
 define('TEXT_DATABASE_ADVANCED_TIPS', 'ADVANCED TIP: If you have custom .sql scripts to run as part of this install, upload them to the zc_install/sql/plugins folder before proceeding. (They need to be named like "mysql_xxxxx.sql" to be recognized and run.)');
+=======
+>>>>>>> upstream/master
 define('TEXT_DATABASE_SETUP_SETTINGS', 'Basic Settings');
 define('TEXT_DATABASE_SETUP_DB_HOST', 'Database Host: ');
 define('TEXT_DATABASE_SETUP_DB_USER', 'Database User: ');
@@ -56,6 +59,10 @@ define('TEXT_DATABASE_SETUP_SQL_CACHE_METHOD', 'SQL Cache Method: ');
 define('TEXT_DATABASE_SETUP_JSCRIPT_SQL_ERRORS1', '<p>Some errors occurred when running the SQL install file');
 define('TEXT_DATABASE_SETUP_JSCRIPT_SQL_ERRORS2', '<br>Please see error logs for more details<p>');
 define('TEXT_DATABASE_SETUP_CHARSET_OPTION_UTF8', 'UTF8 (default setting)');
+<<<<<<< HEAD
+=======
+define('TEXT_DATABASE_SETUP_CHARSET_OPTION_LATIN1', 'Latin1');
+>>>>>>> upstream/master
 define('TEXT_DATABASE_SETUP_CACHE_TYPE_OPTION_NONE', 'No SQL Caching');
 define('TEXT_DATABASE_SETUP_CACHE_TYPE_OPTION_DATABASE', 'Database');
 define('TEXT_DATABASE_SETUP_CACHE_TYPE_OPTION_FILE', 'File');
@@ -86,7 +93,10 @@ define('TEXT_ADMIN_SETUP_USER_PASSWORD_HELP', '<strong>REMEMBER THIS!!</strong>:
 define('TEXT_ADMIN_SETUP_ADMIN_DIRECTORY', 'Admin Directory: ');
 define('TEXT_ADMIN_SETUP_ADMIN_DIRECTORY_HELP_DEFAULT', 'We were not able to change your admin directory automatically. You will need to change it yourself before you can access your Store Admin.');
 define('TEXT_ADMIN_SETUP_ADMIN_DIRECTORY_HELP_NOT_ADMIN_CHANGED', 'We did not change your admin directory automatically as it already seems to have been changed from the default.');
+<<<<<<< HEAD
 define('TEXT_ADMIN_SETUP_ADMIN_DIRECTORY_HELP_DEVELOPER', 'We did not change your admin directory automatically as you are in DEVELOPER_MODE.');
+=======
+>>>>>>> upstream/master
 define('TEXT_ADMIN_SETUP_ADMIN_DIRECTORY_HELP_CHANGED', 'Your store Admin directory may have been automatically renamed. Please ensure you make a note of the directory below.');
 define('TEXT_ADMIN_SETUP_NEWSLETTER_SETTINGS', 'Newsletter');
 define('TEXT_ADMIN_SETUP_NEWSLETTER_EMAIL', 'Newsletter Email: ');
@@ -96,6 +106,7 @@ define('TEXT_ADMIN_SETUP_NEWSLETTER_OPTIN', 'Opt In: ');
 
 define('TEXT_PAGE_HEADING_COMPLETION', 'Setup Finished');
 define('TEXT_COMPLETION_HEADER_MAIN', '');
+<<<<<<< HEAD
 define('TEXT_COMPLETION_INSTALL_COMPLETE', 'Installation completed.');
 define('TEXT_COMPLETION_INSTALL_LINKS_BELOW', 'You can now access your store front and admin backend using the links below.');
 define('TEXT_COMPLETION_UPGRADE_COMPLETE', 'Congratulations, your upgrade is now complete.');
@@ -104,6 +115,15 @@ define('TEXT_COMPLETION_INSTALLATION_DIRECTORY_WARNING', "Please delete the 'zc_
 define('TEXT_COMPLETION_INSTALLATION_DIRECTORY_EXPLANATION', "To prevent unauthorized persons from overwriting your installation, administering your installation will be disabled until the folder has been deleted.");
 
 define('TEXT_COMPLETION_CATALOG_LINK_TEXT', 'Your Store Front');
+=======
+define('TEXT_COMPLETION_INSTALL_COMPLETE', 'Installation is now complete.');
+define('TEXT_COMPLETION_INSTALL_LINKS_BELOW', 'You can access your storefront and your Administration area using the links below.');
+define('TEXT_COMPLETION_UPGRADE_COMPLETE', 'Congratulations, your upgrade is now complete.');
+define('TEXT_COMPLETION_ADMIN_DIRECTORY_WARNING', 'Your admin directory could not be renamed automatically, you will need to rename your admin directory before accessing it');
+define('TEXT_COMPLETION_INSTALLATION_DIRECTORY_WARNING', "You need to remove the /zc_install/ folder so that someone can't re-install your shop again and wipe out your database! A message will appear and you will not be able to log into your admin until the folder has been removed.");
+
+define('TEXT_COMPLETION_CATALOG_LINK_TEXT', 'Your Storefront');
+>>>>>>> upstream/master
 define('TEXT_COMPLETION_ADMIN_LINK_TEXT', 'Your Admin Backend');
 
 define('TEXT_PAGE_HEADING_DATABASE_UPGRADE', 'Database Upgrade');
@@ -140,6 +160,7 @@ define('TEXT_NAVBAR_ADMIN_SETUP', 'Admin Setup');
 define('TEXT_NAVBAR_COMPLETION', 'Finished');
 define('TEXT_NAVBAR_PAYMENT_PROVIDERS', 'Payment Providers');
 
+<<<<<<< HEAD
 define('TEXT_ERROR_PROBLEMS_WRITING_CONFIGUREPHP_FILES', 'There were problems preparing and storing the configure.php file. YOUR INSTALL DID NOT COMPLETE PROPERLY.<br>Additional technical details may be found in your /logs/ folder.');
 define('TEXT_ERROR_COULD_NOT_READ_CFGFILE_TEMPLATE', 'Could not read the master config file layout: %s. Please ensure the file exists and is readable.');
 define('TEXT_ERROR_COULD_NOT_WRITE_CONFIGFILE', 'Could not write the generated config file: %s. Please ensure the file exists and is writable.');
@@ -147,6 +168,14 @@ define('TEXT_ERROR_COULD_NOT_WRITE_CONFIGFILE', 'Could not write the generated c
 define('TEXT_ERROR_DATABASE_INSTALL', 'There was a problem during the database installation.  Please check the files in the /logs/ folder for details');
 
 define('TEXT_ERROR_STORE_CONFIGURE', "Main /includes/configure.php file does not exist (isn't readable) or is not writeable");
+=======
+define('TEXT_ERROR_PROBLEMS_WRITING_CONFIGUREPHP_FILES', 'There were problems preparing and storing the configure.php files. YOUR INSTALL DID NOT COMPLETE PROPERLY.<br>Additional technical details may be found in your /logs/ folder.');
+define('TEXT_ERROR_COULD_NOT_READ_CFGFILE_TEMPLATE', 'Could not read the master config file layout: %s. Please ensure the file exists and is readable.');
+define('TEXT_ERROR_COULD_NOT_WRITE_CONFIGFILE', 'Could not write the generated config file: %s. Please ensure the file exists and is writable.');
+
+define('TEXT_ERROR_STORE_CONFIGURE', "Main /includes/configure.php file does not exist (isn't readable) or is not writeable");
+define('TEXT_ERROR_ADMIN_CONFIGURE', "Admin /admin/includes/configure.php does not exist (isn't readable) or is not writeable");
+>>>>>>> upstream/master
 define('TEXT_ERROR_PHP_VERSION', str_replace(array("\n", "\r"), '', 'Incorrect PHP Version.
 <p>The PHP version you are using (' . PHP_VERSION . ') is too old, and this version of Zen Cart&reg; cannot be used on this server in its present configuration.</p>
 <p>This version of Zen Cart&reg; is compatible with PHP versions 5.2.9 to 7.0.<br>
@@ -184,7 +213,10 @@ define('TEXT_ERROR_EXTENSION_NOT_LOADED', '%s extension does not seem to be load
 define('TEXT_ERROR_FUNCTION_DOES_NOT_EXIST', 'PHP function %s does not exist');
 define('TEXT_ERROR_CURL_LIVE_TEST', 'Could not use CURL to contact a live server');
 define('TEXT_ERROR_HTTPS', 'PRO TIP: If possible you should already have installed an SSL certificate, and run the installer using https://');
+<<<<<<< HEAD
 define('TEXT_ERROR_HTTPS_CONFIGURE', 'As soon as possible, you should install an SSL certificate, and set the URL and ENABLE_SSL settings in your configure.php file.');
+=======
+>>>>>>> upstream/master
 define('TEXT_ERROR_SUCCESS_EXISTING_CONFIGURE', 'An existing configure.php file was found. The installer will attempt to upgrade your database structure if you choose "Upgrade..." below.');
 define('TEXT_ERROR_SUCCESS_EXISTING_CONFIGURE_NO_UPDATE', 'An existing configure.php file was found. However your database seems to be current. This suggests you are on a live site. Proceeding with Install will wipe out the current database contents! Are you sure you want to install?');
 define('TEXT_ERROR_MULTIPLE_ADMINS_NONE_SELECTED', 'Multiple Admin directories seem to exist. Either remove old admin directories and click Refresh or select the correct admin directory below and click Refresh.');
@@ -277,6 +309,7 @@ define('REASON_INDEX_ALREADY_EXISTS','Cannot add index %s to table %s because it
 define('REASON_PRIMARY_KEY_ALREADY_EXISTS','Cannot add primary key to table %s because a primary key already exists.');
 
 
+<<<<<<< HEAD
 define('TEXT_COMPLETION_NGINX_TEXT', "<u>Important security information for Nginx</u>");
 define('TEXT_HELP_TITLE_NGINXCONF', "Securing Zen Cart on Nginx Webservers");
 define('TEXT_HELP_CONTENT_NGINXCONF', "<div>
@@ -374,6 +407,8 @@ define('TEXT_HELP_CONTENT_NGINXCONF', "<div>
 </div>
 <hr>");
 
+=======
+>>>>>>> upstream/master
 define('TEXT_HELP_TITLE_AGREETOTERMS', 'Agree To Terms');
 define('TEXT_HELP_CONTENT_AGREETOTERMS', "<a href='http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html' target='_blank'>Original GPL 2.0 text</a><h2>The GNU General Public License (GPL)</h2>
 
@@ -661,4 +696,84 @@ YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER
 PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGES.</p>
 
+<<<<<<< HEAD
          <p><strong>END OF TERMS AND CONDITIONS</strong></p>");
+=======
+         <p><strong>END OF TERMS AND CONDITIONS</strong></p>
+
+
+
+<br>
+<br>
+<br>
+
+
+
+<!-- START OF 'HOW TO APPLY' SECTION -->
+<p>
+<strong> How to Apply These Terms to Your New Programs</strong></p>
+
+<p>  If you develop a new program, and you want it to be of the greatest
+possible use to the public, the best way to achieve this is to make it
+free software which everyone can redistribute and change under these terms.</p>
+
+ <p> To do so, attach the following notices to the program.  It is safest
+to attach them to the start of each source file to most effectively
+convey the exclusion of warranty; and each file should have at least
+the \"copyright\" line and a pointer to where the full notice is found.</p>
+
+
+<blockquote>
+    <p>one line to give the program's name and a brief idea of what it does.<br>
+    Copyright (C) <year>  <name of author></p>
+
+    <p>This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.</p>
+
+  <p>  This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.</p>
+
+    <p>You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA</p>
+</blockquote>
+<p>
+Also add information on how to contact you by electronic and paper mail.</p>
+
+<p>If the program is interactive, make it output a short notice like this
+when it starts in an interactive mode:</p>
+
+<blockquote>
+   <p> Gnomovision version 69, Copyright (C) year name of author
+    Gnomovision comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
+    This is free software, and you are welcome to redistribute it
+    under certain conditions; type `show c' for details.</p>
+</blockquote>
+
+<p>The hypothetical commands `show w' and `show c' should show the appropriate
+parts of the General Public License.  Of course, the commands you use may
+be called something other than `show w' and `show c'; they could even be
+mouse-clicks or menu items--whatever suits your program.</p>
+<p>
+You should also get your employer (if you work as a programmer) or your
+school, if any, to sign a \"copyright disclaimer\" for the program, if
+necessary.  Here is a sample; alter the names:</p>
+
+<blockquote>
+  <p>Yoyodyne, Inc., hereby disclaims all copyright interest <br>in the program
+  `Gnomovision' (which makes passes at compilers)<br>written by James Hacker.</p>
+
+  <p>signature of Ty Coon, 1 April 1989<br>
+  Ty Coon, President of Vice</p>
+  </blockquote>
+
+<p>This General Public License does not permit incorporating your program into
+proprietary programs.  If your program is a subroutine library, you may
+consider it more useful to permit linking proprietary applications with the
+library.  If this is what you want to do, use the GNU Library General
+Public License instead of this License.</p>");
+>>>>>>> upstream/master

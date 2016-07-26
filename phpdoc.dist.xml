@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <phpdocumentor>
+<<<<<<< HEAD
     <title>Zen Cart v1.6.0-ALPHA</title>
+=======
+    <title>Zen Cart v1.5.5</title>
+>>>>>>> upstream/master
     <parser>
         <default-package-name>core</default-package-name>
         <target>../phpdoc-cache-folder-to-DELETE/</target>
@@ -9,7 +13,11 @@
         </extensions>
     </parser>
     <transformer>
+<<<<<<< HEAD
         <target>../phpdoc-1-6-0</target>
+=======
+        <target>../phpdoc-1-5-5</target>
+>>>>>>> upstream/master
     </transformer>
     <transformations>
         <template name="checkstyle" />
@@ -21,9 +29,12 @@
         <file>ipn_main_handler.php</file>
         <directory>includes</directory>
         <ignore>includes/classes/vendors/*</ignore>
+<<<<<<< HEAD
         <ignore>includes/library/aura/*</ignore>
         <ignore>includes/library/container-interop/*</ignore>
         <ignore>includes/library/vlucas/*</ignore>
+=======
+>>>>>>> upstream/master
         <ignore>includes/classes/Mobile_Detect.php</ignore>
         <ignore>includes/languages/classic/*</ignore>
         <ignore>includes/languages/english/classic/*</ignore>

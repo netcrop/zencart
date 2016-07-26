@@ -6,7 +6,11 @@
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+<<<<<<< HEAD
  * @version $Id: Author: DrByte  Fri Jan 8 13:28:20 2016 -0500 Modified in v1.6.0 $
+=======
+ * @version $Id: Author: DrByte  Fri Jan 8 13:28:20 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 // Notifier hook to allow for dynamic changes to template operation
 $zco_notifier->notify('NOTIFY_TPL_MAIN_PAGE_BEFORE_BODY', $body_id, $template_dir);
@@ -71,12 +75,21 @@ $zco_notifier->notify('NOTIFY_TPL_MAIN_PAGE_BEFORE_BODY', $body_id, $template_di
         $restrict = TEXT_ALLOWED;
       } else {
         $restrict = TEXT_DENIED;
+<<<<<<< HEAD
       }
       if ($get_result->RecordCount() >= 1 and $get_result->fields['category_id'] != '-1') {
         $result = $db->Execute("SELECT * FROM " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd WHERE c.categories_id = cd.categories_id
         and cd.language_id = '" . (int)$_SESSION['languages_id'] . "' and c.categories_id='" . $get_result->fields['category_id'] . "'");
         $cats[] = array("validity"=> ($get_result->fields['coupon_restrict'] =='N' ? 'A' : 'D'), 'name'=> $result->fields["categories_name"] . $restrict, 'link'=>'<a href="' . zen_href_link(FILENAME_DEFAULT, 'cPath=' . (int)$result->fields['categories_id']) . '">' . $result->fields["categories_name"] . '</a>' . $restrict);
       }
+=======
+      }
+      if ($get_result->RecordCount() >= 1 and $get_result->fields['category_id'] != '-1') {
+        $result = $db->Execute("SELECT * FROM " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd WHERE c.categories_id = cd.categories_id
+        and cd.language_id = '" . (int)$_SESSION['languages_id'] . "' and c.categories_id='" . $get_result->fields['category_id'] . "'");
+        $cats[] = array("validity"=> ($get_result->fields['coupon_restrict'] =='N' ? 'A' : 'D'), 'name'=> $result->fields["categories_name"] . $restrict, 'link'=>'<a href="' . zen_href_link(FILENAME_DEFAULT, 'cPath=' . (int)$result->fields['categories_id']) . '">' . $result->fields["categories_name"] . '</a>' . $restrict);
+      }
+>>>>>>> upstream/master
       $get_result->MoveNext();
     }
 
@@ -89,6 +102,7 @@ $zco_notifier->notify('NOTIFY_TPL_MAIN_PAGE_BEFORE_BODY', $body_id, $template_di
   }
   $cats = '<ul id="couponCatRestrictions">' . '<li>' . implode('</li><li>', $mycats) . '</li></ul>';
   $text_coupon_help .= $cats;
+<<<<<<< HEAD
 
   $text_coupon_help .= TEXT_COUPON_HELP_PRODUCTS;
   $sql = "select * from " . TABLE_COUPON_RESTRICT . "  where coupon_id=:couponID: and product_id !='0'";
@@ -109,6 +123,28 @@ $zco_notifier->notify('NOTIFY_TPL_MAIN_PAGE_BEFORE_BODY', $body_id, $template_di
 
   if (sizeof($prods) == 0) $prods[] = array("name"=>TEXT_NO_PROD_RESTRICTIONS);
 
+=======
+
+  $text_coupon_help .= TEXT_COUPON_HELP_PRODUCTS;
+  $sql = "select * from " . TABLE_COUPON_RESTRICT . "  where coupon_id=:couponID: and product_id !='0'";
+  $sql = $db->bindVars($sql, ':couponID:', $_GET['cID'], 'integer');
+  $get_result=$db->Execute($sql);
+  $prods = array();
+  while (!$get_result->EOF) {
+    if ($get_result->fields['coupon_restrict'] == 'N') {
+      $restrict = TEXT_ALLOWED;
+    } else {
+      $restrict = TEXT_DENIED;
+    }
+    $result = $db->Execute("SELECT * FROM " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd WHERE p.products_id = pd.products_id and
+    pd.language_id = '" . (int)$_SESSION['languages_id'] . "' and p.products_id = '" . $get_result->fields['product_id'] . "'");
+    $prods[] = array("validity" => ($get_result->fields['coupon_restrict'] =='N' ? 'A' : 'D'), 'name'=> $result->fields["products_name"] . $restrict, 'link'=> '<a href="' . zen_href_link(zen_get_info_page($result->fields['products_id']), 'cPath=' . zen_get_generated_category_path_rev($result->fields['master_categories_id']) . '&products_id=' . $result->fields['products_id']) . '">' . $result->fields['products_name'] . '</a>' . $restrict);
+    $get_result->MoveNext();
+  }
+
+  if (sizeof($prods) == 0) $prods[] = array("name"=>TEXT_NO_PROD_RESTRICTIONS);
+
+>>>>>>> upstream/master
   sort($prods);
   $myprods = array();
   foreach($prods as $key=>$value) {
@@ -120,8 +156,12 @@ $zco_notifier->notify('NOTIFY_TPL_MAIN_PAGE_BEFORE_BODY', $body_id, $template_di
   echo $text_coupon_help;
 
 ?>
+<<<<<<< HEAD
 <p class="smallText" align="right"><a class="btn close-window" href="javascript:window.close()"><?php echo TEXT_CURRENT_CLOSE_WINDOW; ?></a><br clear="all" /></p>
 
+=======
+<p class="smallText forward"><?php echo '<a href="javascript:window.close()">' . TEXT_CURRENT_CLOSE_WINDOW . '</a>'; ?></p>
+>>>>>>> upstream/master
 
 <?php
 /*************** JAVASCRIPT OUTPUT before </body> close ************************/

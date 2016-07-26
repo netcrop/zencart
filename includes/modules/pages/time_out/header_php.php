@@ -3,10 +3,14 @@
  * Time out page
  *
  * @package page
+<<<<<<< HEAD
  * @copyright Copyright 2003-2014 Zen Cart Development Team
+=======
+ * @copyright Copyright 2003-2013 Zen Cart Development Team
+>>>>>>> upstream/master
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version $Id: header_php.php 6350 2007-05-20 21:00:41Z drbyte $
+ * @version GIT: $Id: Author: Ian Wilson  Wed Feb 19 15:57:35 2014 +0000 Modified in v1.5.3 $
  */
 
 // This should be first line of the script:
@@ -40,6 +44,7 @@ if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
         $error = true;
       $messageStack->add('login', TEXT_LOGIN_ERROR);
       } else {
+<<<<<<< HEAD
         $dbPassword = $check_customer->fields['customers_password'];
         // Check that password is good
         if (!zen_validate_password($password, $dbPassword)) {
@@ -47,6 +52,15 @@ if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
           $messageStack->add('login', TEXT_LOGIN_ERROR);
         } else {
           if (password_needs_rehash($dbPassword, PASSWORD_DEFAULT)) {
+=======
+        $newPassword = $check_customer->fields['customers_password'];
+        // Check that password is good
+        if (!zen_validate_password($password, $newPassword)) {
+          $error = true;
+          $messageStack->add('login', TEXT_LOGIN_ERROR);
+        } else {
+          if (password_needs_rehash($newPassword, PASSWORD_DEFAULT)) {
+>>>>>>> upstream/master
             $newPassword = zcPassword::getInstance(PHP_VERSION)->updateNotLoggedInCustomerPassword($password, $email_address);
           }
           if (SESSION_RECREATE == 'True') {

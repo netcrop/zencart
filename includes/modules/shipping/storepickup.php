@@ -1,10 +1,17 @@
 <?php
 /**
  * @package shippingMethod
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: Author: DrByte  Mon Jul 15 17:13:18 2013 -0400 Modified in v1.5.5 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Mon Jul 15 17:13:18 2013 -0400 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 /**
  * Store-Pickup / Will-Call shipping method
@@ -18,13 +25,21 @@ class storepickup extends base {
    */
   var $code;
   /**
+<<<<<<< HEAD
    * $title is the displayed name for this shipping method on the storefront
+=======
+   * $title is the displayed name for this shipping method
+>>>>>>> upstream/master
    *
    * @var string
    */
   var $title;
   /**
+<<<<<<< HEAD
    * $description is a soft name for this shipping method, rarely used
+=======
+   * $description is a soft name for this shipping method
+>>>>>>> upstream/master
    *
    * @var string
    */
@@ -55,6 +70,7 @@ class storepickup extends base {
     $this->icon = ''; // add image filename here; must be uploaded to the /images/ subdirectory
     $this->tax_class = MODULE_SHIPPING_STOREPICKUP_TAX_CLASS;
     $this->tax_basis = MODULE_SHIPPING_STOREPICKUP_TAX_BASIS;
+<<<<<<< HEAD
     $this->enabled = (MODULE_SHIPPING_STOREPICKUP_STATUS == 'True') ? true : false;
     $this->update_status();
     $this->notify('MODULE_SHIPPING_' . strtoupper($this->code) . '_INSTANTIATED');
@@ -94,6 +110,20 @@ class storepickup extends base {
   {
     global $order, $db;
       if ($this->enabled == true && (int)MODULE_SHIPPING_STOREPICKUP_ZONE > 0) {
+=======
+    $this->enabled = ((MODULE_SHIPPING_STOREPICKUP_STATUS == 'True') ? true : false);
+    $this->update_status();
+  }
+  /**
+   * Perform various checks to see whether this module should be visible
+   */
+  function update_status() {
+    global $order, $db;
+    if (!$this->enabled) return;
+    if (IS_ADMIN_FLAG === true) return;
+
+    if (isset($order->delivery) && (int)MODULE_SHIPPING_STOREPICKUP_ZONE > 0 ) {
+>>>>>>> upstream/master
       $check_flag = false;
       $check = $db->Execute("select zone_id from " . TABLE_ZONES_TO_GEO_ZONES . "
                              where geo_zone_id = '" . MODULE_SHIPPING_STOREPICKUP_ZONE . "'
@@ -114,7 +144,15 @@ class storepickup extends base {
         $this->enabled = false;
       }
     }
+<<<<<<< HEAD
     return $this->enabled;
+=======
+
+    // other status checks?
+    if ($this->enabled) {
+      // other checks here
+    }
+>>>>>>> upstream/master
   }
 
   /**
@@ -141,6 +179,7 @@ class storepickup extends base {
     $methodsToParse = ($ways_translated == '') ? $ways_default : $ways_translated;
 
     if ($methodsToParse == '') {
+<<<<<<< HEAD
 
       // calculate final shipping cost
       $final_shipping_cost = MODULE_SHIPPING_STOREPICKUP_COST;
@@ -148,18 +187,27 @@ class storepickup extends base {
       $this->methodsList[] = array('id' => $this->code,
                                    'title' => trim((string)MODULE_SHIPPING_STOREPICKUP_TEXT_WAY),
                                    'cost' => $final_shipping_cost);
+=======
+      $this->methodsList[] = array('id' => $this->code,
+                                   'title' => trim((string)MODULE_SHIPPING_STOREPICKUP_TEXT_WAY),
+                                   'cost' => MODULE_SHIPPING_STOREPICKUP_COST);
+>>>>>>> upstream/master
     } else {
       $this->locations = explode(';', (string)$methodsToParse);
       $this->methodsList = array();
       foreach ($this->locations as $key => $val)
       {
+<<<<<<< HEAD
         if ($val == null) continue; // handles trailing semicolons
         $val = trim($val); // handles pre/post spaces around the semicolons
+=======
+>>>>>>> upstream/master
         if ($method != '' && $method != $this->code . (string)$key) continue;
         $cost = MODULE_SHIPPING_STOREPICKUP_COST;
         $title = $val;
         if (strstr($val, ',')) {
           list($title, $cost) = explode(',', $val);
+<<<<<<< HEAD
           $cost = trim($cost); // also for pre/post spaces around separating commas
         }
 
@@ -169,6 +217,12 @@ class storepickup extends base {
         $this->methodsList[] = array('id' => $this->code . (string)$key,
                                      'title' => trim($title),
                                      'cost' => $final_shipping_cost);
+=======
+        }
+        $this->methodsList[] = array('id' => $this->code . (string)$key,
+                                     'title' => trim($title),
+                                     'cost' => $cost);
+>>>>>>> upstream/master
       }
     }
 

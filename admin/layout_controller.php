@@ -1,17 +1,27 @@
 <?php
 /**
  * @package admin
+<<<<<<< HEAD
  * @copyright Copyright 2003-2015 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: layout_controller.php drbyte  Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Sat Aug 1 18:01:55 2015 -0400 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
   require('includes/application_top.php');
 
 // Check all existing boxes are in the main /sideboxes
   $boxes_directory = DIR_FS_CATALOG_MODULES . 'sideboxes/';
+<<<<<<< HEAD
   $boxes_directory_shared = DIR_FS_CATALOG_MODULES . 'sideboxes/shared/';
+=======
+>>>>>>> upstream/master
   $boxes_directory_template = DIR_FS_CATALOG_MODULES . 'sideboxes/' . $template_dir . '/';
 
   $directory_array = array();
@@ -30,6 +40,7 @@
   }
 
   $dir_check= $directory_array;
+<<<<<<< HEAD
   // Check all existing boxes are in the current template /sideboxes/shared
   if ($dir = @dir($boxes_directory_shared)) {
     while ($file = $dir->read()) {
@@ -46,6 +57,9 @@
   sort($directory_array);
 
   $dir_check = $directory_array;
+=======
+
+>>>>>>> upstream/master
 // Check all existing boxes are in the current template /sideboxes/template_dir
   if ($dir = @dir($boxes_directory_template)) {
     while ($file = $dir->read()) {
@@ -127,11 +141,16 @@
         zen_redirect(zen_admin_href_link(FILENAME_LAYOUT_CONTROLLER, 'page=' . $_GET['page']));
         break;
       case 'reset_defaults':
-        $reset_boxes = $db->Execute("select * from " . TABLE_LAYOUT_BOXES . " where layout_template= 'default_template_settings'");
-        while (!$reset_boxes->EOF) {
-          $db->Execute("update " . TABLE_LAYOUT_BOXES . " set layout_box_status= '" . $reset_boxes->fields['layout_box_status'] . "', layout_box_location= '" . $reset_boxes->fields['layout_box_location'] . "', layout_box_sort_order='" . $reset_boxes->fields['layout_box_sort_order'] . "', layout_box_sort_order_single='" . $reset_boxes->fields['layout_box_sort_order_single'] . "', layout_box_status_single='" . $reset_boxes->fields['layout_box_status_single'] . "' where layout_box_name='" . $reset_boxes->fields['layout_box_name'] . "' and layout_template='" . zen_db_input($template_dir) . "'");
-          $reset_boxes->MoveNext();
+        if ($_POST['action'] == 'reset_defaults') {
+          $reset_boxes = $db->Execute("select * from " . TABLE_LAYOUT_BOXES . " where layout_template= 'default_template_settings'");
+          while (!$reset_boxes->EOF) {
+            $db->Execute("update " . TABLE_LAYOUT_BOXES . " set layout_box_status= '" . $reset_boxes->fields['layout_box_status'] . "', layout_box_location= '" . $reset_boxes->fields['layout_box_location'] . "', layout_box_sort_order='" . $reset_boxes->fields['layout_box_sort_order'] . "', layout_box_sort_order_single='" . $reset_boxes->fields['layout_box_sort_order_single'] . "', layout_box_status_single='" . $reset_boxes->fields['layout_box_status_single'] . "' where layout_box_name='" . $reset_boxes->fields['layout_box_name'] . "' and layout_template='" . zen_db_input($template_dir) . "'");
+            $reset_boxes->MoveNext();
+          }
+          $messageStack->add_session(SUCCESS_BOX_RESET . $template_dir, 'success');
+          zen_redirect(zen_href_link(FILENAME_LAYOUT_CONTROLLER));
         }
+<<<<<<< HEAD
 
         $messageStack->add_session(SUCCESS_BOX_RESET . $template_dir, 'success');
         zen_redirect(zen_admin_href_link(FILENAME_LAYOUT_CONTROLLER, 'page=' . $_GET['page']));
@@ -149,6 +168,8 @@
 
         $messageStack->add_session(SUCCESS_BOX_SET_DEFAULTS . '<strong>' . $template_dir . '</strong>', 'success');
         zen_redirect(zen_admin_href_link(FILENAME_LAYOUT_CONTROLLER, 'page=' . $_GET['page']));
+=======
+>>>>>>> upstream/master
         break;
     }
   }
@@ -380,10 +401,20 @@ if ($warning_new_box) {
           <br>
           <?php echo TEXT_INFO_RESET_TEMPLATE_SORT_ORDER_NOTE; ?>
         </td>
+<<<<<<< HEAD
         <td style="padding-left: 20px" class="alignTop">
           <?php echo '<a href="' . zen_admin_href_link(FILENAME_LAYOUT_CONTROLLER, 'page=' . $_GET['page'] . '&cID=' . $bInfo->layout_id . '&action=save_defaults') . '">' . '<button class="radius button">' . BUTTON_TEXT_MAKE_DEFAULT . '</button>' . '</a>'; ?>
           <br>
           <?php echo TEXT_INFO_SET_AS_DEFAULT . sprintf(TEXT_INFO_THE_ABOVE_SETTINGS_ARE_FOR, $template_dir); ?>
+=======
+      </tr>
+      <tr>
+        <td class="main" align="center">
+            <?php echo zen_draw_form('reset_defaults', FILENAME_LAYOUT_CONTROLLER, 'action=reset_defaults'); ?>
+            <?php echo zen_draw_hidden_field('action', 'reset_defaults'); ?>
+            <?php echo zen_image_submit('button_reset.gif', IMAGE_RESET) ?>
+            </form>
+>>>>>>> upstream/master
         </td>
       </tr>
     </table></td>

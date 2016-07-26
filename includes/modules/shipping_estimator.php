@@ -7,11 +7,19 @@
  * - Shows Free Shipping on Virtual products
  *
  * @package modules
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * portions Copyright (c) 2003 Edwin Bekaert (edwin@ednique.com)
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: Author: DrByte  Wed Jan 6 12:47:43 2016 -0500 Modified in v1.5.5 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * portions Copyright (c) 2003 Edwin Bekaert (edwin@ednique.com)
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Wed Jan 6 12:47:43 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 if (!defined('IS_ADMIN_FLAG')) {
   die('Illegal Access');
@@ -26,6 +34,16 @@ if ($current_page_base != 'popup_shipping_estimator') {
 ?>
 <!-- shipping_estimator //-->
 
+<<<<<<< HEAD
+=======
+<script type="text/javascript">
+function shipincart_submit(){
+  document.estimator.submit();
+  return false;
+}
+</script>
+
+>>>>>>> upstream/master
 <?php
 // Only do when something is in the cart
 if ($_SESSION['cart']->count_contents() > 0) {
@@ -279,5 +297,9 @@ if ($_SESSION['cart']->count_contents() > 0) {
 <?php
 }
 ?>
+<<<<<<< HEAD
 <script>update_zone(document.estimator); </script>
+=======
+<script type="text/javascript">update_zone(document.estimator); </script>
+>>>>>>> upstream/master
 <!-- shipping_estimator_eof //-->

@@ -1,10 +1,17 @@
 <?php
 /**
  * @package Admin Access Management
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version GIT: $Id:  Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Thu Feb 25 14:56:20 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
 /**
@@ -14,7 +21,11 @@
  */
 function check_page($page, $params) {
   global $db;
+<<<<<<< HEAD
   if (!isset($_SESSION['admin_id'])) return false;
+=======
+  if (!isset($_SESSION['admin_id'])) return FALSE;
+>>>>>>> upstream/master
   // Most entries (normal case) have their own pages. However, everything on the Configuration
   // and Modules menus are handled by the single pages configuration.php and modules.php. So for
   // these pages we check their respective get params too.
@@ -34,6 +45,7 @@ function check_page($page, $params) {
           AND ap2p.page_key NOT LIKE '_productTypes_%'";
   $sql = $db->bindVars($sql, ':adminId:', $_SESSION['admin_id'], 'integer');
   $result = $db->Execute($sql);
+<<<<<<< HEAD
   $retVal = false;
   foreach($result as $row) {
     if ($row['main_page'] != '' && defined($row['main_page']) && (constant($row['main_page']) == $page || constant($row['main_page']) . '.php' == $page) && $row['page_params'] == $page_params) {
@@ -51,6 +63,12 @@ function check_page($page, $params) {
     foreach($result as $row) {
       $adjustedPageKey = preg_replace('/_productTypes_/', '', $row['page_key']);
       if ($adjustedPageKey == $page) $retVal = true;
+=======
+  $retVal = FALSE;
+  while (!$result->EOF) {
+    if ($result->fields['main_page'] != '' && defined($result->fields['main_page']) && (constant($result->fields['main_page']) == $page || constant($result->fields['main_page']) . '.php' == $page) && $result->fields['page_params'] == $page_params) {
+      $retVal = TRUE;
+>>>>>>> upstream/master
     }
   }
   return $retVal;
@@ -59,7 +77,11 @@ function check_page($page, $params) {
 function zen_is_superuser()
 {
   global $db;
+<<<<<<< HEAD
   if (!isset($_SESSION['admin_id'])) return false;
+=======
+  if (!isset($_SESSION['admin_id'])) return FALSE;
+>>>>>>> upstream/master
   $sql = 'SELECT admin_id from ' . TABLE_ADMIN . '
           WHERE admin_id = :adminId:
           AND admin_profile = ' . SUPERUSER_PROFILE;
@@ -105,10 +127,15 @@ function zen_delete_user($id)
     $sql = $db->bindVars($sql, ':user:', $id, 'integer');
     $db->Execute($sql);
     $admname = '{' . preg_replace('/[^\d\w._-]/', '*', zen_get_admin_name()) . ' [id: ' . (int)$_SESSION['admin_id'] . ']}';
+<<<<<<< HEAD
     $alertText = sprintf(TEXT_EMAIL_MESSAGE_ADMIN_USER_DELETED, $delname, $admname);
     zen_record_admin_activity($alertText, 'warning');
     $alertText .= "\n\n" . sprintf(TEXT_EMAIL_ALERT_IP_ADDRESS, $_SERVER['REMOTE_ADDR']) . "\n";
     zen_mail(STORE_OWNER_EMAIL_ADDRESS, STORE_OWNER_EMAIL_ADDRESS, TEXT_EMAIL_SUBJECT_ADMIN_USER_DELETED, $alertText, STORE_NAME, EMAIL_FROM, array(), 'admin_settings_changed');
+=======
+    zen_record_admin_activity(sprintf(TEXT_EMAIL_MESSAGE_ADMIN_USER_DELETED, $delname, $admname), 'warning');
+    zen_mail(STORE_OWNER_EMAIL_ADDRESS, STORE_OWNER_EMAIL_ADDRESS, TEXT_EMAIL_SUBJECT_ADMIN_USER_DELETED, sprintf(TEXT_EMAIL_MESSAGE_ADMIN_USER_DELETED, $delname, $admname), STORE_NAME, EMAIL_FROM, array(), 'admin_settings_changed');
+>>>>>>> upstream/master
   }
 }
 
@@ -175,10 +202,15 @@ function zen_insert_user($name, $email, $password, $confirm, $profile, $mobile)
 
     $newname = preg_replace('/[^\d\w._-]/', '*', $name);
     $admname = '{' . preg_replace('/[^\d\w._-]/', '*', zen_get_admin_name()) . ' [id: ' . (int)$_SESSION['admin_id'] . ']}';
+<<<<<<< HEAD
     $alertText = sprintf(TEXT_EMAIL_MESSAGE_ADMIN_USER_ADDED, $newname, $admname);
     zen_record_admin_activity($alertText, 'warning');
     $alertText .= "\n\n" . sprintf(TEXT_EMAIL_ALERT_IP_ADDRESS, $_SERVER['REMOTE_ADDR']) . "\n";
     zen_mail(STORE_OWNER_EMAIL_ADDRESS, STORE_OWNER_EMAIL_ADDRESS, TEXT_EMAIL_SUBJECT_ADMIN_USER_ADDED, $alertText, STORE_NAME, EMAIL_FROM, array(), 'admin_settings_changed');
+=======
+    zen_record_admin_activity(sprintf(TEXT_EMAIL_MESSAGE_ADMIN_USER_ADDED, $newname, $admname), 'warning');
+    zen_mail(STORE_OWNER_EMAIL_ADDRESS, STORE_OWNER_EMAIL_ADDRESS, TEXT_EMAIL_SUBJECT_ADMIN_USER_ADDED, sprintf(TEXT_EMAIL_MESSAGE_ADMIN_USER_ADDED, $newname, $admname), STORE_NAME, EMAIL_FROM, array(), 'admin_settings_changed');
+>>>>>>> upstream/master
   }
   return $errors;
 }
@@ -241,10 +273,16 @@ function zen_update_user($name, $email, $id, $profile, $mobile = false)
     if (isset($changes['name'])) $alertText .= sprintf(TEXT_EMAIL_ALERT_ADM_NAME_CHANGED, $oldData['admin_name'], $changes['name']['old'], $changes['name']['new'], $admname) . "\n";
     if (isset($changes['mobile'])) $alertText .= sprintf(TEXT_EMAIL_ALERT_ADM_MOBILE_CHANGED, $oldData['admin_name'], $changes['mobile']['old'], $changes['mobile']['new'], $admname) . "\n";
     if (isset($changes['profile'])) $alertText .= sprintf(TEXT_EMAIL_ALERT_ADM_PROFILE_CHANGED, $oldData['admin_name'], $changes['profile']['old'], $changes['profile']['new'], $admname) . "\n";
+<<<<<<< HEAD
     if ($alertText != '') $alertText .= "\n" . sprintf(TEXT_EMAIL_ALERT_IP_ADDRESS, $_SERVER['REMOTE_ADDR']) . "\n";
     if ($alertText != '') zen_mail(STORE_OWNER_EMAIL_ADDRESS, STORE_OWNER_EMAIL_ADDRESS, TEXT_EMAIL_SUBJECT_ADMIN_USER_CHANGED, $alertText, STORE_NAME, EMAIL_FROM, array('EMAIL_MESSAGE_HTML' => $alertText, 'EMAIL_SPAM_DISCLAIMER'=>' ', 'EMAIL_DISCLAIMER' => ' '), 'admin_settings_changed');
     if ($alertText != '') zen_mail($oldData['admin_email'], $oldData['admin_email'], TEXT_EMAIL_SUBJECT_ADMIN_USER_CHANGED, $alertText, STORE_NAME, EMAIL_FROM, array('EMAIL_MESSAGE_HTML' => $alertText, 'EMAIL_SPAM_DISCLAIMER'=>' ', 'EMAIL_DISCLAIMER' => ' '), 'admin_settings_changed');
     if ($alertText != '') zen_record_admin_activity(TEXT_EMAIL_SUBJECT_ADMIN_USER_CHANGED . ' ' . $alertText, 'warning');
+=======
+    if ($alertText != '') zen_mail(STORE_OWNER_EMAIL_ADDRESS, STORE_OWNER_EMAIL_ADDRESS, TEXT_EMAIL_SUBJECT_ADMIN_USER_CHANGED, $alertText, STORE_NAME, EMAIL_FROM, array('EMAIL_MESSAGE_HTML' => $alertText, 'EMAIL_SPAM_DISCLAIMER'=>' ', 'EMAIL_DISCLAIMER' => ' '), 'admin_settings_changed');
+    if ($alertText != '') zen_mail($oldData['admin_email'], $oldData['admin_email'], TEXT_EMAIL_SUBJECT_ADMIN_USER_CHANGED, $alertText, STORE_NAME, EMAIL_FROM, array('EMAIL_MESSAGE_HTML' => $alertText, 'EMAIL_SPAM_DISCLAIMER'=>' ', 'EMAIL_DISCLAIMER' => ' '), 'admin_settings_changed');
+    if ($alertText != '') zen_record_admin_activity(TEXT_EMAIL_SUBJECT_ADMIN_USER_CHANGED . ' ' . $alertText, 'warning');
+>>>>>>> upstream/master
   }
   return $errors;
 }
@@ -346,12 +384,19 @@ function zen_validate_user_login($admin_name, $admin_pass)
           zen_record_admin_activity(sprintf(TEXT_ERROR_FAILED_ADMIN_LOGIN_FOR_USER) . ' ' . $admin_name, 'warning');
         }
       }
+<<<<<<< HEAD
     }
     if (password_needs_rehash($token, PASSWORD_DEFAULT)) {
       $token = zcPassword::getInstance(PHP_VERSION)->updateNotLoggedInAdminPassword($admin_pass, $admin_name);
     }
 
 
+=======
+    }
+    if (password_needs_rehash($token, PASSWORD_DEFAULT)) {
+      $token = zcPassword::getInstance(PHP_VERSION)->updateNotLoggedInAdminPassword($admin_pass, $admin_name);
+    }
+>>>>>>> upstream/master
     // BEGIN 2-factor authentication
     if ($error == false && defined('ZC_ADMIN_TWO_FACTOR_AUTHENTICATION_SERVICE') && ZC_ADMIN_TWO_FACTOR_AUTHENTICATION_SERVICE != '')
     {
@@ -363,7 +408,11 @@ function zen_validate_user_login($admin_name, $admin_pass)
           $error = true;
           $message = ERROR_WRONG_LOGIN;
           zen_record_admin_activity('TFA Failure - Two-factor authentication failed', 'warning');
+<<<<<<< HEAD
         } elseif($response === true) {
+=======
+        } elseif($response === TRUE) {
+>>>>>>> upstream/master
           zen_record_admin_activity('TFA Passed - Two-factor authentication passed', 'warning');
         }
       }
@@ -404,18 +453,28 @@ function zen_validate_user_login($admin_name, $admin_pass)
       }
     }
   } // END LOGIN SLAM PREVENTION
+<<<<<<< HEAD
 
 
   // deal with expireds for SSL change
   if ($error == false && $result['pwd_last_change_date']  == '1990-01-01 14:02:22')
+=======
+  // deal with expireds for SSL change
+  if ($error == FALSE && $result['pwd_last_change_date']  == '1990-01-01 14:02:22')
+>>>>>>> upstream/master
   {
     $expired = true;
     $error = true;
     $message = ($message == '' ? '' : $message . '<br /><br />') . EXPIRED_DUE_TO_SSL;
   }
+<<<<<<< HEAD
 
   // deal with expireds for PA-DSS
   if ($error == false && PADSS_PWD_EXPIRY_ENFORCED == 1 && $result['pwd_last_change_date'] < date('Y-m-d H:i:s', ADMIN_PASSWORD_EXPIRES_INTERVAL))
+=======
+  // deal with expireds for PA-DSS
+  if ($error == FALSE && PADSS_PWD_EXPIRY_ENFORCED == 1 && $result['pwd_last_change_date'] < date('Y-m-d H:i:s', ADMIN_PASSWORD_EXPIRES_INTERVAL))
+>>>>>>> upstream/master
   {
     $expired = true;
     $error = true;
@@ -457,7 +516,11 @@ function zen_check_for_password_problems($password, $adminID = 0)
 
   // admin passwords must contain at least 1 letter and 1 number and be of required minimum length
   if (!preg_match('/^(?=.*[a-zA-Z]+.*)(?=.*[\d]+.*)[\d\w\s[:punct:]]{' . $minLength . ',}$/', $password)) {
+<<<<<<< HEAD
     $error = true;
+=======
+    $error = TRUE;
+>>>>>>> upstream/master
   }
   // if no user specified, skip checking history
   if ($adminID == 0) return $error;
@@ -831,6 +894,7 @@ function zen_insert_pages_into_profile($id, $pages)
     $sql = $db->bindVars($sql, ':profileId:', $id, 'integer');
     $db->Execute($sql);
     zen_record_admin_activity('Added pages to profile #' . (int)$id, 'warning');
+<<<<<<< HEAD
   }
   // Now let's see how many were widgets
   $sql = "   SELECT * FROM " . TABLE_ADMIN_PAGES_TO_PROFILES . "
@@ -861,6 +925,8 @@ function zen_insert_pages_into_profile($id, $pages)
     }
     $cleanup_query = $db->bindVars($cleanup_query, ':adminId:', $admin_id, 'integer');
     $db->execute($cleanup_query);
+=======
+>>>>>>> upstream/master
   }
 }
 
@@ -970,6 +1036,7 @@ function zen_deregister_admin_pages($pages)
     }
     $db->Execute($sql);
     zen_record_admin_activity('Deleted admin pages for page keys: ' . print_r($pages, true), 'warning');
+<<<<<<< HEAD
   }
 }
 
@@ -990,4 +1057,7 @@ function getProfilesList($addTextAll = true)
     $profileList[] = array('id' => $result['profile_id'], 'text' => $result['profile_name']);
   }
   return $profileList;
+=======
+  }
+>>>>>>> upstream/master
 }

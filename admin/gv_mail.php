@@ -1,10 +1,17 @@
 <?php
 /**
  * @package admin
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: Author: DrByte  Tue Dec 29 12:22:34 2015 -0500 Modified in v1.5.5 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Tue Dec 29 12:22:34 2015 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
   require('includes/application_top.php');
@@ -83,7 +90,10 @@
 
       zen_mail($mail->fields['customers_firstname'] . ' ' . $mail->fields['customers_lastname'], $mail->fields['customers_email_address'], $subject , $message, $from, $from, $html_msg, 'gv_mail');
       zen_record_admin_activity('GV mail sent to ' . $mail->fields['customers_email_address'] . ' in the amount of ' . $currencies->format($_POST['amount']), 'info');
+<<<<<<< HEAD
       $zco_notifier->notify('ADMIN_GV_EMAIL_SENT', $mail->fields['customers_email_address'], $currencies->format($_POST['amount']));
+=======
+>>>>>>> upstream/master
       $recip_count++;
       if (SEND_EXTRA_GV_ADMIN_EMAILS_TO_STATUS== '1' and SEND_EXTRA_GV_ADMIN_EMAILS_TO != '') {
         zen_mail('', SEND_EXTRA_GV_ADMIN_EMAILS_TO, SEND_EXTRA_GV_ADMIN_EMAILS_TO_SUBJECT . ' ' . $subject, $message, $from, $from, $html_msg, 'gv_mail_extra');
@@ -161,6 +171,22 @@
 require('includes/admin_html_head.php');
 ?>
 <script type="text/javascript">
+<<<<<<< HEAD
+=======
+  <!--
+  function init()
+  {
+    cssjsmenu('navbar');
+    if (document.getElementById)
+    {
+      var kill = document.getElementById('hoverJS');
+      kill.disabled = true;
+    }
+  }
+  // -->
+</script>
+<script language="javascript" type="text/javascript"><!--
+>>>>>>> upstream/master
 var form = "";
 var submitted = false;
 var error = false;

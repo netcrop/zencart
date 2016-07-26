@@ -116,4 +116,7 @@
       $db->Execute("delete from " . TABLE_CONFIGURATION . " where configuration_key in ('" . implode("', '", $this->keys()) . "')");
     }
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> upstream/master

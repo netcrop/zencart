@@ -1,10 +1,17 @@
 <?php
 /**
  * @package shippingMethod
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: perweightunit.php  ajeh  Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Sat Oct 17 22:52:38 2015 -0400 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 /**
  * "Per Weight Unit" shipping module, allowing you to offer per-unit-rate shipping options
@@ -48,6 +55,11 @@ class perweightunit extends base {
    * @return perweightunit
    */
   function __construct() {
+<<<<<<< HEAD
+=======
+    global $order, $db;
+
+>>>>>>> upstream/master
     $this->code = 'perweightunit';
     $this->title = MODULE_SHIPPING_PERWEIGHTUNIT_TEXT_TITLE;
     $this->description = MODULE_SHIPPING_PERWEIGHTUNIT_TEXT_DESCRIPTION;

@@ -3,10 +3,17 @@
  * checkout_new_address.php
  *
  * @package modules
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version GIT: $Id: Author: Ian Wilson  Modified in v1.5.5 $
+=======
+ * @copyright Copyright 2003-2013 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version GIT: $Id: Author: Ian Wilson  Mon Oct 28 17:54:33 2013 +0000 Modified in v1.5.2 $
+>>>>>>> upstream/master
  */
 // This should be first line of the script:
 $zco_notifier->notify('NOTIFY_MODULE_START_CHECKOUT_NEW_ADDRESS');
@@ -85,7 +92,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'submit')) {
       $zone_query = "SELECT distinct zone_id, zone_name, zone_code
                        FROM " . TABLE_ZONES . "
                        WHERE zone_country_id = :zoneCountryID
-                       AND " . 
+                       AND " .
                      ((trim($state) != '' && $zone_id == 0) ? "(upper(zone_name) like ':zoneState%' OR upper(zone_code) like '%:zoneState%') OR " : "") .
                       "zone_id = :zoneID
                        ORDER BY zone_code ASC, zone_name";

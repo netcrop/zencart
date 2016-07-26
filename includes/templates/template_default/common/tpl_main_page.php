@@ -17,10 +17,14 @@
  * To adjust the $bodyClasses content, use an observer on NOTIFY_ADD_BODY_CLASSES
  *
  * @package templateSystem
+<<<<<<< HEAD
  * @copyright Copyright 2003-2013 Zen Cart Development Team
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+>>>>>>> upstream/master
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version $Id: tpl_main_page.php 7085 2007-09-22 04:56:31Z ajeh $
+ * @version $Id: Author: DrByte  Fri Jan 8 14:09:25 2016 -0500 Modified in v1.5.5 $
  */
 
 /** bof DESIGNER TESTING ONLY: */
@@ -31,6 +35,16 @@
 // $messageStack->add('main', 'this is a sample caution message', 'caution');
 // $messageStack->add('main', 'this is a sample success message', 'success');
 /** eof DESIGNER TESTING ONLY */
+<<<<<<< HEAD
+=======
+
+
+
+// the following IF statement can be duplicated/modified as needed to set additional flags
+  if (in_array($current_page_base,explode(",",'list_pages_to_skip_all_right_sideboxes_on_here,separated_by_commas,and_no_spaces')) ) {
+    $flag_disable_right = true;
+  }
+>>>>>>> upstream/master
 
 
   // Notifier hook to allow for dynamic changes to template operation
@@ -158,6 +172,7 @@ if (!isset($flag_disable_right) || !$flag_disable_right) {
 ?>
 <!--eof- banner #6 display -->
 
+<<<<<<< HEAD
 
 <?php /* add any end-of-page code via an observer class */
   $zco_notifier->notify('NOTIFY_FOOTER_END', $current_page);
@@ -177,3 +192,9 @@ if (!isset($flag_disable_right) || !$flag_disable_right) {
 ?>
 </body>
 </html>
+=======
+<?php /* add any end-of-page code via an observer class */
+  $zco_notifier->notify('NOTIFY_FOOTER_END', $current_page);
+?>
+</body>
+>>>>>>> upstream/master

@@ -13,7 +13,11 @@ $zc_settings = array();
  */
 
 /**
+<<<<<<< HEAD
  * If you are building a 1-click install, set your vendor name in the installer_method setting.  This will be stamped in the generated configure.php file for reference and future troubleshooting.
+=======
+ * If you are building a 1-click install, set your vendor name in the installer_method setting.  This will be stamped in the generated configure.php files for reference and future troubleshooting.
+>>>>>>> upstream/master
  */
 $zc_settings['installer_method'] = 'Automated Install';
 
@@ -84,6 +88,10 @@ $zc_settings['db_prefix'] = '';
 
 /**
  * The character-set to use when talking to the database.
+<<<<<<< HEAD
+=======
+ * Possible values: 'utf8' or 'latin1'.
+>>>>>>> upstream/master
  * Default: 'utf8'
  */
 $zc_settings['db_charset'] = 'utf8';

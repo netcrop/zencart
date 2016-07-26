@@ -39,11 +39,22 @@ define('TEXT_EMPTY_CART', '<strong>Empty Cart</strong>');
 define('TEXT_WHOS_ONLINE_FILTER_SPIDERS', 'Exclude Spiders?');
 define('TEXT_WHOS_ONLINE_FILTER_ADMINS', 'Exclude Admin IP Addresses?');
 
+<<<<<<< HEAD
 define('WHOIS_TIMER_REMOVE', 1200); // seconds when removed from whos_online table - 1200 default = 20 minutes
 define('WHOIS_TIMER_INACTIVE', 180); // seconds when considered inactive - 180 default = 3 minutes
 define('WHOIS_TIMER_DEAD', 540); // seconds when considered dead - 540 default = 9 minutes
 define('WHOIS_SHOW_HOST', '1'); // show Last Clicked time and host name - 1 default
 define('WHOIS_REPEAT_LEGEND_BOTTOM', '12'); // show legend on bottom when more than how many entries - 12 default
+
+define('TEXT_DUPLICATE_IPS', 'Duplicate IP Addresses: ');
+define('TEXT_TOTAL_UNIQUE_USERS', 'Total Unique Users: ');
+=======
+define('WHOIS_TIMER_REMOVE', 1200); // seconds when removed from whos_online table - 1200 default = 20 minutes
+define('WHOIS_TIMER_INACTIVE', 180); // seconds when considered inactive - 180 default = 3 minutes
+define('WHOIS_TIMER_DEAD', 540); // seconds when considered dead - 540 default = 9 minutes
+define('WHOIS_SHOW_HOST', '1'); // show Last Clicked time and host name - 1 default
+define('WHOIS_REPEAT_LEGEND_BOTTOM', '12'); // show legend on bottom when more than how many entries - 12 default
+>>>>>>> upstream/master
 
 define('TEXT_DUPLICATE_IPS', 'Duplicate IP Addresses: ');
 define('TEXT_TOTAL_UNIQUE_USERS', 'Total Unique Users: ');

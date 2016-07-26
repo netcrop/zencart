@@ -4,7 +4,11 @@
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+<<<<<<< HEAD
  * @version $Id: Author: zcwilt   Modified in v1.6.0 $
+=======
+ * @version $Id: Author: zcwilt  Fri Apr 01 22:01:13 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
 require('includes/application_top.php');
@@ -12,7 +16,11 @@ if (file_exists(DIR_WS_LANGUAGES . $_SESSION['language'] . '/' . 'users.php')) {
   include(DIR_WS_LANGUAGES . $_SESSION['language'] . '/' . 'users.php');
 }
 // Check if session has timed out
+<<<<<<< HEAD
 if (!isset($_SESSION['admin_id'])) zen_redirect(zen_admin_href_link(FILENAME_LOGIN));
+=======
+if (!isset($_SESSION['admin_id'])) zen_redirect(zen_href_link(FILENAME_LOGIN, '', 'SSL'));
+>>>>>>> upstream/master
 $user = $_SESSION['admin_id'];
 
 // determine whether an action has been requested

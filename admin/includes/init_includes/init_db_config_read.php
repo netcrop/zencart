@@ -1,16 +1,27 @@
 <?php
 /**
  * @package admin
+<<<<<<< HEAD
  * @copyright Copyright 2003-2015 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: init_db_config_read.php 3001 2006-02-09 21:45:06Z wilt $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Thu May 28 13:46:55 2015 -0400 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 if (!defined('IS_ADMIN_FLAG')) {
   die('Illegal Access');
 }
 // Determine the DATABASE patch level
+<<<<<<< HEAD
   $project_db_info = $db->Execute("select * from " . TABLE_PROJECT_VERSION . " WHERE project_version_key = 'Zen-Cart Database' ");
+=======
+  $project_db_info= $db->Execute("select * from " . TABLE_PROJECT_VERSION . " WHERE project_version_key = 'Zen-Cart Database' ");
+>>>>>>> upstream/master
   define('PROJECT_DB_VERSION_MAJOR',$project_db_info->fields['project_version_major']);
   define('PROJECT_DB_VERSION_MINOR',$project_db_info->fields['project_version_minor']);
   define('PROJECT_DB_VERSION_PATCH1',$project_db_info->fields['project_version_patch1']);
@@ -21,14 +32,29 @@ if (!defined('IS_ADMIN_FLAG')) {
 // set application wide parameters
   $configuration = $db->Execute('select configuration_key as cfgKey, configuration_value as cfgValue
                                  from ' . TABLE_CONFIGURATION);
+<<<<<<< HEAD
   foreach ($configuration as $row) {
     define(strtoupper($row['cfgKey']), $row['cfgValue']);
+=======
+  while (!$configuration->EOF) {
+    define(strtoupper($configuration->fields['cfgKey']), $configuration->fields['cfgValue']);
+    $configuration->MoveNext();
+>>>>>>> upstream/master
   }
 
 // set product type layout paramaters
   $configuration = $db->Execute('select configuration_key as cfgKey, configuration_value as cfgValue
+<<<<<<< HEAD
                                  from ' . TABLE_PRODUCT_TYPE_LAYOUT);
   foreach ($configuration as $row) {
     define(strtoupper($row['cfgKey']), $row['cfgValue']);
   }
 unset($configuration);
+=======
+                          from ' . TABLE_PRODUCT_TYPE_LAYOUT);
+
+  while (!$configuration->EOF) {
+    define(strtoupper($configuration->fields['cfgKey']), $configuration->fields['cfgValue']);
+    $configuration->MoveNext();
+  }
+>>>>>>> upstream/master

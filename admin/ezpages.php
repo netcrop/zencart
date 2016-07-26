@@ -1,10 +1,17 @@
 <?php
 /**
  * @package admin
+<<<<<<< HEAD
  * @copyright Copyright 2003-2015 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version GIT: $Id: Author: DrByte  Jun 30 2014 Modified in v1.5.4 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Sat Oct 17 20:53:59 2015 -0400 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
 // Sets the status of a page
@@ -12,11 +19,17 @@
   global $db;
     if ($status == '1') {
       zen_record_admin_activity('EZ-Page ID ' . (int)$pages_id . ' [' . $status_field . '] changed to 0', 'info');
+<<<<<<< HEAD
       $zco_notifier->notify('ADMIN_EZPAGES_STATUS_CHANGE', (int)$pages_id, $status_field, 0);
       return $db->Execute("update " . TABLE_EZPAGES . " set " . zen_db_input($status_field) . " = '0'  where pages_id = '" . (int)$pages_id . "'");
     } elseif ($status == '0') {
       zen_record_admin_activity('EZ-Page ID ' . (int)$pages_id . ' [' . $status_field . '] changed to 1', 'info');
       $zco_notifier->notify('ADMIN_EZPAGES_STATUS_CHANGE', (int)$pages_id, $status_field, 1);
+=======
+      return $db->Execute("update " . TABLE_EZPAGES . " set " . zen_db_input($status_field) . " = '0'  where pages_id = '" . (int)$pages_id . "'");
+    } elseif ($status == '0') {
+      zen_record_admin_activity('EZ-Page ID ' . (int)$pages_id . ' [' . $status_field . '] changed to 1', 'info');
+>>>>>>> upstream/master
       return $db->Execute("update " . TABLE_EZPAGES . " set " . zen_db_input($status_field) . " = '1'  where pages_id = '" . (int)$pages_id . "'");
     } else {
       return -1;
@@ -146,12 +159,18 @@
             $pages_id = $db->insert_ID();
             $messageStack->add(SUCCESS_PAGE_INSERTED, 'success');
             zen_record_admin_activity('EZ-Page with ID ' . (int)$pages_id . ' added.', 'info');
+<<<<<<< HEAD
             $zco_notifier->notify('ADMIN_EZPAGES_PAGE_ADDED', (int)$pages_id);
+=======
+>>>>>>> upstream/master
           } elseif ($action == 'update') {
             zen_db_perform(TABLE_EZPAGES, $sql_data_array, 'update', "pages_id = '" . (int)$pages_id . "'");
             $messageStack->add(SUCCESS_PAGE_UPDATED, 'success');
             zen_record_admin_activity('EZ-Page with ID ' . (int)$pages_id . ' updated.', 'info');
+<<<<<<< HEAD
             $zco_notifier->notify('ADMIN_EZPAGES_PAGE_UPDATED', (int)$pages_id);
+=======
+>>>>>>> upstream/master
           }
 
           zen_redirect(zen_admin_href_link(FILENAME_EZPAGES_ADMIN, (isset($_GET['page']) ? 'page=' . $_GET['page'] . '&' : '') . 'ezID=' . $pages_id));
@@ -173,13 +192,42 @@
         $db->Execute("delete from " . TABLE_EZPAGES . " where pages_id = '" . (int)$pages_id . "'");
         $messageStack->add(SUCCESS_PAGE_REMOVED, 'success');
         zen_record_admin_activity('EZ-Page with ID ' . (int)$pages_id . ' deleted.', 'notice');
+<<<<<<< HEAD
         $zco_notifier->notify('ADMIN_EZPAGES_PAGE_DELETED', (int)$pages_id);
         zen_redirect(zen_admin_href_link(FILENAME_EZPAGES_ADMIN, 'page=' . $_GET['page']));
+=======
+        zen_redirect(zen_href_link(FILENAME_EZPAGES_ADMIN, 'page=' . $_GET['page']));
+>>>>>>> upstream/master
         break;
     }
   }
 require('includes/admin_html_head.php');
 ?>
+<<<<<<< HEAD
+=======
+<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html <?php echo HTML_PARAMS; ?>>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
+<title><?php echo TITLE; ?></title>
+<link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/cssjsmenuhover.css" media="all" id="hoverJS">
+<script language="javascript" src="includes/menu.js"></script>
+<script language="javascript" src="includes/general.js"></script>
+<script type="text/javascript">
+  <!--
+  function init()
+  {
+    cssjsmenu('navbar');
+    if (document.getElementById)
+    {
+      var kill = document.getElementById('hoverJS');
+      kill.disabled = true;
+    }
+  }
+  // -->
+</script>
+>>>>>>> upstream/master
 <?php if ($editor_handler != '') include ($editor_handler); ?>
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">

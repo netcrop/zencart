@@ -1,5 +1,9 @@
 /docs             export-ignore
 /testFramework    export-ignore
+<<<<<<< HEAD
+=======
+*not_for_release* export-ignore
+>>>>>>> upstream/master
 .gitattributes    export-ignore
 .gitignore        export-ignore
 .scrutinizer.yml  export-ignore
@@ -8,4 +12,7 @@ README.md         export-ignore
 CONTRIBUTING.md   export-ignore
 phpdoc.xml        export-ignore
 phpdoc.dist.xml   export-ignore
+<<<<<<< HEAD
 *not_for_release* export-ignore
+=======
+>>>>>>> upstream/master

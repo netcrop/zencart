@@ -3,10 +3,17 @@
  * language Class.
  *
  * @package classes
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: language.php drbyte  Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Thu Apr 2 14:27:45 2015 -0400 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 if (!defined('IS_ADMIN_FLAG')) {
   die('Illegal Access');
@@ -31,11 +38,16 @@ class language extends base {
    */
   protected $language = '';
 
+<<<<<<< HEAD
   /**
    * @deprecated since v1.6.0
    * @var array DEPRECATED - This is old, and only present for compatibility reasons. Use get_available_languages() instead.
    */
   public $catalog_languages = array();
+=======
+  function __construct($lng = '') {
+    global $db;
+>>>>>>> upstream/master
 
   /**
    * @param string $lng The language we'd like to set the site to, as long as it exists in the db
@@ -61,6 +73,7 @@ class language extends base {
     // for legacy compatibility only:
     $this->catalog_languages = $this->get_available_languages();
 
+<<<<<<< HEAD
     return $this->set_language($lng);
   }
 
@@ -73,6 +86,17 @@ class language extends base {
 
     if (isset($this->available_languages[$language])) {
       $this->language = $this->available_languages[$language];
+=======
+    while (!$languages->EOF) {
+      $this->catalog_languages[$languages->fields['code']] = array(
+              'id' => $languages->fields['languages_id'],
+              'name' => $languages->fields['name'],
+              'image' => $languages->fields['image'],
+              'code' => $languages->fields['code'],
+              'directory' => $languages->fields['directory'],
+              );
+      $languages->MoveNext();
+>>>>>>> upstream/master
     }
     return $this->language;
   }

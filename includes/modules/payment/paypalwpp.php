@@ -6,7 +6,11 @@
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+<<<<<<< HEAD
  * @version GIT: $Id: Author: DrByte  Modified in v1.6.0 $
+=======
+ * @version $Id: Author: DrByte  Wed Mar 27 01:25:43 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 /**
  * load the communications layer code
@@ -107,7 +111,11 @@ class paypalwpp extends base {
     global $order;
     $this->code = 'paypalwpp';
     $this->codeTitle = MODULE_PAYMENT_PAYPALWPP_TEXT_ADMIN_TITLE_EC;
+<<<<<<< HEAD
     $this->codeVersion = '1.6.0';
+=======
+    $this->codeVersion = '1.5.5';
+>>>>>>> upstream/master
     $this->enableDirectPayment = FALSE;
     $this->enabled = (MODULE_PAYMENT_PAYPALWPP_STATUS == 'True');
     // Set the title & description text based on the mode we're in ... EC vs US/UK vs admin
@@ -170,7 +178,11 @@ class paypalwpp extends base {
     $this->zone = (int)MODULE_PAYMENT_PAYPALWPP_ZONE;
     if (is_object($order)) $this->update_status();
 
+<<<<<<< HEAD
     if (PROJECT_VERSION_MAJOR != '1' && substr(PROJECT_VERSION_MINOR, 0, 3) != '6.0') $this->enabled = false;
+=======
+    if (PROJECT_VERSION_MAJOR != '1' && substr(PROJECT_VERSION_MINOR, 0, 3) != '5.5') $this->enabled = false;
+>>>>>>> upstream/master
 
     $this->cards = array();
     // if operating in markflow mode, start EC process when submitting order

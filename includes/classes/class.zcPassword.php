@@ -3,9 +3,15 @@
  * File contains just the zcPassword class
  *
  * @package classes
+<<<<<<< HEAD
  * @copyright Copyright 2003-2015 Zen Cart Development Team
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: class.base.php 14535 2009-10-07 22:16:19Z wilt $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Tue Feb 9 16:18:42 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 /**
  * class zcPassword
@@ -13,11 +19,18 @@
  * helper class for managing password hashing for different PHP versions
  *
  * Updates admin/customer tables on successful login
+<<<<<<< HEAD
  * For php >= 5.3.7 and < 5.5.0 uses https://github.com/ircmaxell/PHP-PasswordLib
  * For php >= 5.5.0 uses inbuilt php functions
  *
  * NOTE: Zen Cart v1.6.x requires minimum PHP 5.4.0. Mentions of 5.3.7 here are merely for understanding legacy functionality of this class operation.
  *
+=======
+ * For php < 5.3.7 uses custom code to create hashes using SHA256 and longer salts
+ * For php >= 5.3.7 and < 5.5.0 uses https://github.com/ircmaxell/PHP-PasswordLib
+ * For php >= 5.5.0 uses inbuilt php functions
+ *
+>>>>>>> upstream/master
  * @package classes
  */
 class zcPassword extends base
@@ -47,15 +60,26 @@ class zcPassword extends base
    */
   public function __construct($phpVersion = PHP_VERSION)
   {
+<<<<<<< HEAD
     if (version_compare($phpVersion, '5.5.0', '<')) {
       require_once __DIR__ . '/../library/ircmaxell/password_compat/lib/password.php';
+=======
+    if (version_compare($phpVersion, '5.3.7', '<')) {
+      require_once (realpath(dirname(__FILE__)) . '/../functions/password_compat.php');
+    } elseif (version_compare($phpVersion, '5.5.0', '<')) {
+      require_once (realpath(dirname(__FILE__)) . '/vendors/password_compat-master/lib/password.php');
+>>>>>>> upstream/master
     }
   }
   /**
    * Determine the password type
    *
    * Legacy passwords were hash:salt with a salt of length 2
+<<<<<<< HEAD
    * php < 5.3.7 updated passwords were hash:salt with salt of length > 2
+=======
+   * php < 5.3.7 updated passwords are hash:salt with salt of length > 2
+>>>>>>> upstream/master
    * php >= 5.3.7 passwords are BMCF format
    *
    * @param string $encryptedPassword
@@ -139,6 +163,10 @@ class zcPassword extends base
    */
   public function updateLoggedInCustomerPassword($plain, $customerId)
   {
+<<<<<<< HEAD
+=======
+    $this->confirmDbSchema('customer');
+>>>>>>> upstream/master
     global $db;
     $updatedPassword = password_hash($plain, PASSWORD_DEFAULT);
     $sql = "UPDATE " . TABLE_CUSTOMERS . "
@@ -160,6 +188,10 @@ class zcPassword extends base
    */
   public function updateNotLoggedInCustomerPassword($plain, $emailAddress)
   {
+<<<<<<< HEAD
+=======
+    $this->confirmDbSchema('customer');
+>>>>>>> upstream/master
     global $db;
     $updatedPassword = password_hash($plain, PASSWORD_DEFAULT);
     $sql = "UPDATE " . TABLE_CUSTOMERS . "
@@ -180,6 +212,10 @@ class zcPassword extends base
    */
   public function updateNotLoggedInAdminPassword($plain, $admin)
   {
+<<<<<<< HEAD
+=======
+    $this->confirmDbSchema('admin');
+>>>>>>> upstream/master
     global $db;
     $updatedPassword = password_hash($plain, PASSWORD_DEFAULT);
     $sql = "UPDATE " . TABLE_ADMIN . "
@@ -191,4 +227,42 @@ class zcPassword extends base
     $db->Execute($sql);
     return $updatedPassword;
   }
+<<<<<<< HEAD
+=======
+  /**
+   * Ensure db schema has been updated to support the required password lengths
+   * @param string $mode
+   */
+  public function confirmDbSchema($mode = '') {
+    global $db;
+    if ($mode == '' || $mode == 'admin') {
+      $sql = "ALTER TABLE " . TABLE_ADMIN . " MODIFY admin_pass VARCHAR( 255 ) NOT NULL DEFAULT ''";
+      $db->Execute($sql);
+      $sql = "ALTER TABLE " . TABLE_ADMIN . " MODIFY prev_pass1 VARCHAR( 255 ) NOT NULL DEFAULT ''";
+      $db->Execute($sql);
+      $sql = "ALTER TABLE " . TABLE_ADMIN . " MODIFY prev_pass2 VARCHAR( 255 ) NOT NULL DEFAULT ''";
+      $db->Execute($sql);
+      $sql = "ALTER TABLE " . TABLE_ADMIN . " MODIFY prev_pass3 VARCHAR( 255 ) NOT NULL DEFAULT ''";
+      $db->Execute($sql);
+      $sql = "ALTER TABLE " . TABLE_ADMIN . " MODIFY reset_token VARCHAR( 255 ) NOT NULL DEFAULT ''";
+      $db->Execute($sql);
+    }
+    if ($mode == '' || $mode == 'customer') {
+      $found = false;
+      $sql = "show fields from " . TABLE_CUSTOMERS;
+      $result = $db->Execute($sql);
+      while (!$result->EOF && !$found) {
+        if ($result->fields['Field'] == 'customers_password' && strtoupper($result->fields['Type']) == 'VARCHAR(255)') {
+          $found = true;
+        }
+        $result->MoveNext();
+      }
+      if (!$found) {
+        $sql = "ALTER TABLE " . TABLE_CUSTOMERS . " MODIFY customers_password VARCHAR( 255 ) NOT NULL DEFAULT ''";
+        $db->Execute($sql);
+      }
+    }
+    return;
+  }
+>>>>>>> upstream/master
 }

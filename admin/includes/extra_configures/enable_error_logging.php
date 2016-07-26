@@ -8,6 +8,7 @@
  * Credits to @lat9 for adding backtrace functionality
  *
  * @package debug
+<<<<<<< HEAD
  * @copyright Copyright 2003-2015 Zen Cart Development Team
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version GIT: $Id: Author: DrByte  Modified in v1.6.0 $
@@ -15,6 +16,15 @@
 
 function zen_debug_error_handler ($errno, $errstr, $errfile, $errline) {
   if (!(error_reporting() & $errno)) {
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Sat Oct 17 20:09:58 2015 -0400 Modified in v1.5.5 $
+ */
+
+function zen_debug_error_handler ($errno, $errstr, $errfile, $errline) {
+  if (!(error_reporting() && $errno)) {
+>>>>>>> upstream/master
     return;
   }
   ob_start();

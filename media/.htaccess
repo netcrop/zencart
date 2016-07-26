@@ -1,7 +1,7 @@
 #
 # @copyright Copyright 2003-2013 Zen Cart Development Team
 # @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
-# @version $Id: .htaccess 16954 2010-07-21 22:55:30Z drbyte $
+# @version GIT: $Id: Author: DrByte  Fri May 17 14:29:18 2013 -0400 Modified in v1.5.2 $
 #
 # This is used with Apache WebServers
 #
@@ -30,6 +30,7 @@
 
 # but now allow just *certain* necessary files:
 <FilesMatch "(?i).*\.(mp3|mp4|swf|avi|mpg|wma|rm|ra|ram|wmv|epub|flv|ogg|m4v|m4a|webm)$" >
+<<<<<<< HEAD
   <IfModule mod_authz_core.c>
     Require all granted
   </IfModule>
@@ -37,6 +38,10 @@
     Order Allow,Deny
     Allow from all
   </IfModule>
+=======
+  Order Allow,Deny
+  Allow from all
+>>>>>>> upstream/master
 </FilesMatch>
 
 IndexIgnore */*

@@ -7,7 +7,11 @@
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+<<<<<<< HEAD
  * @version $Id: html_output.php 19355 2011-08-21 21:12:09Z drbyte  Modified in v1.6.0 $
+=======
+ * @version $Id: Author: DrByte  Fri Feb 26 20:52:53 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
   /**
@@ -70,6 +74,7 @@
    */
   function zen_href_link($page = '', $parameters = '', $connection = 'NONSSL', $add_session_id = true, $search_engine_safe = true, $static = false, $use_dir_ws_catalog = true) {
     global $request_type, $session_started, $http_domain, $https_domain, $zco_notifier;
+<<<<<<< HEAD
 
     // Notify any observers listening for href_link calls
     $link = $connection;
@@ -118,6 +123,14 @@
         unset($e);
         $link = HTTP_SERVER;
         if($use_dir_ws_catalog) $link .= DIR_WS_CATALOG;
+=======
+    $link = null;
+    $zco_notifier->notify('NOTIFY_SEFU_INTERCEPT', array(), $link, $page, $parameters, $connection, $add_session_id, $static, $use_dir_ws_catalog);
+    if($link !== null) return $link;
+
+    if (!zen_not_null($page)) {
+      die('</td></tr></table></td></tr></table><br /><br /><strong class="note">Error!<br /><br />Unable to determine the page link!</strong><br /><br /><!--' . $page . '<br />' . $parameters . ' -->');
+>>>>>>> upstream/master
     }
 
     // Handle parameters passed as an array (using RFC 3986)
@@ -151,9 +164,26 @@
         $link .= $page . $separator . zen_output_string($parameters);
         $separator = '&';
       }
+<<<<<<< HEAD
       else {
         $link .= $page;
         if(FALSE !== strpos($link, '?')) $separator = '&';
+=======
+    }
+
+    $separator = '&';
+
+    while ( (substr($link, -1) == '&') || (substr($link, -1) == '?') ) $link = substr($link, 0, -1);
+// Add the session ID when moving from different HTTP and HTTPS servers, or when SID is defined
+    if ( ($add_session_id == true) && ($session_started == true) && (SESSION_FORCE_COOKIE_USE == 'False') ) {
+      if (defined('SID') && zen_not_null(constant('SID'))) {
+        $sid = constant('SID');
+//      } elseif ( ( ($request_type == 'NONSSL') && ($connection == 'SSL') && (ENABLE_SSL_ADMIN == 'true') ) || ( ($request_type == 'SSL') && ($connection == 'NONSSL') ) ) {
+      } elseif ( ( ($request_type == 'NONSSL') && ($connection == 'SSL') && (ENABLE_SSL == 'true') ) || ( ($request_type == 'SSL') && ($connection == 'NONSSL') ) ) {
+        if ($http_domain != $https_domain) {
+          $sid = zen_session_name() . '=' . zen_session_id();
+        }
+>>>>>>> upstream/master
       }
     }
 
@@ -402,6 +432,7 @@
  * concept from contributions by Seb Rouleau and paulm, subsequently adapted to Zen Cart
  * note: any hard-coded buttons will not be able to use this function
 **/
+<<<<<<< HEAD
   function zenCssButton($image = '', $text = '', $type = 'button', $sec_class = '', $parameters = '') {
     global $zco_notifier, $template, $current_page_base, $language;
     $button_name = basename($image, '.gif');
@@ -435,6 +466,50 @@
       $tooltip = ' title="' . $popuptext . '"';
     } else {
       $tooltip = '';
+=======
+  function zenCssButton($image = '', $text, $type, $sec_class = '', $parameters = '') {
+   global $css_button_text, $css_button_opts, $template, $current_page_base, $language;
+
+   $button_name = basename($image, '.gif');
+
+    // if no secondary class is set use the image name for the sec_class
+    if (empty($sec_class)) $sec_class = $button_name;
+    if(!empty($sec_class)) $sec_class = ' ' . $sec_class;
+    if(!empty($parameters))$parameters = ' ' . $parameters;
+    $mouse_out_class  = 'cssButton ' . (($type == 'submit') ? 'submit_button button ' : 'normal_button button ') . $sec_class;
+    $mouse_over_class = 'cssButtonHover ' . (($type == 'button') ? 'normal_button button ' : '') . $sec_class . $sec_class . 'Hover';
+    // javascript to set different classes on mouseover and mouseout: enables hover effect on the buttons
+    // (pure css hovers on non link elements do work work in every browser)
+    $css_button_js =  'onmouseover="this.className=\''. $mouse_over_class . '\'" onmouseout="this.className=\'' . $mouse_out_class . '\'"';
+
+    if (CSS_BUTTON_POPUPS_IS_ARRAY == 'true') {
+      $popuptext = (!empty($css_button_text[$button_name])) ? $css_button_text[$button_name] : ($button_name . CSSBUTTONS_CATALOG_POPUPS_SHOW_BUTTON_NAMES_TEXT);
+      $tooltip = ' title="' . $popuptext . '"';
+    } else {
+      $tooltip = '';
+    }
+    $css_button = '';
+
+    if ($type == 'submit'){
+      // form input button
+      if ($parameters != '') {
+        // If the input parameters include a "name" attribute, need to emulate an <input type="image" /> return value by adding a _x to the name parameter (creds to paulm)
+        if (preg_match('/name="([a-zA-Z0-9\-_]+)"/', $parameters, $matches)) {
+          $parameters = str_replace('name="' . $matches[1], 'name="' . $matches[1] . '_x', $parameters);
+        }
+        // If the input parameters include a "value" attribute, remove it since that attribute will be set to the input text string.
+        if (preg_match('/(value="[a-zA-Z0=9\-_]+")/', $parameters, $matches)) {
+          $parameters = str_replace($matches[1], '', $parameters);
+        }
+      }
+
+      $css_button = '<input class="' . $mouse_out_class . '" ' . $css_button_js . ' type="submit" value="' . $text . '"' . $tooltip . $parameters . ' />';
+    }
+
+    if ($type=='button'){
+      // link button
+      $css_button = '<span class="' . $mouse_out_class . '" ' . $css_button_js . $tooltip . $parameters . '>&nbsp;' . $text . '&nbsp;</span>';
+>>>>>>> upstream/master
     }
 
     switch($type) {

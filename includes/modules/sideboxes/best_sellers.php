@@ -3,10 +3,14 @@
  * best_sellers sidebox - displays selected number of (usually top ten) best selling products
  *
  * @package templateSystem
+<<<<<<< HEAD
  * @copyright Copyright 2003-2013 Zen Cart Development Team
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+>>>>>>> upstream/master
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version $Id: best_sellers.php 18941 2011-06-13 22:12:42Z wilt $
+ * @version $Id: Author: DrByte  Sat Oct 17 22:33:45 2015 -0400 Modified in v1.5.5 $
  */
 
 // test if box should display
@@ -67,9 +71,14 @@ if ($best_sellers->RecordCount() >= MIN_DISPLAY_BESTSELLERS) {
         $bestsellers_list[$rows]['id'] = $best_sellers->fields['products_id'];
         $bestsellers_list[$rows]['name']  = $best_sellers->fields['products_name'];
         $bestsellers_list[$rows]['image'] = zen_image(DIR_WS_IMAGES . $best_sellers->fields['products_image'], $best_sellers->fields['products_name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);;
+<<<<<<< HEAD
         $bestsellers_list[$rows]['price_array'] = zen_get_products_output_price((int)$best_sellers->fields['products_id']);
         $bestsellers_list[$rows]['href'] = zen_href_link(zen_get_info_page($best_sellers->fields["products_id"]), 'cPath=' . zen_get_generated_category_path_rev($best_sellers->fields["master_categories_id"]) . '&products_id=' . $best_sellers->fields["products_id"]);
 
+=======
+        $bestsellers_list[$rows]['href'] = zen_href_link(zen_get_info_page($best_sellers->fields["products_id"]), 'cPath=' . zen_get_generated_category_path_rev($best_sellers->fields["master_categories_id"]) . '&products_id=' . $best_sellers->fields["products_id"]);
+        $bestsellers_list[$rows]['price'] = zen_get_products_display_price((int)$best_sellers->fields['products_id']);
+>>>>>>> upstream/master
         $bestsellers_list[$rows]['model']  = $best_sellers->fields['products_model'];
         $bestsellers_list[$rows]['description']  = $best_sellers->fields['products_description'];
         $best_sellers->MoveNext();

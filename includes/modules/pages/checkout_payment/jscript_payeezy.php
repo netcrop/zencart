@@ -188,7 +188,11 @@ var apiEndpoint = '<?php echo MODULE_PAYMENT_PAYEEZYJSZC_TESTING_MODE == 'Sandbo
 
 jQuery(function($) {
     $('form[name="checkout_payment"]').submit(function(e) {
+<<<<<<< HEAD
         if($('#pmt-payeezyjszc').is(':checked') || this['payment'].value == 'payeezyjszc') {
+=======
+        if($('#pmt-payeezyjszc').is(':checked')) {
+>>>>>>> upstream/master
             var $form = $(this);
             $form.find('button').prop('disabled', true);
             e.preventDefault();

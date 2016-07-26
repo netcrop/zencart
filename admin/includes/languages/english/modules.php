@@ -1,10 +1,14 @@
 <?php
 /**
  * @package admin
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+>>>>>>> upstream/master
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version $Id: modules.php 19287 2011-07-28 15:51:25Z drbyte $
+ * @version $Id: Author: DrByte  Tue Dec 29 15:53:14 2015 -0500 Modified in v1.5.5 $
  */
 
 define('HEADING_TITLE_MODULES_PAYMENT', 'Payment Modules');
@@ -23,7 +27,6 @@ define('TEXT_MODULE_STATUS_DISABLED', ' <span style="color:red";>Disabled</span>
 define('TEXT_DO_COMMUNICATIONS_TEST', 'Test Communications');
 
 define('TEXT_MODULE_DIRECTORY', 'Module Directory:');
-define('WARNING_MODULES_SORT_ORDER','WARNING: YOU HAVE DUPLICATE SORT ORDERS WHICH WILL RESULT IN CALCULATION ERRORS<br />PLEASE CORRECT THESE ISSUES NOW!');
 define('ERROR_MODULE_FILE_NOT_FOUND', 'ERROR: module not loaded due to missing language file: ');
 define('TEXT_EMAIL_SUBJECT_ADMIN_SETTINGS_CHANGED', 'ALERT: Your Admin settings have been changed in your online store.');
 define('TEXT_EMAIL_MESSAGE_ADMIN_SETTINGS_CHANGED', 'This is an automated email from your Zen Cart store to alert you of a change that was just made to your administrative settings: ' . "\n\n" . 'NOTE: Admin settings have been CHANGED for the [%s] module, by your Zen Cart admin user %s.' . "\n\n" . 'If you did not initiate these changes, it is advisable that you verify the settings immediately.' . "\n\n" . 'If you are already aware of these changes, you can ignore this automated email.');
@@ -32,6 +35,9 @@ define('TEXT_EMAIL_MESSAGE_ADMIN_MODULE_REMOVED', 'This is an automated email fr
 define('TEXT_DELETE_INTRO', 'Are you sure you want to remove this module?');
 define('TEXT_WARNING_SSL_EDIT', 'ALERT: <a href="http://www.zen-cart.com/content.php?56" target="_blank">For security reasons, Editing of this module is disabled until your Admin is configured for SSL</a>.');
 define('TEXT_WARNING_SSL_INSTALL', 'ALERT: <a href="http://www.zen-cart.com/content.php?56" target="_blank">For security reasons, Installation of this module is disabled until your Admin is configured for SSL</a>.');
+<<<<<<< HEAD
 define('TEXT_ERROR_NO_COMMTEST_OPTION_AVAILABLE', 'ERROR: This module does not have a communications-test option. Try a regular transaction via checkout instead.');
 
+=======
+>>>>>>> upstream/master
 define('WARNING_MODULES_MISSING_KEYS', '<span class="alert">Missing keys - Save (write down), Remove, Install and Reconfigure</span>');

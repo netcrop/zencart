@@ -1,14 +1,21 @@
 <?php
 /**
  * @package admin
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: server_info.php   Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Fri Feb 26 00:34:34 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
   require('includes/application_top.php');
-  $version_check_sysinfo=true;
+  $version_check_sysinfo = true;
 
   $system = zen_get_system_information();
 
@@ -40,8 +47,33 @@
       $hist_details->MoveNext();
     }
   $sinfo .= '</div></div>';
+<<<<<<< HEAD
 require('includes/admin_html_head.php');
 ?>
+=======
+?>
+<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html <?php echo HTML_PARAMS; ?>>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
+<title><?php echo TITLE; ?></title>
+<link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/cssjsmenuhover.css" media="all" id="hoverJS">
+<script language="javascript" src="includes/menu.js"></script>
+<script type="text/javascript">
+  <!--
+  function init()
+  {
+    cssjsmenu('navbar');
+    if (document.getElementById)
+    {
+      var kill = document.getElementById('hoverJS');
+      kill.disabled = true;
+    }
+  }
+  // -->
+</script>
+>>>>>>> upstream/master
 <style>
 .pageHeading {font-size: 2em;}
 .serverInfo{max-width: 800px; margin-left: auto; margin-right: auto; font-size: 1.1em;}
@@ -70,7 +102,11 @@ pre {margin: 0; font-family: monospace;}
 .phpinfo img {float: right; border: 0;}
 </style>
 </head>
+<<<<<<< HEAD
 <body class="sysinfoBody">
+=======
+<body onLoad="init()" class="sysinfoBody">
+>>>>>>> upstream/master
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
@@ -82,7 +118,11 @@ pre {margin: 0; font-family: monospace;}
       <div class="infocell"><strong><?php echo TITLE_SERVER_OS; ?></strong> <?php echo $system['system'] . ' ' . $system['kernel']; ?> </div>
       <div class="infocell"><strong><?php echo TITLE_SERVER_DATE; ?></strong> <?php echo $system['date']; ?> &nbsp;</div>
       <div class="infocell"><strong><?php echo TITLE_SERVER_UP_TIME; ?></strong> <?php echo $system['uptime']; ?></div>
+<<<<<<< HEAD
       <div class="infocell"><strong><?php echo TITLE_WEBSERVER; ?></strong> <?php echo $system['webserver']; ?></div>
+=======
+      <div class="infocell"><strong><?php echo TITLE_HTTP_SERVER; ?></strong> <?php echo $system['http_server']; ?></div>
+>>>>>>> upstream/master
       <div class="infocell"><strong><?php echo TITLE_PHP_VERSION; ?></strong> <?php echo $system['php'] . ' (' . TITLE_ZEND_VERSION . ' ' . $system['zend'] . ')'; ?></div>
       <div class="infocell"><strong><?php echo TITLE_PHP_FILE_UPLOADS; ?></strong> <?php echo ($system['php_file_uploads'] != '' && $system['php_file_uploads'] != 'off' && $system['php_file_uploads'] != '0') ? 'On' : 'Off';?></div>
       <div class="infocell"><strong><?php echo TITLE_PHP_UPLOAD_MAX;?></strong> <?php echo $system['php_uploadmaxsize'];?></div>

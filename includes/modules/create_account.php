@@ -6,7 +6,11 @@
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+<<<<<<< HEAD
  * @version $Id: create_account.php  Modified in v1.6.0 $
+=======
+ * @version $Id: Author: zcwilt Fri Apr 15  Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 // This should be first line of the script:
 $zco_notifier->notify('NOTIFY_MODULE_START_CREATE_ACCOUNT');
@@ -27,6 +31,10 @@ if (!defined('IS_ADMIN_FLAG')) {
   $email_format = (ACCOUNT_EMAIL_PREFERENCE == '1' ? 'HTML' : 'TEXT');
   $newsletter = (ACCOUNT_NEWSLETTER_STATUS == '1' || ACCOUNT_NEWSLETTER_STATUS == '0' ? false : true);
   $extra_welcome_text = '';
+<<<<<<< HEAD
+=======
+  $send_welcome_email = true;
+>>>>>>> upstream/master
 
 /**
  * Process form contents
@@ -133,9 +141,13 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
   } else {
     $check_email_query = "select count(*) as total
                             from " . TABLE_CUSTOMERS . "
+<<<<<<< HEAD
                             where customers_email_address = '" . zen_db_input($email_address) . "'
                             and is_guest_account != 1";
 
+=======
+                            where customers_email_address = '" . zen_db_input($email_address) . "'";
+>>>>>>> upstream/master
     $zco_notifier->notify('NOTIFY_CREATE_ACCOUNT_LOOKUP_BY_EMAIL', $email_address, $check_email_query, $send_welcome_email);
     $check_email = $db->Execute($check_email_query);
 
@@ -159,6 +171,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
   $zco_notifier->notify('NOTIFY_NICK_CHECK_FOR_DUPLICATE', $nick, $nick_error);
   if ($nick_error) $error = true;
 
+<<<<<<< HEAD
   // check Zen Cart for duplicate nickname
   if (!$error && zen_not_null($nick)) {
     $sql = "select * from " . TABLE_CUSTOMERS  . "
@@ -169,6 +182,18 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
       $error = true;
       $messageStack->add('create_account', ENTRY_NICK_DUPLICATE_ERROR);
     }
+=======
+      // check Zen Cart for duplicate nickname
+  if (!$error && zen_not_null($nick)) {
+      $sql = "select * from " . TABLE_CUSTOMERS  . "
+                           where customers_nick = :nick:";
+      $check_nick_query = $db->bindVars($sql, ':nick:', $nick, 'string');
+      $check_nick = $db->Execute($check_nick_query);
+      if ($check_nick->RecordCount() > 0 ) {
+        $error = true;
+        $messageStack->add('create_account', ENTRY_NICK_DUPLICATE_ERROR);
+      }
+>>>>>>> upstream/master
   }
 
   if (strlen($street_address) < ENTRY_STREET_ADDRESS_MIN_LENGTH) {
@@ -439,7 +464,11 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
       if (trim(SEND_EXTRA_CREATE_ACCOUNT_EMAILS_TO_SUBJECT) != 'n/a') zen_mail('', SEND_EXTRA_CREATE_ACCOUNT_EMAILS_TO, SEND_EXTRA_CREATE_ACCOUNT_EMAILS_TO_SUBJECT . ' ' . EMAIL_SUBJECT,
       $email_text . $extra_info['TEXT'], STORE_NAME, EMAIL_FROM, $html_msg, 'welcome_extra');
     } //endif send extra emails
+<<<<<<< HEAD
 }
+=======
+   }
+>>>>>>> upstream/master
     zen_redirect(zen_href_link(FILENAME_CREATE_ACCOUNT_SUCCESS, '', 'SSL'));
 
   } //endif !error

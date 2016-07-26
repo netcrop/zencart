@@ -5,10 +5,14 @@
  * Prepares list of additional product images to be displayed in template
  *
  * @package templateSystem
+<<<<<<< HEAD
  * @copyright Copyright 2003-2013 Zen Cart Development Team
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+>>>>>>> upstream/master
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version $Id: additional_images.php 18697 2011-05-04 14:35:20Z wilt $
+ * @version $Id: Author: DrByte  Wed Jan 6 12:47:43 2016 -0500 Modified in v1.5.5 $
  */
 if (!defined('IS_ADMIN_FLAG')) {
   die('Illegal Access');
@@ -108,7 +112,11 @@ if ($num_images) {
 
 
     // Link Preparation:
+<<<<<<< HEAD
     $script_link = '<script>' . "\n" . 'document.write(\'' . ($flag_display_large ? '<a href="' . $js_href . '"' . ($js_rel != '' ? ' rel="' . $js_rel . '"' : '') . ' title="' . addslashes($products_name) . '">' . $thumb_slashes . '<br />' . TEXT_CLICK_TO_ENLARGE . '</a>' : $thumb_slashes) . '\');' . "\n" . '</script>';
+=======
+    $script_link = '<script type="text/javascript"><!--' . "\n" . 'document.write(\'' . ($flag_display_large ? '<a href="javascript:popupWindow(\\\'' . str_replace($products_image_large, urlencode(addslashes($products_image_large)), $large_link) . '\\\')">' . $thumb_slashes . '<br />' . TEXT_CLICK_TO_ENLARGE . '</a>' : $thumb_slashes) . '\');' . "\n" . '//--></script>';
+>>>>>>> upstream/master
 
     $noscript_link = '<noscript>' . ($flag_display_large ? '<a href="' . zen_href_link(FILENAME_POPUP_IMAGE_ADDITIONAL, 'pID=' . $_GET['products_id'] . '&pos=' . $i . '&img=' . $products_image_large) . '" target="_blank">' . $thumb_regular . '<br /><span class="imgLinkAdditional">' . TEXT_CLICK_TO_ENLARGE . '</span></a>' : $thumb_regular ) . '</noscript>';
 

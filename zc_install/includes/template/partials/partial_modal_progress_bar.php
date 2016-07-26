@@ -12,6 +12,9 @@
 </div>
 <div id="progress-bar-container" class="modal-body">
 <div id="progress-bar" class="progress"></div>
+<<<<<<< HEAD
 <div id="error-message"></div>
+=======
+>>>>>>> upstream/master
 </div>
 </div>

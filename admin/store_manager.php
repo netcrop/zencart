@@ -9,6 +9,16 @@
 
   require('includes/application_top.php');
 
+<<<<<<< HEAD
+=======
+  require(DIR_WS_CLASSES . 'currencies.php');
+  $currencies = new currencies();
+
+  $languages = zen_get_languages();
+
+  $products_filter = (isset($_GET['products_filter']) ? $_GET['products_filter'] : 0);
+
+>>>>>>> upstream/master
   $action = (isset($_GET['action']) ? $_GET['action'] : '');
 
   $processing_message = '';
@@ -33,7 +43,10 @@
         }
         $messageStack->add_session(SUCCESS_PRODUCT_UPDATE_SORT_ALL, 'success');
         zen_record_admin_activity('Store Manager executed [update all products attributes sort order]', 'info');
+<<<<<<< HEAD
         $zco_notifier->notify('ADMIN_STOREMANAGER_UPDATE_ATTRIBUTES_SORT_ALL');
+=======
+>>>>>>> upstream/master
         $action='';
         zen_redirect(zen_admin_href_link(FILENAME_STORE_MANAGER));
       }
@@ -53,7 +66,10 @@
         }
         $messageStack->add_session(SUCCESS_PRODUCT_UPDATE_PRODUCTS_PRICE_SORTER, 'success');
         zen_record_admin_activity('Store Manager executed [update all products price sorter]', 'info');
+<<<<<<< HEAD
         $zco_notifier->notify('ADMIN_STOREMANAGER_UPDATE_PRODUCTS_SORT_ALL');
+=======
+>>>>>>> upstream/master
         $action='';
         zen_redirect(zen_admin_href_link(FILENAME_STORE_MANAGER));
       }
@@ -124,7 +140,10 @@
           $tables->MoveNext();
         }
         $messageStack->add_session(SUCCESS_DB_OPTIMIZE . ' ' . $i, 'success');
+<<<<<<< HEAD
         $zco_notifier->notify('ADMIN_STOREMANAGER_DB_OPTIMIZE_TABLES');
+=======
+>>>>>>> upstream/master
         zen_record_admin_activity('Store Manager executed [optimize database tables]', 'info');
         $action='';
         zen_redirect(zen_admin_href_link(FILENAME_STORE_MANAGER));
@@ -157,8 +176,13 @@
         $purgeFolder = rtrim($purgeFolder, '/');
         $dir = dir($purgeFolder);
         while ($file = $dir->read()) {
+<<<<<<< HEAD
           if (substr($file, 0, 1) != '.') {
             if (preg_match('/^(' . $patternString . ').*\.log$/i', $file)) {
+=======
+          if ( ($file != '.') && ($file != '..') && substr($file, 0, 1) != '.') {
+            if (preg_match('/^(myDEBUG-|AIM_Debug_|SIM_Debug_|FirstData_Debug_|Linkpoint_Debug_|Paypal|paypal|ipn_|zcInstall|SHIP_|PAYMENT_|usps_|.*debug).*\.log$/i', $file)) {
+>>>>>>> upstream/master
               if (is_writeable($purgeFolder . '/' . $file)) {
                 zen_remove_file($purgeFolder . '/' . $file);
               }
@@ -169,9 +193,14 @@
         unset($dir);
       }
       $messageStack->add_session(SUCCESS_CLEAN_DEBUG_FILES, 'success');
+<<<<<<< HEAD
       $zco_notifier->notify('ADMIN_STOREMANAGER_CLEAR_DEBUG_LOG_FILES');
       zen_record_admin_activity('Store Manager executed [clean debug/log files]', 'info');
       zen_redirect(zen_admin_href_link(FILENAME_STORE_MANAGER));
+=======
+      zen_record_admin_activity('Store Manager executed [clean debug/log files]', 'info');
+      zen_redirect(zen_href_link(FILENAME_STORE_MANAGER));
+>>>>>>> upstream/master
     break;
 
     case ('update_all_master_categories_id'):

@@ -8,7 +8,11 @@
  * @copyright Portions Copyright 2003 osCommerce
  * @copyright Portions adapted from http://www.data-diggers.com/
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+<<<<<<< HEAD
  * @version GIT: $Id: Author: Ian Wilson  Modified in v1.6.0 $
+=======
+ * @version $Id: Author: zcwuilt Fri Apr 15 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 if (!defined('IS_ADMIN_FLAG')) {
   die('Illegal Access');
@@ -155,6 +159,7 @@ class queryFactory extends base {
       echo '<br />in:<br />[' . (strstr($this->zf_sql, 'db_cache') ? 'db_cache table' : $this->zf_sql) . ']<br />';
     } else {
       echo 'WARNING: An Error occurred, please refresh the page and try again.';
+<<<<<<< HEAD
     }
     $backtrace_array = debug_backtrace();
     $query_factory_caller = '';
@@ -164,6 +169,17 @@ class queryFactory extends base {
         break;
       }
     }
+=======
+    }
+    $backtrace_array = debug_backtrace();
+    $query_factory_caller = '';
+    foreach ($backtrace_array as $current_caller) {
+      if (strcmp($current_caller['file'], __FILE__) != 0) {
+        $query_factory_caller = ' ==> (as called by) ' . $current_caller['file'] . ' on line ' . $current_caller['line'] . ' <==';
+        break;
+      }
+    }
+>>>>>>> upstream/master
     trigger_error($this->error_number . ':' . $this->error_text . ' :: ' . $this->zf_sql . $query_factory_caller, E_USER_ERROR);
     if (defined('IS_ADMIN_FLAG') && IS_ADMIN_FLAG==true) echo 'If you were entering information, press the BACK button in your browser and re-check the information you had entered to be sure you left no blank fields.<br />';
     echo '</div>';
@@ -330,10 +346,17 @@ class queryFactory extends base {
         $obj->result_random = array_rand($obj->result, count($obj->result));
         if(is_array($obj->result_random)) {
           shuffle($obj->result_random);
+<<<<<<< HEAD
         }
         else {
           $obj->result_random = array(0 => $obj->result_random);
         }
+=======
+        }
+        else {
+          $obj->result_random = array(0 => $obj->result_random);
+        }
+>>>>>>> upstream/master
         $obj->cursor = -1;
         $obj->MoveNextRandom();
       }
@@ -453,11 +476,17 @@ class queryFactory extends base {
       break;
       case 'string':
         if (preg_match('/NULL/', $value)) return 'null';
+<<<<<<< HEAD
+        return '\'' . $this->prepare_input($value) . '\'';
+      break;
+      case 'stringIgnoreNull':
+=======
+>>>>>>> upstream/master
         return '\'' . $this->prepare_input($value) . '\'';
       break;
       case 'stringIgnoreNull':
         return '\'' . $this->prepare_input($value) . '\'';
-      break;
+        break;
       case 'noquotestring':
         return $this->prepare_input($value);
       break;

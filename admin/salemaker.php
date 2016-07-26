@@ -4,7 +4,7 @@
  * @copyright Copyright 2003-2014 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version $Id: salemaker.php 19330 2011-08-07 06:32:56Z drbyte $
+ * @version $Id: salemaker.php  drbyte  Modified in v1.5.4 $
  */
 
   define('AUTOCHECK', 'False');
@@ -31,9 +31,13 @@
           $salemaker_data_array = array('sale_status' => zen_db_prepare_input($_POST['flag']),
                                       'sale_date_last_modified' => 'now()',
                                       'sale_date_status_change' => 'now()');
+<<<<<<< HEAD
           zen_db_perform(TABLE_SALEMAKER_SALES, $salemaker_data_array, 'update', "sale_id = '" . zen_db_prepare_input($_GET['sID']) . "'");
           $zco_notifier->notify('NOTIFY_SALEMAKER_TOGGLE', (int)$_GET['sID'], $_POST['flag']);
 
+=======
+          zen_db_perform(TABLE_SALEMAKER_SALES, $salemaker_data_array, 'update', "sale_id = '" . (int)$_GET['sID'] . "'");
+>>>>>>> upstream/master
           // update prices for products in sale
           zen_update_salemaker_product_prices($_GET['sID']);
           zen_redirect(zen_admin_href_link(FILENAME_SALEMAKER, 'page=' . $_GET['page'] . '&sID=' . $_GET['sID']));
@@ -138,7 +142,10 @@
 
         // set sale off to update prices before removing
         $db->Execute("update " . TABLE_SALEMAKER_SALES . " set sale_status=0 where sale_id='" . (int)$sale_id . "'");
+<<<<<<< HEAD
         $zco_notifier->notify('NOTIFY_SALEMAKER_DELETED', $sale_id);
+=======
+>>>>>>> upstream/master
 
         // update prices for products in sale
         zen_update_salemaker_product_prices($sale_id);

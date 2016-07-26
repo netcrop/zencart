@@ -1,7 +1,11 @@
 <?php
 /**
  * @package languageDefines
+<<<<<<< HEAD
  * @copyright Copyright 2003-2014 Zen Cart Development Team
+=======
+ * @copyright Copyright 2003-2013 Zen Cart Development Team
+>>>>>>> upstream/master
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * $Id: discount_coupon.php 14712 2009-10-28 22:05:08Z ajeh $

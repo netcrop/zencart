@@ -2,7 +2,11 @@
 .buttonRow a {
   text-decoration: none;
 }
+<<<<<<< HEAD
 .button, input.button {
+=======
+.button, input.button, input.cssButtonHover {
+>>>>>>> upstream/master
   -moz-border-radius:6px;
   -webkit-border-radius:6px;
   border-radius:6px;
@@ -13,6 +17,7 @@
   margin: 0;
   padding:3px 8px;
   text-decoration:none;
+<<<<<<< HEAD
 }
 input.submit_button {
   background-color:#fee8b9;  /* Submit button background color */
@@ -37,3 +42,29 @@ span.normal_button {
 span.normal_button:hover {
   background-color:#b4bc8b;  /* Hover color for link-related buttons */
 }
+=======
+}
+input.submit_button {
+  background-color:#fee8b9;  /* Submit button background color */
+  border: 1px solid #638263;  /* Submit button border color */
+  font-size: 13px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0;
+  padding: 3px 8px;
+  color: #404040;  /* Text color for submit buttons */
+}
+input.submit_button:hover, input.cssButtonHover {
+  background-color:#ffdc9c;  /* Hover color for the submit buttons */
+  border: 1px solid #638263;  /* Submit button border color */
+  cursor: pointer;
+}
+span.normal_button {
+  background-color:#ced79c;  /* Link button background color */
+  border:1px solid #638263;  /* Link button border color */
+  color:#404040;  /* Text color for link-related buttons */
+}
+span.normal_button:hover {
+  background-color:#b4bc8b;  /* Hover color for link-related buttons */
+}
+>>>>>>> upstream/master

@@ -6,7 +6,11 @@
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+<<<<<<< HEAD
  * @version $Id: header_php.php  Modified in v1.6.0 $
+=======
+ * @version $Id: Author: zcwilt Fri Apr 15 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 // This should be first line of the script:
 $zco_notifier->notify('NOTIFY_HEADER_START_ACCOUNT_EDIT');
@@ -87,8 +91,11 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
   $nick_error = false;
   $zco_notifier->notify('NOTIFY_NICK_CHECK_FOR_EXISTING_EMAIL', $email_address, $nick_error, $nick);
   if ($nick_error) $error = true;
+<<<<<<< HEAD
   $zco_notifier->notify('NOTIFY_NICK_CHECK_FOR_DUPLICATE', $nick, $nick_error);
   if ($nick_error) $error = true;
+=======
+>>>>>>> upstream/master
 
 
   if (strlen($telephone) < ENTRY_TELEPHONE_MIN_LENGTH) {

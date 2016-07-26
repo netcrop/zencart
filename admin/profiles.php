@@ -1,10 +1,17 @@
 <?php
 /**
  * @package admin
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: Author: DrByte  Fri Feb 19 22:01:13 2016 -0500 Modified in v1.5.5 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Fri Feb 19 22:01:13 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
 require('includes/application_top.php');
@@ -81,6 +88,7 @@ switch ($action) {
     zen_redirect(zen_admin_href_link(FILENAME_PROFILES));
     break;
   case 'update_name':
+<<<<<<< HEAD
     $profileName = $_POST['profile-name'];
     $_POST['profile-name'] = trim($_POST['profile-name']);
 //    $_POST['profile-name'] = preg_replace('/[^a-zA-Z0-9_-]/', '', $_POST['profile-name']);
@@ -93,6 +101,20 @@ switch ($action) {
       $messageStack->add_session(ERROR_INVALID_PROFILE_NAME, 'error');
     }
     zen_redirect(zen_admin_href_link(FILENAME_PROFILES));
+=======
+    $profileName = $_POST['profile-name'];
+    $_POST['profile-name'] = trim($_POST['profile-name']);
+//    $_POST['profile-name'] = preg_replace('/[^a-zA-Z0-9_-]/', '', $_POST['profile-name']);
+    if ($_POST['profile-name'] != '' && $_POST['profile-name'] == $profileName)
+    {
+      zen_update_profile_name($profile, $_POST['profile-name']);
+      $messageStack->add_session(SUCCESS_PROFILE_NAME_UPDATED, 'success');
+    } else
+    {
+      $messageStack->add_session(ERROR_INVALID_PROFILE_NAME, 'error');
+    }
+    zen_redirect(zen_href_link(FILENAME_PROFILES));
+>>>>>>> upstream/master
     break;
   case 'rename':
   case 'delete':
@@ -165,6 +187,7 @@ require('includes/admin_html_head.php');
         <td class="users"><?php echo zen_output_string($profileDetails['users'], FALSE, TRUE) ?></td>
 <?php if ($profileDetails['id'] != SUPERUSER_PROFILE) { ?>
         <td class="actions">
+<<<<<<< HEAD
 <?php if ($action != 'delete') {  ?>
           <a href="<?php echo zen_admin_href_link(FILENAME_PROFILES, 'action=edit&amp;profile=' . $profileDetails['id']) ?>"><?php echo zen_image_button('button_edit.gif', IMAGE_EDIT) ?></a>
           <a href="<?php echo zen_admin_href_link(FILENAME_PROFILES, 'action=rename&amp;profile=' . $profileDetails['id']) ?>"><?php echo zen_image_button('button_rename.gif', IMAGE_RENAME) ?></a>
@@ -180,6 +203,23 @@ if ($action == 'delete' && $profileDetails['name'] == zen_get_profile_name($prof
           } else if ($action != 'delete') {
 ?>
           <a href="<?php echo zen_admin_href_link(FILENAME_PROFILES, 'action=delete&amp;profile=' . $profileDetails['id']) ?>"><?php echo zen_image_button('button_delete.gif', IMAGE_DELETE) ?></a>
+=======
+<?php if ($action != 'delete') {  ?>
+          <a href="<?php echo zen_href_link(FILENAME_PROFILES, 'action=edit&amp;profile=' . $profileDetails['id']) ?>"><?php echo zen_image_button('button_edit.gif', IMAGE_EDIT) ?></a>
+          <a href="<?php echo zen_href_link(FILENAME_PROFILES, 'action=rename&amp;profile=' . $profileDetails['id']) ?>"><?php echo zen_image_button('button_rename.gif', IMAGE_RENAME) ?></a>
+<?php } ?>
+<?php if ($profileDetails['users'] == 0) { ?>
+<?php
+if ($action == 'delete' && $profileDetails['name'] == zen_get_profile_name($profile)) {
+          echo TEXT_CONFIRM_DELETE;
+?>
+          <a href="<?php echo zen_href_link(FILENAME_PROFILES, 'action=delete_confirm&amp;profile=' . $profileDetails['id']) ?>"><?php echo zen_image_button('button_confirm_red.gif', IMAGE_DELETE) ?></a>
+          <a href="<?php echo zen_href_link(FILENAME_PROFILES) ?>"><?php echo zen_image_button('button_cancel.gif', IMAGE_CANCEL) ?></a>
+<?php
+          } else if ($action != 'delete') {
+?>
+          <a href="<?php echo zen_href_link(FILENAME_PROFILES, 'action=delete&amp;profile=' . $profileDetails['id']) ?>"><?php echo zen_image_button('button_delete.gif', IMAGE_DELETE) ?></a>
+>>>>>>> upstream/master
 <?php     } ?>
 <?php } ?>
         </td>
@@ -265,4 +305,8 @@ if ($action == 'delete' && $profileDetails['name'] == zen_get_profile_name($prof
 </div>
 </body>
 </html>
+<<<<<<< HEAD
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>
+=======
+<?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>
+>>>>>>> upstream/master

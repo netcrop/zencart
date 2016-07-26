@@ -1,10 +1,17 @@
 <?php
 /**
  * @package admin
+<<<<<<< HEAD
  * @copyright Copyright 2003-2015 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version GIT: $Id: Author: DrByte  July 30 2015 Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Sat Oct 17 20:53:59 2015 -0400 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
   require('includes/application_top.php');
@@ -78,13 +85,56 @@
           fclose($new_file);
         }
         zen_record_admin_activity('Define-Page-Editor was used to save changes to file ' . $file, 'info');
+<<<<<<< HEAD
         zen_redirect(zen_admin_href_link(FILENAME_DEFINE_PAGES_EDITOR));
+=======
+        zen_redirect(zen_href_link(FILENAME_DEFINE_PAGES_EDITOR));
+>>>>>>> upstream/master
       }
       break;
   }
 
+<<<<<<< HEAD
 require('includes/admin_html_head.php');
 ?>
+=======
+  if (!$_SESSION['language']) $_SESSION['language'] = $language;
+
+  $languages_array = array();
+  $languages = zen_get_languages();
+  $lng_exists = false;
+  for ($i=0; $i<sizeof($languages); $i++) {
+    if ($languages[$i]['directory'] == $_SESSION['language']) $lng_exists = true;
+
+    $languages_array[] = array('id' => $languages[$i]['directory'],
+                               'text' => $languages[$i]['name']);
+  }
+  if (!$lng_exists) $_SESSION['language'] = $language;
+
+?>
+<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html <?php echo HTML_PARAMS; ?>>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
+<title><?php echo TITLE; ?></title>
+<link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/cssjsmenuhover.css" media="all" id="hoverJS">
+<script language="javascript" src="includes/menu.js"></script>
+<script language="javascript" src="includes/general.js"></script>
+<script type="text/javascript">
+  <!--
+  function init()
+  {
+    cssjsmenu('navbar');
+    if (document.getElementById)
+    {
+      var kill = document.getElementById('hoverJS');
+      kill.disabled = true;
+    }
+  }
+  // -->
+</script>
+>>>>>>> upstream/master
 <?php if ($editor_handler != '') include ($editor_handler); ?>
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
@@ -188,7 +238,11 @@ if (isset($_GET['filename'])) {
     if ($dir) {
       while ($file = $dir->read()) {
         if (preg_match('~^[^\._].*\.php$~i', $file) > 0) {
+<<<<<<< HEAD
           echo '                <td class="smallText"><a href="' . zen_admin_href_link($_GET['filename'], 'lngdir=' . $_SESSION['language'] . '&filename=' . $file) . '">' . $file . '</a></td>' . "\n";
+=======
+          echo '                <td class="smallText"><a href="' . zen_href_link($_GET['filename'], 'lngdir=' . $_SESSION['language'] . '&filename=' . $file) . '">' . $file . '</a></td>' . "\n";
+>>>>>>> upstream/master
           if (!$left) {
             echo '              </tr>' . "\n" .
                  '              <tr>' . "\n";

@@ -1,16 +1,57 @@
 <?php
 /**
  * @package languageDefines
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: english.php  Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Tue Jan 5 15:06:15 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
   define('CONNECTION_TYPE_UNKNOWN', '\'%s\' is not a valid connection type for generating URLs' . PHP_EOL . '%s' . PHP_EOL);
 
   define('FOOTER_TEXT_BODY', 'Copyright &copy; ' . date('Y') . ' <a href="' . zen_href_link(FILENAME_DEFAULT) . '" target="_blank">' . STORE_NAME . '</a>. Powered by <a href="http://www.zen-cart.com" target="_blank">Zen Cart</a>');
 
+<<<<<<< HEAD
+=======
+// look in your $PATH_LOCALE/locale directory for available locales..
+  $locales = array('en_US', 'en_US.utf8', 'en', 'English_United States.1252');
+  @setlocale(LC_TIME, $locales);
+  define('DATE_FORMAT_SHORT', '%m/%d/%Y');  // this is used for strftime()
+  define('DATE_FORMAT_LONG', '%A %d %B, %Y'); // this is used for strftime()
+  define('DATE_FORMAT', 'm/d/Y'); // this is used for date()
+  define('DATE_TIME_FORMAT', DATE_FORMAT_SHORT . ' %H:%M:%S');
+
+////
+// Return date in raw format
+// $date should be in format mm/dd/yyyy
+// raw date is in format YYYYMMDD, or DDMMYYYY
+  if (!function_exists('zen_date_raw')) {
+    function zen_date_raw($date, $reverse = false) {
+      if ($reverse) {
+        return substr($date, 3, 2) . substr($date, 0, 2) . substr($date, 6, 4);
+      } else {
+        return substr($date, 6, 4) . substr($date, 0, 2) . substr($date, 3, 2);
+      }
+    }
+  }
+
+// if USE_DEFAULT_LANGUAGE_CURRENCY is true, use the following currency, instead of the applications default currency (used when changing language)
+  define('LANGUAGE_CURRENCY', 'USD');
+
+// Global entries for the <html> tag
+  define('HTML_PARAMS','dir="ltr" lang="en"');
+
+// charset for web pages and emails
+  define('CHARSET', 'utf-8');
+
+>>>>>>> upstream/master
 // footer text in includes/footer.php
   define('FOOTER_TEXT_REQUESTS_SINCE', 'requests since');
 
@@ -243,7 +284,10 @@
   define('PREVNEXT_BUTTON_PREV', '[&laquo;&nbsp;Prev]');
   define('PREVNEXT_BUTTON_NEXT', '[Next&nbsp;&raquo;]');
   define('PREVNEXT_BUTTON_LAST', 'LAST&raquo;');
+<<<<<<< HEAD
   define('PREVNEXT_TEXT_BACK', 'Back to Listing');
+=======
+>>>>>>> upstream/master
 
   define('TEXT_BASE_PRICE','Starting at: ');
   define('TEXT_PRICE_HEADING','Price:');
@@ -554,6 +598,11 @@
   define('TEXT_DOWNLOADS_UNLIMITED', 'Unlimited');
   define('TEXT_DOWNLOADS_UNLIMITED_COUNT', '--- *** ---');
 
+<<<<<<< HEAD
+=======
+// misc
+  define('COLON_SPACER', ':&nbsp;&nbsp;');
+>>>>>>> upstream/master
   define('PAYMENT_JAVASCRIPT_DISABLED', 'We could not continue with checkout as Javascript is disabled. You must enable it to continue');
 
 // table headings for cart display and upcoming products

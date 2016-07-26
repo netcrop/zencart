@@ -2,9 +2,15 @@
 /**
  * index.php -- This is the main controller file for the Zen Cart installer
  * @package Installer
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: Author: DrByte  Fri Oct 9 15:32:07 2015 -0400 Modified in v1.5.5 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Fri Oct 9 15:32:07 2015 -0400 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
   define('IS_ADMIN_FLAG',false);
 
@@ -12,8 +18,13 @@
  *  'silent': suppress all logging
  *  'screen': display-to-screen and also to the /logs/ folder  (synonyms: TRUE or 'TRUE' or 1)
  *  'file':   log-to-file-only   (synonyms: anything other than above options)
+<<<<<<< HEAD
  */
   $debug_logging = 'file';
+=======
+ */
+  $debug_logging = 'file';
+>>>>>>> upstream/master
 
 /*
  * Ensure that the include_path can handle relative paths, before we try to load any files
@@ -23,9 +34,17 @@
 /*
  * Initialize system core components
  */
+<<<<<<< HEAD
   define('DIR_FS_INSTALL', __DIR__ . DIRECTORY_SEPARATOR);
   define('DIR_FS_ROOT', realpath(__DIR__ . '/../') . DIRECTORY_SEPARATOR);
 
+=======
+  if (!defined('__DIR__')) define('__DIR__', dirname(__FILE__));
+
+  define('DIR_FS_INSTALL', __DIR__ . DIRECTORY_SEPARATOR);
+  define('DIR_FS_ROOT', realpath(__DIR__ . '/../') . DIRECTORY_SEPARATOR);
+
+>>>>>>> upstream/master
   require(DIR_FS_INSTALL . 'includes/application_top.php');
 
   if ($controller == 'cli') {

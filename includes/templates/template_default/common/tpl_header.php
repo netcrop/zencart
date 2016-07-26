@@ -11,10 +11,17 @@
  * $flag_disable_header = true;<br />
  *
  * @package templateSystem
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: Modified in V1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Sat Oct 17 22:01:06 2015 -0400 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 ?>
 
@@ -24,7 +31,11 @@
     echo $messageStack->output('header');
   }
   if (isset($_GET['error_message']) && zen_not_null($_GET['error_message'])) {
+<<<<<<< HEAD
   echo zen_output_string_protected(urldecode($_GET['error_message']));
+=======
+    echo zen_output_string_protected(urldecode($_GET['error_message']));
+>>>>>>> upstream/master
   }
   if (isset($_GET['info_message']) && zen_not_null($_GET['info_message'])) {
    echo zen_output_string_protected($_GET['info_message']);

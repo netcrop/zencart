@@ -6,10 +6,14 @@
  * Allows customer to add a new address book entry
  *
  * @package templateSystem
+<<<<<<< HEAD
  * @copyright Copyright 2003-2013 Zen Cart Development Team
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+>>>>>>> upstream/master
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version $Id: tpl_address_book_process_default.php 18695 2011-05-04 05:24:19Z drbyte $
+ * @version $Id: Author: DrByte  Sat Oct 17 22:01:06 2015 -0400 Modified in v1.5.5 $
  */
 ?>
 <div class="centerColumn" id="addressBookProcessDefault">

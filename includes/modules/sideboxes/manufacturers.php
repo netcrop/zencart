@@ -3,10 +3,17 @@
  * manufacturers sidebox - displays a list of manufacturers so customer can choose to filter on their products only
  *
  * @package templateSystem
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version GIT: $Id:  Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: Crystal Jones  Tue Mar 3 10:36:43 2015 -0800 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
 // test if manufacturers sidebox should show
@@ -56,8 +63,11 @@ if ($show_manufacturers) {
                                             'text' => $manufacturer_sidebox_name);
     }
 
+<<<<<<< HEAD
     require($template->get_template_dir('tpl_manufacturers_select.php',DIR_WS_TEMPLATE, $current_page_base,'sideboxes'). '/tpl_manufacturers_select.php');
 
+=======
+>>>>>>> upstream/master
     $title = BOX_HEADING_MANUFACTURERS;
     $title_link = false;
     require($template->get_template_dir($column_box_default, DIR_WS_TEMPLATE, $current_page_base,'common') . '/' . $column_box_default);

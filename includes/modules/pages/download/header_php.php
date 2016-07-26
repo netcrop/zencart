@@ -6,7 +6,11 @@
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+<<<<<<< HEAD
  * @version $Id: Modified in v1.6.0 $
+=======
+ * @version $Id: Author: DrByte  Mar 22 15:35:01 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
 // This should be first line of the script:
@@ -98,6 +102,7 @@ if (!isset($downloadsShouldDecrement) || $downloadsShouldDecrement === true) {
 if (@ini_get('zlib.output_compression')) @ini_set('zlib.output_compression', 'Off');
 
 
+<<<<<<< HEAD
 if (!$file_exists) {
   $msg = 'DOWNLOAD PROBLEM: Problems detected with download for ' . $source_directory . $origin_filename . '(' . $service . ')' . ' because the file could not be found on the server. If the file exists, then its permissions are too low for PHP to access it. Contact your hosting company for specific help in determining correct permissions to make the file readable by PHP.';
   zen_mail('', STORE_OWNER_EMAIL_ADDRESS, ERROR_CUSTOMER_DOWNLOAD_FAILURE, $msg, STORE_NAME, EMAIL_FROM);
@@ -106,6 +111,22 @@ if (!$file_exists) {
 if ($downloadFilesize < 1 && $service == 'local') {
   $msg = 'DOWNLOAD PROBLEM: Problem detected with download for ' . $source_directory . $origin_filename . ' because the server is preventing PHP from reading the file size attributes, or the file is actually 0 bytes in size (which suggests the uploaded file is damaged or incomplete). Perhaps its permissions are too low for PHP to access it? Contact your hosting company for specific help in determining correct permissions to allow PHP to stat the file using the filesize() function.';
   zen_mail('', STORE_OWNER_EMAIL_ADDRESS, ERROR_CUSTOMER_DOWNLOAD_FAILURE, $msg, STORE_NAME, EMAIL_FROM);
+=======
+// Returns a random name, 16 to 20 characters long
+// There are more than 10^28 combinations
+// The directory is "hidden", i.e. starts with '.'
+function zen_random_name()
+{
+  $letters = 'abcdefghijklmnopqrstuvwxyz';
+  $dirname = '.';
+  if (defined('DOWNLOADS_SKIP_DOT_PREFIX_ON_REDIRECT') && DOWNLOADS_SKIP_DOT_PREFIX_ON_REDIRECT === TRUE) $dirname = '';
+  $length = floor(zen_rand(16,20));
+  for ($i = 1; $i <= $length; $i++) {
+    $q = floor(zen_rand(0,25));
+    $dirname .= $letters[$q];
+  }
+  return $dirname;
+>>>>>>> upstream/master
 }
 
 
@@ -163,6 +184,7 @@ if ($browser_headers_override == '') {
 //    header("Content-Type: application/x-octet-stream");
 //    header("Content-Type: application/octet-stream");
 //    header("Content-Type: application/download");
+<<<<<<< HEAD
 //    header("Content-Type: application/force-download");
   header("Content-Type: " . $mime_type);
 
@@ -180,6 +202,37 @@ if ($browser_headers_override == '') {
       header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
       header("Cache-Control: private", FALSE);
       header("Cache-Control: max-age=1");  // stores for only 1 second, which helps allow SSL downloads to work more reliably in IE
+=======
+    header("Content-Type: application/force-download");
+
+    header('Content-Disposition: attachment; filename="' . urlencode($browser_filename) . '"');
+
+//     relocated below
+//     if ((int)$downloadFilesize > 0) header("Content-Length: " . (string) $downloadFilesize);
+
+    header("Expires: Mon, 22 Jan 2002 00:00:00 GMT");
+    header("Last-Modified: " . gmdate("D,d M Y H:i:s") . " GMT");
+    switch($detectedBrowser)
+    {
+      case 'IE5':
+      case 'IE6':
+        header("Pragma: public");
+        header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+        header("Cache-Control: private", FALSE);
+        header("Cache-Control: max-age=1");  // stores for only 1 second, which helps allow SSL downloads to work more reliably in IE
+      break;
+      case 'IE7':
+      case 'IE8':
+      case 'IE9':
+        header("Pragma: public");
+        header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+        header("Cache-Control: private", FALSE);
+        header("Cache-Control: max-age=1");  // stores for only 1 second, which helps allow SSL downloads to work more reliably in IE
+        break;
+      default:
+        header("Cache-Control: no-cache, must-revalidate");
+        header("Pragma: no-cache");
+>>>>>>> upstream/master
       break;
     default:
       header("Cache-Control: no-cache, must-revalidate");
@@ -198,11 +251,61 @@ if ($browser_extra_headers != '') header($browser_extra_headers);
 $link_create_status = false;
 $zco_notifier->notify('NOTIFY_DOWNLOAD_READY_TO_REDIRECT', array(), $service, $origin_filename, $browser_filename, $source_directory, $link_create_status);
 
+<<<<<<< HEAD
+=======
+if (DOWNLOAD_BY_REDIRECT == 'true') {
+  zen_unlink_temp_dir(DIR_FS_DOWNLOAD_PUBLIC);
+  $tempdir = zen_random_name() . '-' . time();
+  umask(0000);
+  mkdir(DIR_FS_DOWNLOAD_PUBLIC . $tempdir, 0777);
+  $download_link = str_replace(array('/','\\'),'_',$browser_filename);
+  $link_create_status = @symlink(DIR_FS_DOWNLOAD . $origin_filename, DIR_FS_DOWNLOAD_PUBLIC . $tempdir . '/' . $download_link);
+>>>>>>> upstream/master
 
 // We don't get here unless not downloading by redirect; instead, we stream it to the browser.
 // This happens if the symlink couldn't happen, or if set as default in Admin
 $zco_notifier->notify('NOTIFY_DOWNLOAD_READY_TO_STREAM', array(), $service, $origin_filename, $browser_filename, $source_directory, $downloadFilesize);
 
+<<<<<<< HEAD
+=======
+if (DOWNLOAD_BY_REDIRECT != 'true' or $link_create_status==false ) {
+  // not downloading by redirect; instead, we stream it to the browser.
+  // This happens if the symlink couldn't happen, or if set as default in Admin
+
+  if ((int)$downloadFilesize > 0) header("Content-Length: " . (string) $downloadFilesize);
+
+
+  $disabled_funcs = @ini_get("disable_functions");
+  if (DOWNLOAD_IN_CHUNKS != 'true' && !strstr($disabled_funcs,'readfile')) {
+    $zco_notifier->notify('NOTIFY_DOWNLOAD_WITHOUT_REDIRECT___COMPLETED', $origin_filename);
+    // close the session, since it is not needed for streaming the file contents
+    session_write_close();
+    // Dump the file to the browser. This will work on all systems, but will need considerable resources
+    readfile(DIR_FS_DOWNLOAD . $origin_filename);
+  } else {
+    // override PHP timeout to 25 minutes, if allowed
+    @set_time_limit(1500);
+    $zco_notifier->notify('NOTIFY_DOWNLOAD_IN_CHUNKS___COMPLETED', $origin_filename);
+    // loop with fread($fp, xxxx) to allow streaming in chunk sizes below the PHP memory_limit
+    $handle = @fopen(DIR_FS_DOWNLOAD . $origin_filename, "rb");
+    if ($handle) {
+      // close the session, since it is not needed for streaming the file contents
+      session_write_close();
+      // stream the file in 4K chunks
+      while (!@feof($handle)) {
+        echo(fread($handle, 4096));
+        @flush();
+      }
+      fclose($handle);
+    } else {
+      // Throw error condition -- this should never happen!
+      $messageStack->add_session('default', 'Please contact store owner.  ERROR: Cannot read file: ' . $origin_filename, 'error');
+      zen_mail('', STORE_OWNER_EMAIL_ADDRESS, ERROR_CUSTOMER_DOWNLOAD_FAILURE, "Unable to open file '" . $origin_filename . " for reading.  Check the file permissions.", STORE_NAME, EMAIL_FROM);
+    }
+    $zco_notifier->notify('NOTIFY_DOWNLOAD_WITHOUT_REDIRECT_VIA_CHUNKS___COMPLETED');
+  }
+}
+>>>>>>> upstream/master
 
 // This should be last line of the script:
 $zco_notifier->notify('NOTIFY_HEADER_END_DOWNLOAD');

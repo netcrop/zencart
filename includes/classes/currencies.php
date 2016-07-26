@@ -3,10 +3,14 @@
  * currencies Class.
  *
  * @package classes
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+>>>>>>> upstream/master
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version $Id: currencies.php 15880 2010-04-11 16:24:30Z wilt $
+ * @version $Id: Author: DrByte  Sun Oct 18 03:20:05 2015 -0400 Modified in v1.5.5 $
  */
 if (!defined('IS_ADMIN_FLAG')) {
   die('Illegal Access');
@@ -20,7 +24,11 @@ if (!defined('IS_ADMIN_FLAG')) {
 class currencies extends base {
   public $currencies;
 
+<<<<<<< HEAD
   public function __construct() {
+=======
+  function __construct() {
+>>>>>>> upstream/master
     global $db;
     $this->currencies = array();
     $currencies_query = "select code, title, symbol_left, symbol_right, decimal_point, thousands_point, decimal_places, value
@@ -104,7 +112,11 @@ class currencies extends base {
     return $value;
   }
 
+<<<<<<< HEAD
   public function exists($code) {
+=======
+  function is_set($code) {
+>>>>>>> upstream/master
     if (isset($this->currencies[$code]) && zen_not_null($this->currencies[$code])) {
       return true;
     } else {

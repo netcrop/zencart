@@ -5,7 +5,11 @@
  * @package classes
  * @copyright Copyright 2003-2014 Zen Cart Development Team
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+<<<<<<< HEAD
  * @version $Id:
+=======
+ * @version GIT: $Id: Author: Ian Wilson  Wed Mar 12 20:31:27 2014 +0000 Modified in v1.5.3 $
+>>>>>>> upstream/master
  */
 /**
  * abstract class base
@@ -74,7 +78,11 @@ class base {
         }
       }
       global $this_is_home_page, $PHP_SELF;
+<<<<<<< HEAD
       $main_page = (isset($this_is_home_page) && $this_is_home_page) ? 'index-home' : (IS_ADMIN_FLAG) ? basename($PHP_SELF) : zcRequest::readGet('main_page', '');
+=======
+      $main_page = (isset($this_is_home_page) && $this_is_home_page) ? 'index-home' : (IS_ADMIN_FLAG) ? basename($PHP_SELF) : (isset($_GET['main_page'])) ? $_GET['main_page'] : '';
+>>>>>>> upstream/master
       $output = '';
       if (count($paramArray)) {
         $output = ', ';
@@ -126,6 +134,7 @@ class base {
     $observer =  & base::getStaticObserver();
     unset($observer[$element]);
   }
+<<<<<<< HEAD
   public static function classFactory($baseClassDirectory, $classOptions, $classParameters = FALSE)
   {
     $classDir = $classOptions ['classDirectory'];
@@ -141,6 +150,8 @@ class base {
     }
     return NULL;
   }
+=======
+>>>>>>> upstream/master
   public static function camelize($rawName, $camelFirst = FALSE)
   {
     if ($rawName == "")

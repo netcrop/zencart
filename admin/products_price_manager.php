@@ -1,10 +1,14 @@
 <?php
 /**
  * @package admin
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+>>>>>>> upstream/master
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version $Id: products_price_manager.php 19294 2011-07-28 18:15:46Z drbyte $
+ * @version $Id: Author: mc12345678  Sun Jan 3 13:54:17 2016 -0500 Modified in v1.5.5 $
  */
 
   require('includes/application_top.php');
@@ -40,7 +44,11 @@
             ORDER by pd.products_name";
     $new_product_query = $db->Execute($sql);
     $products_filter = (!$new_product_query->EOF) ? $new_product_query->fields['products_id'] : '';
+<<<<<<< HEAD
     zen_redirect(zen_admin_href_link(FILENAME_PRODUCTS_PRICE_MANAGER, 'products_filter=' . $products_filter . '&current_category_id=' . $current_category_id));
+=======
+    zen_redirect(zen_href_link(FILENAME_PRODUCTS_PRICE_MANAGER, 'products_filter=' . $products_filter . '&current_category_id=' . $current_category_id));
+>>>>>>> upstream/master
   }
 
 // set categories and products if not set
@@ -361,7 +369,11 @@ if ($products_filter != '' && zen_get_product_is_linked($products_filter) == 'tr
     echo '</td><td class="main" align="center" valign="bottom">';
     echo '<a href="' . zen_admin_href_link(FILENAME_CATEGORIES, 'action=new_product' . '&cPath=' . zen_get_product_path($products_filter) . '&pID=' . $products_filter . '&product_type=' . zen_get_products_type($products_filter)) . '">' . zen_image_button('button_edit_product.gif', IMAGE_EDIT_PRODUCT) . '<br />' . TEXT_PRODUCT_EDIT . '</a>';
     echo '</td><td class="main" align="center" valign="bottom">';
+<<<<<<< HEAD
     echo '<a href="' . zen_admin_href_link(FILENAME_ATTRIBUTES_CONTROLLER, '&products_filter=' . $products_filter . '&current_category_id=' . $current_category_id) . '">' . zen_image_button('button_edit_attribs.gif', IMAGE_EDIT_ATTRIBUTES) . '<br />' . TEXT_ATTRIBUTE_EDIT . '</a>' . '&nbsp;&nbsp;&nbsp;';
+=======
+    echo '<a href="' . zen_href_link(FILENAME_ATTRIBUTES_CONTROLLER, '&products_filter=' . $products_filter . '&current_category_id=' . $current_category_id, 'NONSSL') . '">' . zen_image_button('button_edit_attribs.gif', IMAGE_EDIT_ATTRIBUTES) . '<br />' . TEXT_ATTRIBUTE_EDIT . '</a>' . '&nbsp;&nbsp;&nbsp;';
+>>>>>>> upstream/master
   }
 ?>
                 </td>
@@ -548,6 +560,37 @@ function getTaxRate() {
   }
 }
 //--></script>
+<<<<<<< HEAD
+=======
+<?php } ?>
+<?php if ($pInfo->products_id != '') { ?>
+<script language="javascript">
+var ProductStartDate = new ctlSpiffyCalendarBox("ProductStartDate", "new_prices", "product_start", "btnDate1","<?php echo (($pInfo->products_date_available <= '0001-01-01') ? '' : zen_date_short($pInfo->products_date_available)); ?>",scBTNMODE_CUSTOMBLUE);
+</script>
+<script language="javascript"><!--
+function updateGross() {
+  var taxRate = getTaxRate();
+  var grossValue = document.forms["new_prices"].products_price.value;
+
+  if (taxRate > 0) {
+    grossValue = grossValue * ((taxRate / 100) + 1);
+  }
+
+  document.forms["new_prices"].products_price_gross.value = doRound(grossValue, 4);
+}
+
+function updateNet() {
+  var taxRate = getTaxRate();
+  var netValue = document.forms["new_prices"].products_price_gross.value;
+
+  if (taxRate > 0) {
+    netValue = netValue / ((taxRate / 100) + 1);
+  }
+
+  document.forms["new_prices"].products_price.value = doRound(netValue, 4);
+}
+//--></script>
+>>>>>>> upstream/master
 <?php } ?>
 <?php if ($pInfo->products_id != '') { ?>
 <script language="javascript"><!--
@@ -576,6 +619,13 @@ function updateNet() {
 <?php } ?>
 
 <?php if ($sInfo->products_id != '') { ?>
+<<<<<<< HEAD
+=======
+<script language="javascript">
+var SpecialStartDate = new ctlSpiffyCalendarBox("SpecialStartDate", "new_prices", "special_start", "btnDate4","<?php echo (($sInfo->specials_date_available <= '0001-01-01') ? '' : zen_date_short($sInfo->specials_date_available)); ?>",scBTNMODE_CUSTOMBLUE);
+var SpecialEndDate = new ctlSpiffyCalendarBox("SpecialEndDate", "new_prices", "special_end", "btnDate5","<?php echo (($sInfo->expires_date <= '0001-01-01') ? '' : zen_date_short($sInfo->expires_date)); ?>",scBTNMODE_CUSTOMBLUE);
+</script>
+>>>>>>> upstream/master
 <script language="javascript"><!--
 function updateSpecialsGross() {
   var taxRate = getTaxRate();
@@ -751,7 +801,11 @@ echo zen_draw_hidden_field('master_categories_id', $pInfo->master_categories_id)
             <td class="main" width="200"><?php echo TEXT_PRODUCTS_PRICE_INFO; ?></td>
             <td class="main" bgcolor="#ebebff"><?php echo TEXT_PRICE_NET . '<br />' . zen_draw_input_field('products_price', (isset($pInfo->products_price) ? $pInfo->products_price : ''), 'OnKeyUp="updateGross()"'); ?></td>
             <td class="main" bgcolor="#ebebff"><?php echo TEXT_PRICE_GROSS . '<br />' . zen_draw_input_field('products_price_gross', (isset($pInfo->products_price) ? $pInfo->products_price : ''), 'OnKeyUp="updateNet()"'); ?></td>
+<<<<<<< HEAD
              <td class="main"><?php echo TEXT_PRODUCT_AVAILABLE_DATE; ?><br /><?php echo zen_draw_input_field('product_start', (($pInfo->products_date_available <= '0001-01-01') ? '' : zen_date_short($pInfo->products_date_available)), 'class="datepicker"'); ?></td>
+=======
+            <td class="main"><?php echo TEXT_PRODUCT_AVAILABLE_DATE; ?><br /><script language="javascript">ProductStartDate.writeControl(); ProductStartDate.dateFormat="<?php echo DATE_FORMAT_SPIFFYCAL; ?>";</script></td>
+>>>>>>> upstream/master
             <td colspan="2" class="main"><?php echo zen_draw_radio_field('products_status', '1', $products_in_status) . '&nbsp;' . TEXT_PRODUCT_AVAILABLE . '<br />' . zen_draw_radio_field('products_status', '0', $products_out_status) . '&nbsp;' . TEXT_PRODUCT_NOT_AVAILABLE; ?></td>
           </tr>
 
@@ -812,8 +866,13 @@ echo zen_draw_hidden_field('master_categories_id', $pInfo->master_categories_id)
             <td class="main" width="200"><?php echo TEXT_SPECIALS_PRODUCT_INFO; ?></td>
             <td class="main" bgcolor="#ebebff"><?php echo TEXT_SPECIALS_SPECIAL_PRICE_NET . '<br />' . zen_draw_input_field('specials_price', (isset($sInfo->specials_new_products_price) ? $sInfo->specials_new_products_price : ''), 'OnKeyUp="updateSpecialsGross()"'); ?></td>
             <td class="main" bgcolor="#ebebff"><?php echo TEXT_SPECIALS_SPECIAL_PRICE_GROSS . '<br />' . zen_draw_input_field('specials_price_gross', (isset($sInfo->specials_new_products_price) ? $sInfo->specials_new_products_price : ''), 'OnKeyUp="updateSpecialsNet()"'); ?></td>
+<<<<<<< HEAD
              <td class="main"><?php echo TEXT_SPECIALS_AVAILABLE_DATE; ?><br /><?php echo zen_draw_input_field('special_start', (($sInfo->specials_date_available <= '0001-01-01') ? '' : zen_date_short($sInfo->specials_date_available)), 'class="datepicker"'); ?></td>
             <td class="main"><?php echo TEXT_SPECIALS_EXPIRES_DATE; ?><br /><?php echo zen_draw_input_field('special_end', (($sInfo->expires_date <= '0001-01-01') ? '' : zen_date_short($sInfo->expires_date)), 'class="datepicker"'); ?></td>
+=======
+            <td class="main"><?php echo TEXT_SPECIALS_AVAILABLE_DATE; ?><br /><script language="javascript">SpecialStartDate.writeControl(); SpecialStartDate.dateFormat="<?php echo DATE_FORMAT_SPIFFYCAL; ?>";</script></td>
+            <td class="main"><?php echo TEXT_SPECIALS_EXPIRES_DATE; ?><br /><script language="javascript">SpecialEndDate.writeControl(); SpecialEndDate.dateFormat="<?php echo DATE_FORMAT_SPIFFYCAL; ?>";</script></td>
+>>>>>>> upstream/master
             <td class="main"><?php echo TEXT_SPECIALS_PRODUCTS_STATUS; ?><br />
               <?php echo zen_draw_radio_field('special_status', '1', $special_in_status) . '&nbsp;' . TEXT_SPECIALS_PRODUCT_AVAILABLE . '&nbsp;' . zen_draw_radio_field('special_status', '0', $special_out_status) . '&nbsp;' . TEXT_SPECIALS_PRODUCT_NOT_AVAILABLE; ?>
             </td>

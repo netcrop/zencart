@@ -5,13 +5,23 @@
  * @copyright Portions Copyright 2003 osCommerce
  * @copyright Portions copyright COWOA authors see https://www.zen-cart.com/downloads.php?do=file&id=1115
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+<<<<<<< HEAD
  * @version GIT: $Id: Author: DrByte  Modified in v1.6.0 $
+=======
+ * @version $Id: Author: DrByte  Sun Feb 28 02:42:59 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
   require('includes/application_top.php');
 
   // unset variable which is sometimes tainted by bad plugins like magneticOne tools
   if (isset($module)) unset($module);
+<<<<<<< HEAD
+=======
+
+  require(DIR_WS_CLASSES . 'currencies.php');
+  $currencies = new currencies();
+>>>>>>> upstream/master
 
   $currencies = new currencies();
 
@@ -44,7 +54,11 @@
     $order_exists = ($order->id > 0);
     if (!$order_exists) {
       if ($action != '') $messageStack->add_session(ERROR_ORDER_DOES_NOT_EXIST . ' ' . $oID, 'error');
+<<<<<<< HEAD
       zen_redirect(zen_admin_href_link(FILENAME_ORDERS, zen_get_all_get_params(array('oID', 'action'))));
+=======
+      zen_redirect(zen_href_link(FILENAME_ORDERS, zen_get_all_get_params(array('oID', 'action')), 'NONSSL'));
+>>>>>>> upstream/master
     }
   }
 
@@ -61,7 +75,36 @@
       case 'edit':
       // reset single download to on
         if ($_GET['download_reset_on'] > 0) {
+<<<<<<< HEAD
           $order->resetSingleDownloadToOn((int)$_GET['download_reset_on']);
+=======
+          // adjust download_maxdays based on current date
+          $check_status = $db->Execute("select customers_name, customers_email_address, orders_status,
+                                      date_purchased from " . TABLE_ORDERS . "
+                                      where orders_id = '" . $_GET['oID'] . "'");
+
+          // check for existing product attribute download days and max
+          $chk_products_download_query = "SELECT orders_products_id, orders_products_filename, products_prid from " . TABLE_ORDERS_PRODUCTS_DOWNLOAD . " WHERE orders_products_download_id='" . $_GET['download_reset_on'] . "'";
+          $chk_products_download = $db->Execute($chk_products_download_query);
+
+          $chk_products_download_time_query = "SELECT pa.products_attributes_id, pa.products_id, pad.products_attributes_filename, pad.products_attributes_maxdays, pad.products_attributes_maxcount
+          from " . TABLE_PRODUCTS_ATTRIBUTES . " pa, " . TABLE_PRODUCTS_ATTRIBUTES_DOWNLOAD . " pad
+          WHERE pa.products_attributes_id = pad.products_attributes_id
+          and pad.products_attributes_filename = '" . $db->prepare_input($chk_products_download->fields['orders_products_filename']) . "'
+          and pa.products_id = '" . (int)$chk_products_download->fields['products_prid'] . "'";
+
+          $chk_products_download_time = $db->Execute($chk_products_download_time_query);
+
+          if ($chk_products_download_time->EOF) {
+            $zc_max_days = (DOWNLOAD_MAX_DAYS == 0 ? 0 : zen_date_diff($check_status->fields['date_purchased'], date('Y-m-d H:i:s', time())) + DOWNLOAD_MAX_DAYS);
+            $update_downloads_query = "update " . TABLE_ORDERS_PRODUCTS_DOWNLOAD . " set download_maxdays='" . $zc_max_days . "', download_count='" . DOWNLOAD_MAX_COUNT . "' where orders_id='" . $_GET['oID'] . "' and orders_products_download_id='" . $_GET['download_reset_on'] . "'";
+          } else {
+            $zc_max_days = ($chk_products_download_time->fields['products_attributes_maxdays'] == 0 ? 0 : zen_date_diff($check_status->fields['date_purchased'], date('Y-m-d H:i:s', time())) + $chk_products_download_time->fields['products_attributes_maxdays']);
+            $update_downloads_query = "update " . TABLE_ORDERS_PRODUCTS_DOWNLOAD . " set download_maxdays='" . $zc_max_days . "', download_count='" . $chk_products_download_time->fields['products_attributes_maxcount'] . "' where orders_id='" . $_GET['oID'] . "' and orders_products_download_id='" . $_GET['download_reset_on'] . "'";
+          }
+
+          $db->Execute($update_downloads_query);
+>>>>>>> upstream/master
           unset($_GET['download_reset_on']);
           $messageStack->add_session(SUCCESS_ORDER_UPDATED_DOWNLOAD_ON, 'success');
           zen_redirect(zen_admin_href_link(FILENAME_ORDERS, zen_get_all_get_params(array('action')) . 'action=edit'));
@@ -75,12 +118,138 @@
         }
       break;
       case 'update_order':
+<<<<<<< HEAD
         if ((int)$_POST['status'] < 1) break;
+=======
+        // demo active test
+        if (zen_admin_demo()) {
+          $_GET['action']= '';
+          $messageStack->add_session(ERROR_ADMIN_DEMO, 'caution');
+          zen_redirect(zen_href_link(FILENAME_ORDERS, zen_get_all_get_params(array('action')) . 'action=edit', 'NONSSL'));
+        }
+        $oID = zen_db_prepare_input($_GET['oID']);
+        $comments = zen_db_prepare_input($_POST['comments']);
+        $status = (int)zen_db_prepare_input($_POST['status']);
+        if ($status < 1) break;
+
+        $order_updated = false;
+        $check_status = $db->Execute("select customers_name, customers_email_address, orders_status,
+                                      date_purchased from " . TABLE_ORDERS . "
+                                      where orders_id = '" . (int)$oID . "'");
+
+        if ( ($check_status->fields['orders_status'] != $status) || zen_not_null($comments)) {
+          $db->Execute("update " . TABLE_ORDERS . "
+                        set orders_status = '" . zen_db_input($status) . "', last_modified = now()
+                        where orders_id = '" . (int)$oID . "'");
+
+          $customer_notified = '0';
+          if (isset($_POST['notify']) && ($_POST['notify'] == '1')) {
+
+            $notify_comments = '';
+            if (isset($_POST['notify_comments']) && ($_POST['notify_comments'] == 'on') && zen_not_null($comments)) {
+              $notify_comments = EMAIL_TEXT_COMMENTS_UPDATE . $comments . "\n\n";
+            }
+            //send emails
+            $message =
+            EMAIL_TEXT_ORDER_NUMBER . ' ' . $oID . "\n\n" .
+            EMAIL_TEXT_INVOICE_URL . ' ' . zen_catalog_href_link(FILENAME_CATALOG_ACCOUNT_HISTORY_INFO, 'order_id=' . $oID, 'SSL') . "\n\n" .
+            EMAIL_TEXT_DATE_ORDERED . ' ' . zen_date_long($check_status->fields['date_purchased']) . "\n\n" .
+            $notify_comments .
+            EMAIL_TEXT_STATUS_UPDATED . sprintf(EMAIL_TEXT_STATUS_LABEL, $orders_status_array[$status] ) .
+            EMAIL_TEXT_STATUS_PLEASE_REPLY;
+
+            $html_msg['EMAIL_CUSTOMERS_NAME']    = $check_status->fields['customers_name'];
+            $html_msg['EMAIL_TEXT_ORDER_NUMBER'] = EMAIL_TEXT_ORDER_NUMBER . ' ' . $oID;
+            $html_msg['EMAIL_TEXT_INVOICE_URL']  = '<a href="' . zen_catalog_href_link(FILENAME_CATALOG_ACCOUNT_HISTORY_INFO, 'order_id=' . $oID, 'SSL') .'">'.str_replace(':','',EMAIL_TEXT_INVOICE_URL).'</a>';
+            $html_msg['EMAIL_TEXT_DATE_ORDERED'] = EMAIL_TEXT_DATE_ORDERED . ' ' . zen_date_long($check_status->fields['date_purchased']);
+            $html_msg['EMAIL_TEXT_STATUS_COMMENTS'] = nl2br($notify_comments);
+            $html_msg['EMAIL_TEXT_STATUS_UPDATED'] = str_replace('\n','', EMAIL_TEXT_STATUS_UPDATED);
+            $html_msg['EMAIL_TEXT_STATUS_LABEL'] = str_replace('\n','', sprintf(EMAIL_TEXT_STATUS_LABEL, $orders_status_array[$status] ));
+            $html_msg['EMAIL_TEXT_NEW_STATUS'] = $orders_status_array[$status];
+            $html_msg['EMAIL_TEXT_STATUS_PLEASE_REPLY'] = str_replace('\n','', EMAIL_TEXT_STATUS_PLEASE_REPLY);
+            $html_msg['EMAIL_PAYPAL_TRANSID'] = '';
+
+            zen_mail($check_status->fields['customers_name'], $check_status->fields['customers_email_address'], EMAIL_TEXT_SUBJECT . ' #' . $oID, $message, STORE_NAME, EMAIL_FROM, $html_msg, 'order_status');
+            $customer_notified = '1';
+
+            // PayPal Trans ID, if any
+            $sql = "select txn_id, parent_txn_id from " . TABLE_PAYPAL . " where order_id = :orderID order by last_modified DESC, date_added DESC, parent_txn_id DESC, paypal_ipn_id DESC ";
+            $sql = $db->bindVars($sql, ':orderID', $oID, 'integer');
+            $result = $db->Execute($sql);
+            if ($result->RecordCount() > 0) {
+              $message .= "\n\n" . ' PayPal Trans ID: ' . $result->fields['txn_id'];
+              $html_msg['EMAIL_PAYPAL_TRANSID'] = $result->fields['txn_id'];
+            }
+
+            //send extra emails
+            if (SEND_EXTRA_ORDERS_STATUS_ADMIN_EMAILS_TO_STATUS == '1' and SEND_EXTRA_ORDERS_STATUS_ADMIN_EMAILS_TO != '') {
+              zen_mail('', SEND_EXTRA_ORDERS_STATUS_ADMIN_EMAILS_TO, SEND_EXTRA_ORDERS_STATUS_ADMIN_EMAILS_TO_SUBJECT . ' ' . EMAIL_TEXT_SUBJECT . ' #' . $oID, $message, STORE_NAME, EMAIL_FROM, $html_msg, 'order_status_extra');
+            }
+          } elseif (isset($_POST['notify']) && ($_POST['notify'] == '-1')) {
+            // hide comment
+            $customer_notified = '-1';
+          }
+
+          $db->Execute("insert into " . TABLE_ORDERS_STATUS_HISTORY . "
+                      (orders_id, orders_status_id, date_added, customer_notified, comments)
+                      values ('" . (int)$oID . "',
+                      '" . zen_db_input($status) . "',
+                      now(),
+                      '" . zen_db_input($customer_notified) . "',
+                      '" . zen_db_input($comments)  . "')");
+          $order_updated = true;
+        }
+
+        // trigger any appropriate updates which should be sent back to the payment gateway:
+        $order = new order((int)$oID);
+        if ($order->info['payment_module_code']) {
+          if (file_exists(DIR_FS_CATALOG_MODULES . 'payment/' . $order->info['payment_module_code'] . '.php')) {
+            require_once(DIR_FS_CATALOG_MODULES . 'payment/' . $order->info['payment_module_code'] . '.php');
+            require_once(DIR_FS_CATALOG_LANGUAGES . $_SESSION['language'] . '/modules/payment/' . $order->info['payment_module_code'] . '.php');
+            $module = new $order->info['payment_module_code'];
+            if (method_exists($module, '_doStatusUpdate')) {
+              $response = $module->_doStatusUpdate($oID, $status, $comments, $customer_notified, $check_status->fields['orders_status']);
+            }
+          }
+        }
+>>>>>>> upstream/master
 
         $order_updated = $order->update_status_and_comments($zcRequest->readPost('status'), $zcRequest->readPost('comments'), $zcRequest->readPost('notify', 0), $zcRequest->readPost('notify_comments', '') );
 
+<<<<<<< HEAD
         if ($order_updated) {
+=======
+            // adjust download_maxdays based on current date
+            $chk_downloads_query = "SELECT opd.*, op.products_id from " . TABLE_ORDERS_PRODUCTS_DOWNLOAD . " opd, " . TABLE_ORDERS_PRODUCTS . " op
+                                    WHERE op.orders_id='" . (int)$oID . "'
+                                    and opd.orders_products_id = op.orders_products_id";
+            $chk_downloads = $db->Execute($chk_downloads_query);
+
+            while (!$chk_downloads->EOF) {
+              $chk_products_download_time_query = "SELECT pa.products_attributes_id, pa.products_id, pad.products_attributes_filename, pad.products_attributes_maxdays, pad.products_attributes_maxcount
+                                                    from " . TABLE_PRODUCTS_ATTRIBUTES . " pa, " . TABLE_PRODUCTS_ATTRIBUTES_DOWNLOAD . " pad
+                                                    WHERE pa.products_attributes_id = pad.products_attributes_id
+                                                    and pad.products_attributes_filename = '" . $db->prepare_input($chk_downloads->fields['orders_products_filename']) . "'
+                                                    and pa.products_id = '" . $chk_downloads->fields['products_id'] . "'";
+
+              $chk_products_download_time = $db->Execute($chk_products_download_time_query);
+
+              if ($chk_products_download_time->EOF) {
+                $zc_max_days = (DOWNLOAD_MAX_DAYS == 0 ? 0 : zen_date_diff($check_status->fields['date_purchased'], date('Y-m-d H:i:s', time())) + DOWNLOAD_MAX_DAYS);
+                $update_downloads_query = "update " . TABLE_ORDERS_PRODUCTS_DOWNLOAD . " set download_maxdays='" . $zc_max_days . "', download_count='" . DOWNLOAD_MAX_COUNT . "' where orders_id='" . (int)$oID . "' and orders_products_download_id='" . $_GET['download_reset_on'] . "'";
+              } else {
+                $zc_max_days = ($chk_products_download_time->fields['products_attributes_maxdays'] == 0 ? 0 : zen_date_diff($check_status->fields['date_purchased'], date('Y-m-d H:i:s', time())) + $chk_products_download_time->fields['products_attributes_maxdays']);
+                $update_downloads_query = "update " . TABLE_ORDERS_PRODUCTS_DOWNLOAD . " set download_maxdays='" . $zc_max_days . "', download_count='" . $chk_products_download_time->fields['products_attributes_maxcount'] . "' where orders_id='" . (int)$oID . "' and orders_products_download_id='" . $chk_downloads->fields['orders_products_download_id'] . "'";
+              }
+
+              $db->Execute($update_downloads_query);
+
+              $chk_downloads->MoveNext();
+            }
+          }
+>>>>>>> upstream/master
           $messageStack->add_session(SUCCESS_ORDER_UPDATED, 'success');
+          zen_record_admin_activity('Order ' . $oID . ' updated.', 'info');
         } else {
           $messageStack->add_session(WARNING_ORDER_NOT_UPDATED, 'warning');
         }
@@ -100,8 +269,24 @@
         break;
 
       case 'doRefund':
+<<<<<<< HEAD
         $order->doRefund();
         zen_redirect(zen_admin_href_link(FILENAME_ORDERS, zen_get_all_get_params(array('action')) . 'action=edit'));
+=======
+        $order = new order($oID);
+        if ($order->info['payment_module_code']) {
+          if (file_exists(DIR_FS_CATALOG_MODULES . 'payment/' . $order->info['payment_module_code'] . '.php')) {
+            require_once(DIR_FS_CATALOG_MODULES . 'payment/' . $order->info['payment_module_code'] . '.php');
+            require_once(DIR_FS_CATALOG_LANGUAGES . $_SESSION['language'] . '/modules/payment/' . $order->info['payment_module_code'] . '.php');
+            $module = new $order->info['payment_module_code'];
+            if (method_exists($module, '_doRefund')) {
+              $module->_doRefund($oID);
+            }
+          }
+        }
+        zen_record_admin_activity('Order ' . $oID . ' refund processed. See order comments for details.', 'info');
+        zen_redirect(zen_href_link(FILENAME_ORDERS, zen_get_all_get_params(array('action')) . 'action=edit', 'NONSSL'));
+>>>>>>> upstream/master
         break;
       case 'doAuth':
         $order->doAuth();
@@ -112,8 +297,24 @@
         zen_redirect(zen_admin_href_link(FILENAME_ORDERS, zen_get_all_get_params(array('action')) . 'action=edit'));
         break;
       case 'doVoid':
+<<<<<<< HEAD
         $order->doVoid();
         zen_redirect(zen_admin_href_link(FILENAME_ORDERS, zen_get_all_get_params(array('action')) . 'action=edit'));
+=======
+        $order = new order($oID);
+        if ($order->info['payment_module_code']) {
+          if (file_exists(DIR_FS_CATALOG_MODULES . 'payment/' . $order->info['payment_module_code'] . '.php')) {
+            require_once(DIR_FS_CATALOG_MODULES . 'payment/' . $order->info['payment_module_code'] . '.php');
+            require_once(DIR_FS_CATALOG_LANGUAGES . $_SESSION['language'] . '/modules/payment/' . $order->info['payment_module_code'] . '.php');
+            $module = new $order->info['payment_module_code'];
+            if (method_exists($module, '_doVoid')) {
+              $module->_doVoid($oID);
+            }
+          }
+        }
+        zen_record_admin_activity('Order ' . $oID . ' void processed. See order comments for details.', 'info');
+        zen_redirect(zen_href_link(FILENAME_ORDERS, zen_get_all_get_params(array('action')) . 'action=edit', 'NONSSL'));
+>>>>>>> upstream/master
         break;
     }
   }
@@ -127,11 +328,9 @@ function couponpopupWindow(url) {
 </head>
 <body>
 <!-- header //-->
-<div class="header-area">
 <?php
   require(DIR_WS_INCLUDES . 'header.php');
 ?>
-</div>
 <!-- header_eof //-->
 
 <!-- body //-->
@@ -141,7 +340,11 @@ function couponpopupWindow(url) {
     <td class="pageHeading"><?php echo ($action == 'edit' && $order_exists) ? HEADING_TITLE_DETAILS : HEADING_TITLE; ?></td>
   </tr>
 
+<<<<<<< HEAD
 <?php $order_list_button = '<button type="button" class="btn btn-default" onclick="window.location.href=\'' . zen_admin_href_link(FILENAME_ORDERS) . '\'"><i class="fa fa-th-list" aria-hidden="true"></i> ' . BUTTON_TO_LIST . '</button>'; ?>
+=======
+<?php $order_list_button = '<button type="button" class="btn btn-default" onclick="window.location.href=\'' . zen_href_link(FILENAME_ORDERS) . '\'"><i class="fa fa-th-list" aria-hidden="true"></i> ' . BUTTON_TO_LIST . '</button>'; ?>
+>>>>>>> upstream/master
 <?php if ($action == '') { ?>
 <!-- search -->
   <tr>
@@ -159,7 +362,11 @@ function couponpopupWindow(url) {
                   ?>
                 <?php if ((isset($_GET['search']) && zen_not_null($_GET['search'])) or $_GET['cID'] !='') { ?>
                   <div class="input-group-btn">
+<<<<<<< HEAD
                     <a class="btn btn-danger" role="button" aria-label="<?php echo TEXT_RESET_FILTER; ?>" href="<?php echo zen_admin_href_link(FILENAME_ORDERS); ?>"><span aria-hidden="true">&times;</span></a>
+=======
+                    <a class="btn btn-danger" role="button" aria-label="<?php echo TEXT_RESET_FILTER; ?>" href="<?php echo zen_href_link(FILENAME_ORDERS); ?>"><span aria-hidden="true">&times;</span></a>
+>>>>>>> upstream/master
                   </div>
                 <?php } ?>
                 </div>
@@ -175,7 +382,11 @@ function couponpopupWindow(url) {
                   ?>
                 <?php if ((isset($_GET['search_orders_products']) && zen_not_null($_GET['search_orders_products'])) or $_GET['cID'] !='') { ?>
                   <div class="input-group-btn">
+<<<<<<< HEAD
                     <a class="btn btn-danger" role="button" aria-label="<?php echo TEXT_RESET_FILTER; ?>" href="<?php echo zen_admin_href_link(FILENAME_ORDERS); ?>"><span aria-hidden="true">&times;</span></a>
+=======
+                    <a class="btn btn-danger" role="button" aria-label="<?php echo TEXT_RESET_FILTER; ?>" href="<?php echo zen_href_link(FILENAME_ORDERS); ?>"><span aria-hidden="true">&times;</span></a>
+>>>>>>> upstream/master
                   </div>
                 <?php } ?>
                 </div>
@@ -194,7 +405,11 @@ function couponpopupWindow(url) {
             </div>
             <div class="form-group col-xs-4 col-sm-3 col-md-3 col-lg-3">
               <?php echo zen_draw_form('status', FILENAME_ORDERS, '', 'get', '', true);
+<<<<<<< HEAD
                 echo '<label for="selectstatus" class="sr-only">' . HEADING_TITLE_STATUS . '</label> ' . zen_draw_pull_down_menu('status', array_merge(array(array('id' => '', 'text' => TEXT_ALL_ORDERS)), $orders_statuses_pulldown_list), (int)$_GET['status'], 'class="form-control" onChange="this.form.submit();" id="selectstatus"');
+=======
+                echo '<label for="selectstatus" class="sr-only">' . HEADING_TITLE_STATUS . '</label> ' . zen_draw_pull_down_menu('status', array_merge(array(array('id' => '', 'text' => TEXT_ALL_ORDERS)), $orders_statuses), (int)$_GET['status'], 'class="form-control" onChange="this.form.submit();" id="selectstatus"');
+>>>>>>> upstream/master
                 echo '</form>';
               ?>
             </div>
@@ -207,7 +422,12 @@ function couponpopupWindow(url) {
 
 
 <?php
+<<<<<<< HEAD
   if ($action == 'edit' && $order_exists) {
+=======
+  if ($action == 'edit'&& $order_exists) {
+    $order = new order($oID);
+>>>>>>> upstream/master
     $zco_notifier->notify('NOTIFY_ADMIN_ORDERS_EDIT_BEGIN', $oID, $order);
     if ($order->info['payment_module_code']) {
       if (file_exists(DIR_FS_CATALOG_MODULES . 'payment/' . $order->info['payment_module_code'] . '.php')) {
@@ -220,15 +440,25 @@ function couponpopupWindow(url) {
 
 
     $prev_button = '';
+<<<<<<< HEAD
     $result = $db->Execute("SELECT orders_id FROM " . TABLE_ORDERS . " WHERE orders_id < " . (int)$oID . " ORDER BY orders_id DESC LIMIT 1");
     if ($result->RecordCount()) {
       $prev_button = '<button type="button" class="btn btn-default" onclick="window.location.href=\'' . zen_admin_href_link(FILENAME_ORDERS, 'oID=' . $result->fields['orders_id'] . '&action=edit') . '\'">&laquo; ' . $result->fields['orders_id'] . '</button>';
+=======
+    $result = $db->Execute("SELECT orders_id FROM " . TABLE_ORDERS . " WHERE orders_id < '" . $oID . "' ORDER BY orders_id DESC LIMIT 1");
+    if ($result->RecordCount()) {
+      $prev_button = '<button type="button" class="btn btn-default" onclick="window.location.href=\'' . zen_href_link(FILENAME_ORDERS, 'oID=' . $result->fields['orders_id'] . '&action=edit') . '\'">&laquo; ' . $result->fields['orders_id'] . '</button>';
+>>>>>>> upstream/master
     }
 
     $next_button = '';
     $result = $db->Execute("SELECT orders_id FROM " . TABLE_ORDERS . " WHERE orders_id > '" . $oID . "' ORDER BY orders_id ASC LIMIT 1");
     if ($result->RecordCount()) {
+<<<<<<< HEAD
       $next_button = '<button type="button" class="btn btn-default" onclick="window.location.href=\'' . zen_admin_href_link(FILENAME_ORDERS, 'oID=' . $result->fields['orders_id'] . '&action=edit') . '\'">' . $result->fields['orders_id'] . ' &raquo;</button>';
+=======
+      $next_button = '<button type="button" class="btn btn-default" onclick="window.location.href=\'' . zen_href_link(FILENAME_ORDERS, 'oID=' . $result->fields['orders_id'] . '&action=edit') . '\'">' . $result->fields['orders_id'] . ' &raquo;</button>';
+>>>>>>> upstream/master
     }
 
 ?>
@@ -266,7 +496,11 @@ function couponpopupWindow(url) {
           <tr>
             <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="2">
               <tr>
+<<<<<<< HEAD
                 <td class="main" valign="top"><strong><?php echo ENTRY_CUSTOMER_ADDRESS . '<br /><i class="fa fa-2x fa-user"></i>'; ?></strong></td>
+=======
+                <td class="main" valign="top"><strong><?php echo ENTRY_CUSTOMER_ADDRESS; ?></strong></td>
+>>>>>>> upstream/master
                 <td class="main"><?php echo zen_address_format($order->customer['format_id'], $order->customer, 1, '', '<br />'); ?></td>
               </tr>
               <tr>
@@ -285,14 +519,22 @@ function couponpopupWindow(url) {
                 <?php if ($order->info['ip_address'] != '') {
                   $lookup_ip = substr($order->info['ip_address'], 0, strpos($order->info['ip_address'], ' '));
                 ?>
+<<<<<<< HEAD
                 <td class="main"><a href="http://www.dnsstuff.com/tools#whois|type=ipv4&&value=<?php echo $lookup_ip; ?>"  target="_blank"><?php echo $order->info['ip_address']; ?></a></td>
+=======
+                <td class="main"><a href="http://www.dnsstuff.com/tools#whois|type=ipv4&value=<?php echo $lookup_ip; ?>"  target="_blank"><?php echo $order->info['ip_address']; ?></a></td>
+>>>>>>> upstream/master
                 <?php } else { ?>
                 <td class="main"><?php echo TEXT_UNKNOWN; ?></td>
                 <?php } ?>
               </tr>
               <tr>
                 <td class="main"><strong><?php echo ENTRY_CUSTOMER; ?></strong></td>
+<<<<<<< HEAD
                 <td class="main"><?php echo '<a href="' . zen_admin_href_link(FILENAME_CUSTOMERS, 'search=' . $order->customer['email_address']) . '" . >' . '<i class="fa fa-search"></i> ' . TEXT_CUSTOMER_LOOKUP . '</a>'; ?></td>
+=======
+                <td class="main"><?php echo '<a href="' . zen_href_link(FILENAME_CUSTOMERS, 'search=' . $order->customer['email_address'], 'SSL') . '" . >' . TEXT_CUSTOMER_LOOKUP . '</a>'; ?></td>
+>>>>>>> upstream/master
               </tr>
             </table></td>
             <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="2">
@@ -342,12 +584,20 @@ function couponpopupWindow(url) {
           </tr>
           <tr>
             <td class="main"><?php echo ENTRY_CREDIT_CARD_NUMBER; ?></td>
+<<<<<<< HEAD
             <td class="main"><?php echo $order->info['cc_number'] . (zen_not_null($order->info['cc_number']) && !strstr($order->info['cc_number'],'X') && !strstr($order->info['cc_number'],'********') ? '&nbsp;&nbsp;<a href="' . zen_admin_href_link(FILENAME_ORDERS, '&action=mask_cc&oID=' . $oID) . '" class="noprint">' . TEXT_MASK_CC_NUMBER . '</a>' : ''); ?></td>
+=======
+            <td class="main"><?php echo $order->info['cc_number'] . (zen_not_null($order->info['cc_number']) && !strstr($order->info['cc_number'],'X') && !strstr($order->info['cc_number'],'********') ? '&nbsp;&nbsp;<a href="' . zen_href_link(FILENAME_ORDERS, '&action=mask_cc&oID=' . $oID, 'NONSSL') . '" class="noprint">' . TEXT_MASK_CC_NUMBER . '</a>' : ''); ?></td>
+>>>>>>> upstream/master
           </tr>
 <?php if (zen_not_null($order->info['cc_cvv'])) { ?>
           <tr>
             <td class="main"><?php echo ENTRY_CREDIT_CARD_CVV; ?></td>
+<<<<<<< HEAD
             <td class="main"><?php echo $order->info['cc_cvv'] . (zen_not_null($order->info['cc_cvv']) && !strstr($order->info['cc_cvv'],TEXT_DELETE_CVV_REPLACEMENT) ? '&nbsp;&nbsp;<a href="' . zen_admin_href_link(FILENAME_ORDERS, '&action=delete_cvv&oID=' . $oID) . '" class="noprint">' . TEXT_DELETE_CVV_FROM_DATABASE . '</a>' : ''); ?></td>
+=======
+            <td class="main"><?php echo $order->info['cc_cvv'] . (zen_not_null($order->info['cc_cvv']) && !strstr($order->info['cc_cvv'],TEXT_DELETE_CVV_REPLACEMENT) ? '&nbsp;&nbsp;<a href="' . zen_href_link(FILENAME_ORDERS, '&action=delete_cvv&oID=' . $oID, 'NONSSL') . '" class="noprint">' . TEXT_DELETE_CVV_FROM_DATABASE . '</a>' : ''); ?></td>
+>>>>>>> upstream/master
           </tr>
 <?php } ?>
           <tr>
@@ -524,7 +774,11 @@ function couponpopupWindow(url) {
         </table></td>
       </form></tr>
       <tr>
+<<<<<<< HEAD
         <td colspan="2" align="right" class="noprint"><?php echo '<a href="' . zen_admin_href_link(FILENAME_ORDERS_INVOICE, 'oID=' . $order->id) . '" target="_blank">' . zen_image_button('button_invoice.gif', IMAGE_ORDERS_INVOICE) . '</a> <a href="' . zen_admin_href_link(FILENAME_ORDERS_PACKINGSLIP, 'oID=' . $order->id) . '" target="_blank">' . zen_image_button('button_packingslip.gif', IMAGE_ORDERS_PACKINGSLIP) . '</a> <a href="' . zen_admin_href_link(FILENAME_ORDERS, zen_get_all_get_params(array('action'))) . '">' . zen_image_button('button_orders.gif', IMAGE_ORDERS) . '</a>'; ?></td>
+=======
+        <td colspan="2" align="right" class="noprint"><?php echo '<a href="' . zen_href_link(FILENAME_ORDERS_INVOICE, 'oID=' . $_GET['oID']) . '" target="_blank">' . zen_image_button('button_invoice.gif', IMAGE_ORDERS_INVOICE) . '</a> <a href="' . zen_href_link(FILENAME_ORDERS_PACKINGSLIP, 'oID=' . $_GET['oID']) . '" target="_blank">' . zen_image_button('button_packingslip.gif', IMAGE_ORDERS_PACKINGSLIP) . '</a> <a href="' . zen_href_link(FILENAME_ORDERS, zen_get_all_get_params(array('action'))) . '">' . zen_image_button('button_orders.gif', IMAGE_ORDERS) . '</a>'; ?></td>
+>>>>>>> upstream/master
       </tr>
 <?php
 // check if order has open gv
@@ -559,7 +813,66 @@ function couponpopupWindow(url) {
               </tr>
 
 <?php
+<<<<<<< HEAD
 $orders_query_raw = \order::build_search_query($_GET['search'], $_GET['search_orders_products'], $_GET['cID'], $_GET['status']);
+=======
+// Only one or the other search
+// create search_orders_products filter
+  $search = '';
+  $new_table = '';
+  $new_fields = '';
+  if (isset($_GET['search_orders_products']) && zen_not_null($_GET['search_orders_products'])) {
+    $new_fields = '';
+    $search_distinct = ' distinct ';
+    $new_table = " left join " . TABLE_ORDERS_PRODUCTS . " op on (op.orders_id = o.orders_id) ";
+    $keywords = zen_db_input(zen_db_prepare_input($_GET['search_orders_products']));
+    $search = " and (op.products_model like '%" . $keywords . "%' or op.products_name like '" . $keywords . "%')";
+    if (substr(strtoupper($_GET['search_orders_products']), 0, 3) == 'ID:') {
+      $keywords = TRIM(substr($_GET['search_orders_products'], 3));
+      $search = " and op.products_id ='" . (int)$keywords . "'";
+    }
+  } else {
+?>
+<?php
+// create search filter
+  $search = '';
+  if (isset($_GET['search']) && zen_not_null($_GET['search'])) {
+    $search_distinct = ' ';
+    $keywords = zen_db_input(zen_db_prepare_input($_GET['search']));
+    $search = " and (o.customers_city like '%" . $keywords . "%' or o.customers_postcode like '%" . $keywords . "%' or o.date_purchased like '%" . $keywords . "%' or o.billing_name like '%" . $keywords . "%' or o.billing_company like '%" . $keywords . "%' or o.billing_street_address like '%" . $keywords . "%' or o.delivery_city like '%" . $keywords . "%' or o.delivery_postcode like '%" . $keywords . "%' or o.delivery_name like '%" . $keywords . "%' or o.delivery_company like '%" . $keywords . "%' or o.delivery_street_address like '%" . $keywords . "%' or o.billing_city like '%" . $keywords . "%' or o.billing_postcode like '%" . $keywords . "%' or o.customers_email_address like '%" . $keywords . "%' or o.customers_name like '%" . $keywords . "%' or o.customers_company like '%" . $keywords . "%' or o.customers_street_address  like '%" . $keywords . "%' or o.customers_telephone like '%" . $keywords . "%' or o.ip_address  like '%" . $keywords . "%')";
+    $new_table = '';
+//    $new_fields = ", o.customers_company, o.customers_email_address, o.customers_street_address, o.delivery_company, o.delivery_name, o.delivery_street_address, o.billing_company, o.billing_name, o.billing_street_address, o.payment_module_code, o.shipping_module_code, o.ip_address ";
+  }
+} // eof: search orders or orders_products
+    $new_fields = ", o.customers_company, o.customers_email_address, o.customers_street_address, o.delivery_company, o.delivery_name, o.delivery_street_address, o.billing_company, o.billing_name, o.billing_street_address, o.payment_module_code, o.shipping_module_code, o.ip_address ";
+?>
+<?php
+
+    $orders_query_raw = "select " . $search_distinct . " o.orders_id, o.customers_id, o.customers_name, o.payment_method, o.shipping_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name, ot.text as order_total" .
+$new_fields . "
+                          from (" . TABLE_ORDERS . " o " .
+                          $new_table . ")
+                          left join " . TABLE_ORDERS_STATUS . " s on (o.orders_status = s.orders_status_id and s.language_id = " . (int)$_SESSION['languages_id'] . ")
+                          left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id and ot.class = 'ot_total') ";
+
+
+    if (isset($_GET['cID'])) {
+      $cID = (int)zen_db_prepare_input($_GET['cID']);
+      $orders_query_raw .= " WHERE o.customers_id = " . (int)$cID;
+//echo '<BR><BR>I SEE A: ' . $orders_query_raw . '<BR><BR>';
+
+    } elseif ($_GET['status'] != '') {
+      $status = (int)zen_db_prepare_input($_GET['status']);
+      $orders_query_raw .= " WHERE s.orders_status_id = " . (int)$status . $search;
+//echo '<BR><BR>I SEE B: ' . $orders_query_raw . '<BR><BR>';
+
+    } else {
+      $orders_query_raw .= (trim($search) != '') ? preg_replace('/ *AND /i', ' WHERE ', $search) : '';
+//echo '<BR><BR>I SEE C: ' . $orders_query_raw . '<BR><BR>';
+    }
+>>>>>>> upstream/master
+
+    $orders_query_raw .= " order by o.orders_id DESC";
 
 // Split Page
 // reset page when page is unknown
@@ -611,7 +924,11 @@ if (($_GET['page'] == '' or $_GET['page'] <= 1) and (int)$oID > 0) {
                 <td class="dataTableContent" align="right"><?php echo ($orders->fields['orders_status_name'] != '' ? $orders->fields['orders_status_name'] : TEXT_INVALID_ORDER_STATUS); ?></td>
                 <td class="dataTableContent" align="center"><?php echo (zen_get_orders_comments($orders->fields['orders_id']) == '' ? '' : zen_image(DIR_WS_IMAGES . 'icon_yellow_on.gif', TEXT_COMMENTS_YES, 16, 16)); ?></td>
 
+<<<<<<< HEAD
                 <td class="dataTableContent noprint" align="right"><?php echo '<a href="' . zen_admin_href_link(FILENAME_ORDERS, zen_get_all_get_params(array('oID', 'action')) . 'oID=' . $orders->fields['orders_id'] . '&action=edit') . '">' . zen_image(DIR_WS_IMAGES . 'icon_edit.gif', ICON_EDIT) . '</a>'; ?><?php if (isset($oInfo) && is_object($oInfo) && ($orders->fields['orders_id'] == $oInfo->orders_id)) { echo zen_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . zen_admin_href_link(FILENAME_ORDERS, zen_get_all_get_params(array('oID')) . 'oID=' . $orders->fields['orders_id']) . '">' . zen_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+=======
+                <td class="dataTableContent noprint" align="right"><?php echo '<a href="' . zen_href_link(FILENAME_ORDERS, zen_get_all_get_params(array('oID', 'action')) . 'oID=' . $orders->fields['orders_id'] . '&action=edit', 'NONSSL') . '">' . zen_image(DIR_WS_IMAGES . 'icon_edit.gif', ICON_EDIT) . '</a>'; ?><?php if (isset($oInfo) && is_object($oInfo) && ($orders->fields['orders_id'] == $oInfo->orders_id)) { echo zen_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . zen_href_link(FILENAME_ORDERS, zen_get_all_get_params(array('oID')) . 'oID=' . $orders->fields['orders_id'], 'NONSSL') . '">' . zen_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+>>>>>>> upstream/master
               </tr>
 <?php
       $orders->MoveNext();
@@ -661,8 +978,13 @@ if (($_GET['page'] == '' or $_GET['page'] <= 1) and (int)$oID > 0) {
         $order = new \order($oInfo->orders_id);
         $heading[] = array('text' => '<strong>[' . $oInfo->orders_id . ']&nbsp;&nbsp;' . zen_datetime_short($oInfo->date_purchased) . '</strong>');
 
+<<<<<<< HEAD
         $contents[] = array('align' => 'center', 'text' => '<a href="' . zen_admin_href_link(FILENAME_ORDERS, zen_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&action=edit') . '">' . zen_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . zen_admin_href_link(FILENAME_ORDERS, zen_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&action=delete') . '">' . zen_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
         $contents[] = array('align' => 'center', 'text' => '<a href="' . zen_admin_href_link(FILENAME_ORDERS_INVOICE, 'oID=' . $oInfo->orders_id) . '" target="_blank">' . zen_image_button('button_invoice.gif', IMAGE_ORDERS_INVOICE) . '</a> <a href="' . zen_admin_href_link(FILENAME_ORDERS_PACKINGSLIP, 'oID=' . $oInfo->orders_id) . '" target="_blank">' . zen_image_button('button_packingslip.gif', IMAGE_ORDERS_PACKINGSLIP) . '</a>');
+=======
+        $contents[] = array('align' => 'center', 'text' => '<a href="' . zen_href_link(FILENAME_ORDERS, zen_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&action=edit', 'NONSSL') . '">' . zen_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . zen_href_link(FILENAME_ORDERS, zen_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&action=delete', 'NONSSL') . '">' . zen_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<a href="' . zen_href_link(FILENAME_ORDERS_INVOICE, 'oID=' . $oInfo->orders_id) . '" TARGET="_blank">' . zen_image_button('button_invoice.gif', IMAGE_ORDERS_INVOICE) . '</a> <a href="' . zen_href_link(FILENAME_ORDERS_PACKINGSLIP, 'oID=' . $oInfo->orders_id) . '" TARGET="_blank">' . zen_image_button('button_packingslip.gif', IMAGE_ORDERS_PACKINGSLIP) . '</a>');
+>>>>>>> upstream/master
         $zco_notifier->notify('NOTIFY_ADMIN_ORDERS_MENU_BUTTONS', $oInfo, $contents);
 
         $contents[] = array('text' => '<br />' . TEXT_DATE_ORDER_CREATED . ' ' . zen_date_short($oInfo->date_purchased));
@@ -680,6 +1002,7 @@ if (($_GET['page'] == '' or $_GET['page'] <= 1) and (int)$oID > 0) {
           $contents[] = array('align' => 'center', 'text' => $goto_gv);
         }
 
+<<<<<<< HEAD
 // display customers comment if any exist (comment from first available order status)
         if (sizeof($order->status_history) && trim($order->status_history[0]['comments']) != '') {
           $contents[] = array('align' => 'left', 'text' => '<br />' . TABLE_HEADING_COMMENTS . ': ' . $order->status_history[0]['comments']);
@@ -687,6 +1010,17 @@ if (($_GET['page'] == '' or $_GET['page'] <= 1) and (int)$oID > 0) {
 
         $contents[] = array('text' => '<br />' . zen_image(DIR_WS_IMAGES . 'pixel_black.gif','','100%','3'));
 
+=======
+        // indicate if comments exist
+        $orders_history_query = $db->Execute("select orders_status_id, date_added, customer_notified, comments from " . TABLE_ORDERS_STATUS_HISTORY . " where orders_id = '" . $oInfo->orders_id . "' and comments !='" . "'" );
+
+        if ($orders_history_query->RecordCount() > 0) {
+          $contents[] = array('align' => 'left', 'text' => '<br />' . TABLE_HEADING_COMMENTS);
+        }
+
+        $contents[] = array('text' => '<br />' . zen_image(DIR_WS_IMAGES . 'pixel_black.gif','','100%','3'));
+        $order = new order($oInfo->orders_id);
+>>>>>>> upstream/master
         $contents[] = array('text' => TABLE_HEADING_PRODUCTS . ': ' . sizeof($order->products) );
         for ($i=0; $i<sizeof($order->products); $i++) {
           $contents[] = array('text' => $order->products[$i]['qty'] . '&nbsp;x&nbsp;' . $order->products[$i]['name']);
@@ -703,7 +1037,11 @@ if (($_GET['page'] == '' or $_GET['page'] <= 1) and (int)$oID > 0) {
         }
 
         if (sizeof($order->products) > 0) {
+<<<<<<< HEAD
           $contents[] = array('align' => 'center', 'text' => '<a href="' . zen_admin_href_link(FILENAME_ORDERS, zen_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&action=edit') . '">' . zen_image_button('button_edit.gif', IMAGE_EDIT) . '</a>');
+=======
+          $contents[] = array('align' => 'center', 'text' => '<a href="' . zen_href_link(FILENAME_ORDERS, zen_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&action=edit', 'NONSSL') . '">' . zen_image_button('button_edit.gif', IMAGE_EDIT) . '</a>');
+>>>>>>> upstream/master
         }
       }
       break;

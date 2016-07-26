@@ -3,6 +3,7 @@
  * Checkout Shipping Page
  *
  * @package page
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
@@ -15,6 +16,15 @@
   if ($_SESSION['ORDER_STATUS'] == 'True') {
       zen_session_destroy();
   }
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Mon Dec 7 14:40:03 2015 -0500 Modified in v1.5.5 $
+ */
+// This should be first line of the script:
+  $zco_notifier->notify('NOTIFY_HEADER_START_CHECKOUT_SHIPPING');
+>>>>>>> upstream/master
   require_once(DIR_WS_CLASSES . 'http_client.php');
 
 // if there is nothing in the customers cart, redirect them to the shopping cart page
@@ -49,11 +59,19 @@
       $qtyAvailable = zen_get_products_stock($products[$i]['id']);
       // compare against product inventory, and against mixed=YES
       if ($qtyAvailable - $products[$i]['quantity'] < 0 || $qtyAvailable - $_SESSION['cart']->in_cart_mixed($products[$i]['id']) < 0) {
+<<<<<<< HEAD
         zen_redirect(zen_href_link(FILENAME_SHOPPING_CART));
         break;
       }
     }
   }
+=======
+          zen_redirect(zen_href_link(FILENAME_SHOPPING_CART));
+          break;
+        }
+      }
+    }
+>>>>>>> upstream/master
 
 // if no shipping destination address was selected, use the customers own address as default
   if (!$_SESSION['sendto']) {
@@ -144,7 +162,11 @@ if (isset($_SESSION['cart']->cartID)) {
 // process the selected shipping method
   if ( isset($_POST['action']) && ($_POST['action'] == 'process') ) {
     if (zen_not_null($_POST['comments'])) {
+<<<<<<< HEAD
       $_SESSION['comments'] = zen_output_string_protected(trim($_POST['comments']));
+=======
+      $_SESSION['comments'] = zen_output_string_protected($_POST['comments']);
+>>>>>>> upstream/master
     }
     $comments = $_SESSION['comments'];
     $quote = array();
@@ -227,6 +249,9 @@ if (isset($_SESSION['cart']->cartID)) {
       $displayAddressEdit = true;
     }
   }
+
+  require(DIR_WS_CLASSES . 'payment.php');
+  $payment_modules = new payment;
 
   $breadcrumb->add(NAVBAR_TITLE_1, zen_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
   $breadcrumb->add(NAVBAR_TITLE_2);

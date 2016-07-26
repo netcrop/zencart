@@ -3,9 +3,15 @@
  * @package plugins
  * @copyright Copyright 2003-2014 Zen Cart Development Team
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+<<<<<<< HEAD
  * @version GIT: $Id: Author: DrByte  Jun 30 2014 Modified in v1.6.0 $
  *
  * Designed for ZC >= v1.6.0
+=======
+ * @version GIT: $Id: Author: DrByte  Jun 30 2014 New in v1.5.4 $
+ *
+ * Designed for ZC >= v1.5.4
+>>>>>>> upstream/master
  *
  */
 
@@ -13,15 +19,27 @@ class zcObserverLogWriterTextfile extends base {
 
   private $destinationLogFilename = '';
 
+<<<<<<< HEAD
   public function __construct($file = '') {
     $this->attach($this, array('NOTIFY_ADMIN_FIRE_LOG_WRITERS', 'NOTIFY_ADMIN_FIRE_LOG_WRITER_RESET'));
     $this->setLogFilename($file);
+=======
+  public function __construct(notifier $zco_notifier = null) {
+    if (!$zco_notifier) $zco_notifier = new notifier;
+    $this->notifier = $zco_notifier;
+    $this->notifier->attach($this, array('NOTIFY_ADMIN_FIRE_LOG_WRITERS', 'NOTIFY_ADMIN_FIRE_LOG_WRITER_RESET'));
+    $this->setLogFilename();
+>>>>>>> upstream/master
   }
 
   /**
    * Set the folderpath on the filesystem where the data will be logged
    */
+<<<<<<< HEAD
   private function setLogFilename($filepath = '')
+=======
+  public function setLogFilename($filepath = '')
+>>>>>>> upstream/master
   {
     if ($filepath == '') $filepath = DIR_FS_LOGS . '/admin_log.txt';
 
@@ -46,7 +64,11 @@ class zcObserverLogWriterTextfile extends base {
    * So this tests whether the logging file exists, creates it if necessary, and
    * then if the file is empty initializes it
    */
+<<<<<<< HEAD
   private function initLogFile()
+=======
+  public function initLogFile()
+>>>>>>> upstream/master
   {
     $init_required = false;
     if (!file_exists($this->destinationLogFilename))

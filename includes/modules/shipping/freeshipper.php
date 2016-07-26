@@ -1,11 +1,39 @@
 <?php
 /**
  * @package shippingMethod
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+>>>>>>> upstream/master
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: freeshipper.php  ajeh  Modified in v1.6.0 $
  */
+<<<<<<< HEAD
+=======
+// $Id: freeshipper.php 14498 2009-10-01 20:16:16Z ajeh $
+//
+  class freeshipper {
+    var $code, $title, $description, $icon, $enabled;
+
+// class constructor
+    function __construct() {
+      global $order, $db;
+
+      $this->code = 'freeshipper';
+      $this->title = MODULE_SHIPPING_FREESHIPPER_TEXT_TITLE;
+      $this->description = MODULE_SHIPPING_FREESHIPPER_TEXT_DESCRIPTION;
+      $this->sort_order = MODULE_SHIPPING_FREESHIPPER_SORT_ORDER;
+      $this->icon = '';
+      $this->tax_class = MODULE_SHIPPING_FREESHIPPER_TAX_CLASS;
+
+      // enable only when entire cart is free shipping
+//      if ($_SESSION['cart']->in_cart_check('product_is_always_free_shipping','1') == $_SESSION['cart']->count_contents()) {
+      if (zen_get_shipping_enabled($this->code)) {
+        $this->enabled = ((MODULE_SHIPPING_FREESHIPPER_STATUS == 'True') ? true : false);
+      }
+>>>>>>> upstream/master
 
 class freeshipper extends base {
   /**

@@ -6,10 +6,17 @@
  * Displays all customers previous orders
  *
  * @package templateSystem
+<<<<<<< HEAD
  * @copyright Copyright 2003-2015 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Sat Jan 9 13:13:41 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 ?>
 <div class="centerColumn" id="accountHistoryDefault">
@@ -32,8 +39,16 @@
 <?php
     }
 ?>
+<<<<<<< HEAD
   <?php require($template->get_template_dir($tplVars['listingBox']['paginator']['scrollerTemplate'],DIR_WS_TEMPLATE, $current_page_base,'templates'). '/'.$tplVars['listingBox']['paginator']['scrollerTemplate']); ?>
   <?php } else { ?>
+=======
+<div class="navSplitPagesLinks forward"><?php echo TEXT_RESULT_PAGE . $history_split->display_links($max_display_page_links, zen_get_all_get_params(array('page', 'info', 'x', 'y', 'main_page')), $paginateAsUL); ?></div>
+<div class="navSplitPagesResult"><?php echo $history_split->display_count(TEXT_DISPLAY_NUMBER_OF_ORDERS); ?></div>
+<?php
+  } else {
+?>
+>>>>>>> upstream/master
 <div class="centerColumn" id="noAcctHistoryDefault">
 <?php echo TEXT_NO_PURCHASES; ?>
 </div>

@@ -3,10 +3,17 @@
  * shopping_cart header_php.php
  *
  * @package page
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: Author: DrByte  Fri Dec 4 16:31:15 2015 -0500 Modified in v1.5.5 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Fri Dec 4 16:31:15 2015 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
 // This should be first line of the script:
@@ -14,7 +21,9 @@ $zco_notifier->notify('NOTIFY_HEADER_START_SHOPPING_CART');
 
 require(DIR_WS_MODULES . zen_get_module_directory('require_languages.php'));
 $breadcrumb->add(NAVBAR_TITLE);
-
+if (isset($_GET['jscript']) && $_GET['jscript'] == 'no') {
+  $messageStack->add('shopping_cart', PAYMENT_JAVASCRIPT_DISABLED, 'error');
+}
 // Validate Cart for checkout
 $_SESSION['valid_to_checkout'] = true;
 $_SESSION['cart_errors'] = '';
@@ -58,6 +67,7 @@ $flagHasCartContents = ($_SESSION['cart']->count_contents() > 0);
 $cartShowTotal = $currencies->format($_SESSION['cart']->show_total());
 
 $flagAnyOutOfStock = false;
+$flagStockCheck = '';
 $products = $_SESSION['cart']->get_products();
 for ($i=0, $n=sizeof($products); $i<$n; $i++) {
   $flagStockCheck = '';
@@ -129,7 +139,11 @@ for ($i=0, $n=sizeof($products); $i<$n; $i++) {
     $qtyAvailable = zen_get_products_stock($products[$i]['id']);
     // compare against product inventory, and against mixed=YES
     if ($qtyAvailable - $products[$i]['quantity'] < 0 || $qtyAvailable - $_SESSION['cart']->in_cart_mixed($products[$i]['id']) < 0) {
+<<<<<<< HEAD
       $flagStockCheck = '<span class="markProductOutOfStock">' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . '</span>';
+=======
+        $flagStockCheck = '<span class="markProductOutOfStock">' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . '</span>';
+>>>>>>> upstream/master
       $flagAnyOutOfStock = true;
     }
   }

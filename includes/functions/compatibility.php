@@ -4,6 +4,7 @@
  * It is better to use the "new way" to do these things ... which is generally demonstrated by the code inside the functions herein.
  *
  * @package functions
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
@@ -117,3 +118,13 @@ function zen_decode_specialchars($string){
 function zen_db_output($string) {
     return htmlspecialchars($string, ENT_COMPAT, CHARSET, TRUE);
 }
+=======
+ * @copyright Copyright 2003-2014 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version GIT: $Id: Author: DrByte  Tue Apr 1 15:21:04 2014 -0400 Modified in v1.5.3 $
+ */
+
+
+// This file is empty in v1.5.2
+>>>>>>> upstream/master

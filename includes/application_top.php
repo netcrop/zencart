@@ -7,10 +7,17 @@
  * see {@link  http://www.zen-cart.com/wiki/index.php/Developers_API_Tutorials#InitSystem wikitutorials} for more details.
  *
  * @package initSystem
+<<<<<<< HEAD
  * @copyright Copyright 2003-2015 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version GIT: Modified in v1.6.0 $Id:
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: zcwilt  Mon Oct 19 18:21:05 2015 +0100 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 /**
  * inoculate against hack attempts which waste CPU cycles
@@ -42,6 +49,7 @@ if (!$contaminated) {
       }
     }
   }
+<<<<<<< HEAD
 }
 unset($paramsToCheck, $paramsToAvoid, $key);
 if ($contaminated)
@@ -49,6 +57,15 @@ if ($contaminated)
   header('HTTP/1.1 406 Not Acceptable');
   exit(0);
 }
+=======
+}
+unset($paramsToCheck, $paramsToAvoid, $key);
+if ($contaminated)
+{
+  header('HTTP/1.1 406 Not Acceptable');
+  exit(0);
+}
+>>>>>>> upstream/master
 unset($contaminated, $len);
 /* *** END OF INNOCULATION *** */
 /**
@@ -62,7 +79,10 @@ define('PAGE_PARSE_START_TIME', microtime());
 //  define('DISPLAY_PAGE_PARSE_TIME', 'true');
 @ini_set("arg_separator.output","&");
 @ini_set("html_errors","0");
+<<<<<<< HEAD
 @ini_set("session.use_trans_sid","0");
+=======
+>>>>>>> upstream/master
 /**
  * Set the local configuration parameters - mainly for developers
  */
@@ -91,7 +111,19 @@ if (defined('STRICT_ERROR_REPORTING') && STRICT_ERROR_REPORTING == true) {
 /*
  * Get time zone info from PHP config
  */
+<<<<<<< HEAD
 @date_default_timezone_set(date_default_timezone_get());
+=======
+if (version_compare(PHP_VERSION, 5.3, '<') && function_exists('set_magic_quotes_runtime')) set_magic_quotes_runtime(0);
+if (version_compare(PHP_VERSION, 5.4, '<') && @ini_get('magic_quotes_sybase') != 0) @ini_set('magic_quotes_sybase', 0);
+/*
+ * Get time zone info from PHP config
+ */
+if (version_compare(PHP_VERSION, 5.3, '>='))
+{
+  @date_default_timezone_set(date_default_timezone_get());
+}
+>>>>>>> upstream/master
 /**
  * check for and include load application parameters
  */
@@ -100,7 +132,7 @@ if (file_exists('includes/configure.php')) {
    * load the main configure file.
    */
   include('includes/configure.php');
-} else {
+} else if (!defined('DIR_FS_CATALOG') && !defined('HTTP_SERVER') && !defined('DIR_WS_CATALOG') && !defined('DIR_WS_INCLUDES')) {
   $problemString = 'includes/configure.php not found';
   require('includes/templates/template_default/templates/tpl_zc_install_suggested_default.php');
   exit;
@@ -117,6 +149,7 @@ if (!defined('DIR_FS_CATALOG') || !is_dir(DIR_FS_CATALOG.'/includes/classes')) {
  * check for and load system defined path constants
  */
 if (file_exists('includes/defined_paths.php')) {
+<<<<<<< HEAD
   /**
    * load the system-defined path constants
    */
@@ -131,6 +164,18 @@ $autoloadNamespaces = require DIR_WS_INCLUDES .  '/autoload_namespaces.php';
 
 /**
  * include the extra_configures files
+=======
+    /**
+     * load the system-defined path constants
+     */
+    require('includes/defined_paths.php');
+} else {
+    die('ERROR: /includes/defined_paths.php file not found. Cannot continue.');
+    exit;
+}
+/**
+ * include the list of extra configure files
+>>>>>>> upstream/master
  */
 if ($za_dir = @dir(DIR_WS_INCLUDES . 'extra_configures')) {
   while ($zv_file = $za_dir->read()) {
@@ -199,8 +244,20 @@ if (( (!file_exists('includes/configure.php') && !file_exists('includes/local/co
  * load the autoloader interpreter code.
 */
 require('includes/autoload_func.php');
+<<<<<<< HEAD
 
 // get customer's unique IP that external gateway does not touch
+=======
+/**
+ * load the counter code
+**/
+if ($spider_flag == false) {
+// counter and counter history
+  require(DIR_WS_INCLUDES . 'counter.php');
+}
+// get customers unique IP that paypal does not touch
+$customers_ip_address = $_SERVER['REMOTE_ADDR'];
+>>>>>>> upstream/master
 if (!isset($_SESSION['customers_ip_address'])) {
   $_SESSION['customers_ip_address'] = $_SERVER['REMOTE_ADDR'];
 }

@@ -3,11 +3,19 @@
  * @package Installer
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+<<<<<<< HEAD
  * @version $Id: Author: zcwilt  Wed Sep 23 20:04:38 2015 +0100 Modified in v1.6.0 $
  */
 
   require (DIR_FS_INSTALL . 'includes/classes/class.zcDatabaseInstaller.php');
   
+=======
+ * @version $Id: Author: zcwilt  Wed Sep 23 20:04:38 2015 +0100 New in v1.5.5 $
+ */
+
+  require (DIR_FS_INSTALL . 'includes/classes/class.zcDatabaseInstaller.php');
+
+>>>>>>> upstream/master
   $isUpgrade = FALSE;
   $adminLink = $catalogLink = '#';
   $adminServer = isset($_POST['http_server_admin']) ? $_POST['http_server_admin'] : '';
@@ -17,6 +25,10 @@
   if (!isset($_POST['admin_directory']) || !file_exists(DIR_FS_ROOT . $_POST['admin_directory'])) {
     $systemChecker = new systemChecker($adminDir);
     $adminDirectoryList = systemChecker::getAdminDirectoryList();
+<<<<<<< HEAD
+=======
+// die('admin list:<pre>'.print_r($adminDirectoryList, TRUE));
+>>>>>>> upstream/master
     if (count($adminDirectoryList) == 1) $adminDir = $adminDirectoryList[0];
     list($adminDir, $documentRoot, $adminServer, $catalogHttpServer, $catalogHttpUrl, $catalogHttpsServer, $catalogHttpsUrl, $dir_ws_http_catalog, $dir_ws_https_catalog) = getDetectedURIs($adminDir);
   }
@@ -38,6 +50,7 @@
     $extendedOptions = array();
     $error = $dbInstaller->doCompletion($options);
   }
+<<<<<<< HEAD
   
   // Update Nginx Conf Template
   $ngx_temp = trim($dir_ws_http_catalog, "/");
@@ -62,3 +75,5 @@
   $fh = fopen($ngx_output_file, "w");
   fwrite($fh, $ngx_content);
   fclose($fh);
+=======
+>>>>>>> upstream/master

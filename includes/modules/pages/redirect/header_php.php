@@ -150,7 +150,10 @@ switch ($_GET['action']) {
   default:
     $zco_notifier->notify('NOTIFY_REDIRECT_DEFAULT_ACTION');
 }
+<<<<<<< HEAD
 
 // Should not normally get to this point, unless supplied redirect destination is invalid
 $zco_notifier->notify('NOTIFY_HEADER_END_REDIRECT_HANDLER');
+=======
+>>>>>>> upstream/master
 zen_redirect(zen_href_link(FILENAME_DEFAULT));

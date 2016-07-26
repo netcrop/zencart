@@ -3,10 +3,17 @@
  * Override Template for common/tpl_main_page.php
  *
  * @package templateSystem
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: Author: DrByte  Fri Jan 8 00:33:36 2016 -0500 Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Fri Jan 8 00:33:36 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 // Notifier hook to allow for dynamic changes to template operation
 $zco_notifier->notify('NOTIFY_TPL_MAIN_PAGE_BEFORE_BODY', $body_id, $template_dir);
@@ -55,7 +62,11 @@ $show_onetime= 'false';
         $products_options_lookup = $db->Execute($sql);
 
         while (!$products_options_lookup->EOF) {
+<<<<<<< HEAD
         $cnt_qty_prices= 0;
+=======
+          $cnt_qty_prices= 0;
+>>>>>>> upstream/master
 
           // set for attributes_qty_prices_onetime
           if ($products_options_lookup->fields['attributes_qty_prices_onetime'] != '') {
@@ -104,7 +115,7 @@ $show_onetime= 'false';
           }
           $products_options_lookup->MoveNext();
         }
-          $products_options_names_lookup->MoveNext();
+        $products_options_names_lookup->MoveNext();
       }
 ?>
 </div>
@@ -155,7 +166,11 @@ $show_onetime= 'false';
         $products_options_lookup = $db->Execute($sql);
 
         while (!$products_options_lookup->EOF) {
+<<<<<<< HEAD
         $cnt_qty_prices= 0;
+=======
+          $cnt_qty_prices= 0;
+>>>>>>> upstream/master
           if ($products_options_lookup->fields['attributes_qty_prices_onetime'] != '') {
             $attribute_quantity= '';
             $attribute_quantity_price= '';
@@ -187,6 +202,7 @@ $show_onetime= 'false';
 </div>
 <?php } // show onetime ?>
 
+<<<<<<< HEAD
 <p class="smallText" align="right"><a class="btn close-window" href="javascript:window.close()"><?php echo TEXT_CURRENT_CLOSE_WINDOW; ?></a><br clear="all" /></p>
 
 <?php
@@ -202,3 +218,7 @@ $show_onetime= 'false';
 ?>
 </body>
 </html>
+=======
+<p class="button forward"><?php echo '<a href="javascript:window.close()">' . TEXT_CURRENT_CLOSE_WINDOW . '</a>'; ?></p>
+</body>
+>>>>>>> upstream/master

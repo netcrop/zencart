@@ -1,10 +1,17 @@
 <?php
 /**
  * @package admin
+<<<<<<< HEAD
  * @copyright Copyright 2003-2015 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version GIT: $Id: Author: Ian Wilson   Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Sun Oct 18 02:03:48 2015 -0400 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
   require('includes/application_top.php');
@@ -68,7 +75,11 @@
     } else {
       $messageStack->add_session(sprintf(NOTICE_EMAIL_FAILED_SEND, $mail_sent_to .  ' (' . $recip_count . ')'), 'error');
     }
+<<<<<<< HEAD
     zen_redirect(zen_admin_href_link(FILENAME_MAIL, 'mail_sent_to=' . urlencode($mail_sent_to) . '&recip_count='. $recip_count  . (isset($_GET['origin']) ? '&origin='.zen_output_string_protected($_GET['origin']): '') . (isset($_GET['cID']) ? '&cID=' . (int)$_GET['cID'] : '') . (isset($_GET['customer']) ? '&customer='.zen_output_string_protected($_GET['customer']): '')));
+=======
+    zen_redirect(zen_href_link(FILENAME_MAIL, 'mail_sent_to=' . urlencode($mail_sent_to) . '&recip_count='. $recip_count  . (isset($_GET['origin']) ? '&origin='.zen_output_string_protected($_GET['origin']): '') . (isset($_GET['cID']) ? '&cID=' . (int)$_GET['cID'] : '') . (isset($_GET['customer']) ? '&customer='.zen_output_string_protected($_GET['customer']): '')));
+>>>>>>> upstream/master
   }
 
   if ( EMAIL_ATTACHMENTS_ENABLED && $action == 'preview') {
@@ -106,6 +117,30 @@
 
 require('includes/admin_html_head.php');
 ?>
+<<<<<<< HEAD
+=======
+<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html <?php echo HTML_PARAMS; ?>>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
+<title><?php echo TITLE; ?></title>
+<link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/cssjsmenuhover.css" media="all" id="hoverJS">
+<script language="javascript" src="includes/menu.js"></script>
+<script type="text/javascript">
+<!--
+function init()
+{
+  cssjsmenu('navbar');
+  if (document.getElementById)
+  {
+    var kill = document.getElementById('hoverJS');
+    kill.disabled = true;
+  }
+}
+// -->
+</script>
+>>>>>>> upstream/master
 <?php if ($editor_handler != '') include ($editor_handler); ?>
 <script type="text/javascript">
 var form = "";
@@ -272,7 +307,11 @@ function check_form(form_name) {
                 <table border="0" width="100%" cellpadding="0" cellspacing="2">
                   <tr>
                     <td><?php echo zen_image_submit('button_back.gif', IMAGE_BACK, 'name="back"'); ?></td>
+<<<<<<< HEAD
                     <td align="right"><?php echo '<a href="' . zen_admin_href_link(FILENAME_MAIL, 'cID=' . zen_db_prepare_input($_GET['cID']) . (isset($_GET['customer']) ? '&customer=' . zen_output_string_protected($_GET['customer']) : '') . (isset($_GET['origin']) ? '&origin='.zen_output_string_protected($_GET['origin']): '')) . '">' . zen_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a> ' . zen_image_submit('button_send_mail.gif', IMAGE_SEND_EMAIL); ?></td>
+=======
+                    <td align="right"><?php echo '<a href="' . zen_href_link(FILENAME_MAIL, 'cID=' . zen_db_prepare_input($_GET['cID']) . (isset($_GET['customer']) ? '&customer=' . zen_output_string_protected($_GET['customer']) : '') . (isset($_GET['origin']) ? '&origin='.zen_output_string_protected($_GET['origin']): '')) . '">' . zen_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a> ' . zen_image_submit('button_send_mail.gif', IMAGE_SEND_EMAIL); ?></td>
+>>>>>>> upstream/master
                   </tr>
                 </table></td>
               </tr>

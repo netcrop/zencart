@@ -1,10 +1,17 @@
 <?php
 /**
  * @package admin
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: Author: ajeh  Wed Jul 9 21:58:03 2014 -0400 Modified in v1.5.5 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: ajeh  Wed Jul 9 21:58:03 2014 -0400 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
   if (!defined('IS_ADMIN_FLAG')) {
     die('Illegal Access');
@@ -78,8 +85,13 @@
                     (products_id, categories_id)
                     values ('" . (int)$products_id . "', '" . (int)$current_category_id . "')");
 
+<<<<<<< HEAD
       zen_record_admin_activity('New product ' . (int)$products_id . ' added via admin console.', 'info');
       $zco_notifier->notify('NOTIFIER_ADMIN_NEW_PRODUCT_ADDED', $products_id, $current_category_id);
+=======
+      zen_record_admin_activity('Product ' . (int)$products_id . ' ' . ($action == 'insert_product' ? 'added' : 'updated') . ' via admin console.', 'info');
+
+>>>>>>> upstream/master
 
 
       ///////////////////////////////////////////////////////

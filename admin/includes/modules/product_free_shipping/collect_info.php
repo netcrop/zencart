@@ -1,10 +1,17 @@
 <?php
 /**
  * @package admin
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: collect_info.php drbyte  Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Sun Oct 18 02:03:48 2015 -0400 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 if (!defined('IS_ADMIN_FLAG')) {
   die('Illegal Access');
@@ -431,7 +438,11 @@ updateGross();
           </tr>
 <?php
   $dir_info = zen_build_subdirectories_array(DIR_FS_CATALOG_IMAGES);
+<<<<<<< HEAD
   $default_directory = substr($pInfo->products_image, 0, strpos($pInfo->products_image, '/') + 1);
+=======
+  $default_directory = substr( $pInfo->products_image, 0,strpos( $pInfo->products_image, '/')+1);
+>>>>>>> upstream/master
 ?>
 
           <tr>

@@ -3,14 +3,22 @@
  * File contains the autoloader loop
  *
  * The autoloader loop takes the array from the auto_loaders directory
+<<<<<<< HEAD
  * and uses this to construct the InitSysytem.
  * see {@link http://www.zen-cart.com/wiki/index.php/Developers_API_Tutorials#InitSystem} for more details.
  *
  * @package initSystem
  * @copyright Copyright 2003-2013 Zen Cart Development Team
+=======
+ * and uses this this to constuct the InitSysytem.
+ * see {@link http://www.zen-cart.com/wiki/index.php/Developers_API_Tutorials#InitSystem} for more details.
+ *
+ * @package initSystem
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+>>>>>>> upstream/master
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version $Id: autoload_func.php 14141 2009-08-10 19:34:47Z wilt $
+ * @version $Id: Author: DrByte  Sat Oct 17 20:09:58 2015 -0400 Modified in v1.5.5 $
  */
 use ZenCart\Request\Request;
 

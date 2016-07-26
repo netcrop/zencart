@@ -3,10 +3,17 @@
  * Admin Activity Log Viewer/Archiver
  *
  * @package admin
+<<<<<<< HEAD
  * @copyright Copyright 2003-2015 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version GIT: $Id: Author: DrByte  Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2014 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version GIT: $Id: Author: DrByte  Jun 30 2014 Modified in v1.5.4 $
+>>>>>>> upstream/master
  *
  * @TODO: prettify so on-screen output is more friendly, perhaps adding pagination support etc (using existing "s" and "p" params)
  * @TODO: prettify by hiding postdata until requested, either with hidden layers or other means
@@ -314,6 +321,33 @@ if ($action != '')
 
 require('includes/admin_html_head.php');
 ?>
+<<<<<<< HEAD
+=======
+<?php echo '<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">'; ?>
+<html <?php
+echo HTML_PARAMS;
+?>>
+<head>
+<meta http-equiv="Content-Type"  content="text/html; charset=<?php echo CHARSET; ?>">
+<title><?php echo TITLE; ?></title>
+<link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="includes/cssjsmenuhover.css" media="all" id="hoverJS">
+<script language="javascript" src="includes/menu.js"></script>
+<script language="javascript" src="includes/general.js"></script>
+<script type="text/javascript">
+  <!--
+  function init()
+  {
+    cssjsmenu('navbar');
+    if (document.getElementById)
+    {
+      var kill = document.getElementById('hoverJS');
+      kill.disabled = true;
+    }
+  }
+  // -->
+</script>
+>>>>>>> upstream/master
 </head>
 <body>
 <!-- header //-->
@@ -374,7 +408,11 @@ require (DIR_WS_INCLUDES . 'header.php');
               </td>
           </tr>
           <tr>
+<<<<<<< HEAD
             <td class="main" align="right"><?php echo zen_image_submit('button_go.gif', IMAGE_GO) . '&nbsp;&nbsp;<a href="' . zen_admin_href_link(FILENAME_ADMIN_ACTIVITY) . '">' . zen_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
+=======
+            <td class="main" align="right"><?php echo zen_image_submit('button_go.gif', IMAGE_GO) . '&nbsp;&nbsp;<a href="' . zen_href_link(FILENAME_ADMIN_ACTIVITY) . '">' . zen_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>'; ?></td>
+>>>>>>> upstream/master
           </tr>
         <tr><td><div style="width:100%;max-width:800px"><?php echo TEXT_INTERPRETING_LOG_DATA; ?></div></td></tr>
         </table>
@@ -388,7 +426,11 @@ require (DIR_WS_INCLUDES . 'header.php');
       <tr><td><h2><?php echo HEADING_SUB2; ?></h2></td></tr>
           <tr>
             <td class="<?php echo ($_SESSION['reset_admin_activity_log'] == true ? "alert" : "main"); ?>" align="left" valign="top"><?php echo TEXT_INFO_ADMIN_ACTIVITY_LOG; ?></td>
+<<<<<<< HEAD
             <td class="main" align="right" valign="middle"><?php echo '<a href="' . zen_admin_href_link(FILENAME_ADMIN_ACTIVITY, 'action=clean_admin_activity_log') . '">' . zen_image_button('button_reset.gif', IMAGE_RESET) . '</a>'; ?></td>
+=======
+            <td class="main" align="right" valign="middle"><?php echo '<a href="' . zen_href_link(FILENAME_ADMIN_ACTIVITY, 'action=clean_admin_activity_log') . '">' . zen_image_button('button_reset.gif', IMAGE_RESET) . '</a>'; ?></td>
+>>>>>>> upstream/master
           </tr>
         </table></td>
       </tr>

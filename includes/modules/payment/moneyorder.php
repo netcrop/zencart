@@ -3,10 +3,17 @@
  * @package money order payment module
  *
  * @package paymentMethod
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: Author: DrByte  Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Mon Jul 15 17:13:18 2013 -0400 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
   class moneyorder extends base {
     var $code, $title, $description, $enabled;

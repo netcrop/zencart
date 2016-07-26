@@ -29,9 +29,13 @@
  * }<br />
  *
  * @package templateSystem
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+>>>>>>> upstream/master
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version $Id: main_template_vars.php 2620 2005-12-20 00:52:57Z drbyte $
+ * @version $Id: Author: DrByte  Sat Jan 9 13:13:41 2016 -0500 Modified in v1.5.5 $
  */
   // Notifier hook to allow for dynamic changes to template operation
   $zco_notifier->notify('NOTIFY_MAIN_TEMPLATE_VARS_START', $template_dir);
@@ -88,6 +92,18 @@
   if (!isset($max_display_page_links)) $max_display_page_links = ($layoutType == 'mobile' ? MAX_DISPLAY_PAGE_LINKS_MOBILE : MAX_DISPLAY_PAGE_LINKS);
   if (!isset($paginateAsUL)) $paginateAsUL = false;
 
+<<<<<<< HEAD
+=======
+  $zco_notifier->notify('NOTIFY_MAIN_TEMPLATE_VARS_START', $template_dir);
+
+/**
+ * set some variables used by templates
+ */
+  if (!isset($layoutType)) $layoutType = 'legacy';
+  if (!isset($max_display_page_links)) $max_display_page_links = ($layoutType == 'mobile' ? MAX_DISPLAY_PAGE_LINKS_MOBILE : MAX_DISPLAY_PAGE_LINKS);
+  if (!isset($paginateAsUL)) $paginateAsUL = false;
+
+>>>>>>> upstream/master
 /**
  * load page-specific main_template_vars if present, or jump directly to template file
  */
@@ -98,4 +114,7 @@
   }
 
   $zco_notifier->notify('NOTIFY_MAIN_TEMPLATE_VARS_END', $template_dir, $body_code);
+<<<<<<< HEAD
 
+=======
+>>>>>>> upstream/master

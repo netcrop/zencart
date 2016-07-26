@@ -1,6 +1,7 @@
 <?php
 /**
  * @package Installer
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
@@ -9,6 +10,15 @@
 
 @ini_set("arg_separator.output", "&");
 @ini_set("session.use_trans_sid","0");
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Fri Oct 9 15:32:07 2015 -0400 Modified in v1.5.5 $
+ */
+
+@ini_set("arg_separator.output", "&");
+>>>>>>> upstream/master
 @set_time_limit(250);
 
 if (file_exists(DIR_FS_INSTALL . 'includes/localConfig.php')) {
@@ -78,7 +88,11 @@ if (!defined('DIR_FS_DOWNLOAD_PUBLIC')) {
  * set the level of error reporting
  */
 if (!defined('DEBUG_LOG_FOLDER')) define('DEBUG_LOG_FOLDER', DIR_FS_LOGS);
+<<<<<<< HEAD
 error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE & ~E_STRICT);
+=======
+error_reporting(version_compare(PHP_VERSION, 5.3, '>=') ? E_ALL & ~E_DEPRECATED & ~E_NOTICE : version_compare(PHP_VERSION, 5.4, '>=') ? E_ALL & ~E_DEPRECATED & ~E_NOTICE & ~E_STRICT : E_ALL & ~E_NOTICE);
+>>>>>>> upstream/master
 $debug_logfile_path = DEBUG_LOG_FOLDER . '/zcInstallDEBUG-' . time() . '-' . mt_rand(1000, 999999) . '.log';
 @ini_set('log_errors', 1);
 @ini_set('log_errors_max_len', 0);
@@ -103,7 +117,11 @@ if (ini_get('date.timezone') == '' && @date_default_timezone_get() == '')
   die('ERROR: date.timezone is not set in php.ini. You have two options: 1-Edit /includes/extra_configures/set_time_zone.php to set the $TZ variable manually, or 2-Contact your hosting company to set the timezone correctly in the server PHP configuration before continuing.');
 } else
 {
+<<<<<<< HEAD
   @date_default_timezone_set(date_default_timezone_get());
+=======
+  @date_default_timezone_set(date_default_timezone_get());
+>>>>>>> upstream/master
 }
 
 /*
@@ -113,9 +131,15 @@ if (!isset($_GET['cacheignore'])) {
   //APC
   if (function_exists('apc_clear_cache')) @apc_clear_cache();
   //XCACHE
+<<<<<<< HEAD
   if (function_exists('xcache_clear_cache')) {
     @ini_set('xcache.cacher', 'OFF');
   }
+=======
+  if (function_exists('xcache_clear_cache')) {
+    @ini_set('xcache.cacher', 'OFF');
+  }
+>>>>>>> upstream/master
   //EA
   if (@ini_get('eaccelerator.enable') == 1) {
     @ini_set('eaccelerator.enable', 0);
@@ -142,7 +166,11 @@ if ($za_dir = @dir(DIR_FS_INSTALL . 'includes/extra_configures')) {
 require (DIR_FS_ROOT . 'includes/classes/class.base.php');
 require (DIR_FS_ROOT . 'includes/classes/class.notifier.php');
 require (DIR_FS_INSTALL . 'includes/functions/general.php');
+<<<<<<< HEAD
 require (DIR_FS_INSTALL . 'includes/functions/password_funcs.php');
+=======
+require (DIR_FS_INSTALL . 'includes/functions/password_funcs.php');
+>>>>>>> upstream/master
 require(DIR_FS_INSTALL . 'includes/languages/languages.php');
 zen_sanitize_request();
 /**
@@ -175,10 +203,17 @@ require (DIR_FS_INSTALL . 'includes/vendors/yaml/lib/class.sfYaml.php');
 require (DIR_FS_INSTALL . 'includes/classes/class.zcRegistry.php');
 require (DIR_FS_INSTALL . 'includes/vendors/yaml/lib/class.sfYamlParser.php');
 require (DIR_FS_INSTALL . 'includes/vendors/yaml/lib/class.sfYamlInline.php');
+<<<<<<< HEAD
 if (!isset($_GET['main_page'])) $_GET['main_page'] = 'index';
 $current_page = preg_replace('/[^a-z0-9_]/', '', $_GET['main_page']);
 if ($current_page == '' || !file_exists('includes/modules/pages/' . $current_page)) $_GET['main_page'] = $current_page = 'index';
 $page_directory = 'includes/modules/pages/' . $current_page;
+=======
+if (!isset($_GET['main_page'])) $_GET['main_page'] = 'index';
+$current_page = preg_replace('/[^a-z0-9_]/', '', $_GET['main_page']);
+if ($current_page == '' || !file_exists('includes/modules/pages/' . $current_page)) $_GET['main_page'] = $current_page = 'index';
+$page_directory = 'includes/modules/pages/' . $current_page;
+>>>>>>> upstream/master
 /*
  * language determination
  */
@@ -207,4 +242,8 @@ if (isset($_POST['lng']))
   }
 }
 $lng_short = substr($lng, 0, strpos($lng, '_'));
+<<<<<<< HEAD
 require(DIR_FS_INSTALL . 'includes/languages/' . $languagesInstalled[$lng]['fileName'] . '.php');
+=======
+require(DIR_FS_INSTALL . 'includes/languages/' . $languagesInstalled[$lng]['fileName'] . '.php');
+>>>>>>> upstream/master

@@ -71,8 +71,11 @@
     <div class="row">
       <?php if ($changedDir) { ?>
         <div class="alert-box"><?php echo TEXT_ADMIN_SETUP_ADMIN_DIRECTORY_HELP_CHANGED; ?></div>
+<<<<<<< HEAD
       <?php } elseif (defined('DEVELOPER_MODE') && (DEVELOPER_MODE === true)) { ?>
         <div class="alert-box"><?php echo TEXT_ADMIN_SETUP_ADMIN_DIRECTORY_HELP_DEVELOPER; ?></div>
+=======
+>>>>>>> upstream/master
       <?php } elseif (!$changedDir && $adminNewDir == 'admin') { ?>
         <div class="alert-box alert"><?php echo TEXT_ADMIN_SETUP_ADMIN_DIRECTORY_HELP_DEFAULT; ?></div>
       <?php } else { ?>

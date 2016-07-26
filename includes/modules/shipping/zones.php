@@ -1,10 +1,17 @@
 <?php
 /**
  * @package shippingMethod
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: zones.php  ajeh  Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Sat Oct 17 22:52:38 2015 -0400 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 /*
 
@@ -101,6 +108,29 @@
 
 */
 
+<<<<<<< HEAD
+=======
+  class zones {
+    var $code, $title, $description, $enabled, $num_zones;
+
+// class constructor
+    function __construct() {
+      $this->code = 'zones';
+      $this->title = MODULE_SHIPPING_ZONES_TEXT_TITLE;
+      $this->description = MODULE_SHIPPING_ZONES_TEXT_DESCRIPTION;
+      $this->sort_order = MODULE_SHIPPING_ZONES_SORT_ORDER;
+      $this->icon = '';
+      $this->tax_class = MODULE_SHIPPING_ZONES_TAX_CLASS;
+      $this->tax_basis = MODULE_SHIPPING_ZONES_TAX_BASIS;
+
+      // disable only when entire cart is free shipping
+      if (zen_get_shipping_enabled($this->code)) {
+        $this->enabled = ((MODULE_SHIPPING_ZONES_STATUS == 'True') ? true : false);
+      }
+
+      // CUSTOMIZE THIS SETTING FOR THE NUMBER OF ZONES NEEDED
+      $this->num_zones = 3;
+>>>>>>> upstream/master
 
 class zones extends base {
   /**

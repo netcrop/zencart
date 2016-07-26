@@ -4,15 +4,26 @@
  * see {@link  http://www.zen-cart.com/wiki/index.php/Developers_API_Tutorials#InitSystem wikitutorials} for more details.
  *
  * @package initSystem
+<<<<<<< HEAD
  * @copyright Copyright 2003-2015 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2012 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version GIT: $Id: Author: DrByte  Thu Oct 11 14:29:19 2012 -0400 Modified in v1.5.2 $
+>>>>>>> upstream/master
  */
 if (!defined('IS_ADMIN_FLAG')) {
   die('Illegal Access');
 }
+<<<<<<< HEAD
 if (zcRequest::readGet('main_page', '') != FILENAME_DOWNLOAD && (int)GZIP_LEVEL >= 1 && $ext_zlib_loaded = extension_loaded('zlib') && trim(ini_get('output_handler')) == '') {
+=======
+if ($_GET['main_page'] != FILENAME_DOWNLOAD && (int)GZIP_LEVEL >= 1 && $ext_zlib_loaded = extension_loaded('zlib') && trim(ini_get('output_handler')) == '') {
+>>>>>>> upstream/master
   if (($ini_zlib_output_compression = (int)ini_get('zlib.output_compression')) < 1) {
     @ini_set('zlib.output_compression', 1);
   }

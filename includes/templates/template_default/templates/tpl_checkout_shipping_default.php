@@ -6,25 +6,42 @@
  * Displays allowed shipping modules for selection by customer.
  *
  * @package templateSystem
+<<<<<<< HEAD
  * @copyright Copyright 2003-2015 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: Modified in V1.6.0 $
+=======
+ * @copyright Copyright 2003-2013 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version GIT: $Id: Author: Ian Wilson  Mon Oct 28 17:54:33 2013 +0000 Modified in v1.5.2 $
+>>>>>>> upstream/master
  */
 ?>
 <div class="centerColumn" id="checkoutShipping">
 
+<<<<<<< HEAD
 <?php echo zen_draw_form('checkout_address', $formActionLink) . zen_draw_hidden_field('action', 'process'); ?>
 <!-- bof Order Steps (tableless) -->
 <?php require($template->get_template_dir($checkoutStepsTemplate,DIR_WS_TEMPLATE, $current_page_base,'templates'). '/'.$checkoutStepsTemplate); ?>
 <!-- eof Order Steps (tableless) -->
+=======
+<?php echo zen_draw_form('checkout_address', zen_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL')) . zen_draw_hidden_field('action', 'process'); ?>
+>>>>>>> upstream/master
 
 <h1 id="checkoutShippingHeading"><?php echo HEADING_TITLE; ?></h1>
 
 <?php if ($messageStack->size('checkout_shipping') > 0) echo $messageStack->output('checkout_shipping'); ?>
+<<<<<<< HEAD
 
 <h2 id="checkoutShippingHeadingAddress"><?php echo TITLE_SHIPPING_ADDRESS; ?></h2>
 
+=======
+ 
+<h2 id="checkoutShippingHeadingAddress"><?php echo TITLE_SHIPPING_ADDRESS; ?></h2>
+ 
+>>>>>>> upstream/master
 <div id="checkoutShipto" class="floatingBox back">
 <?php if ($displayAddressEdit) { ?>
 <div class="buttonRow forward"><?php echo '<a href="' . $editShippingButtonLink . '">' . zen_image_button(BUTTON_IMAGE_CHANGE_ADDRESS, BUTTON_CHANGE_ADDRESS_ALT) . '</a>'; ?></div>
@@ -33,6 +50,7 @@
 </div>
 <div class="floatingBox important forward"><?php echo TEXT_CHOOSE_SHIPPING_DESTINATION; ?></div>
 <br class="clearBoth" />
+<<<<<<< HEAD
 
 <?php
   if (zen_count_shipping_modules() > 0) {
@@ -46,11 +64,30 @@
 
 <div id="checkoutShippingContentChoose" class="important"><?php echo TEXT_CHOOSE_SHIPPING_METHOD; ?></div>
 
+=======
+ 
+<?php
+  if (zen_count_shipping_modules() > 0) {
+?>
+ 
+<h2 id="checkoutShippingHeadingMethod"><?php echo TABLE_HEADING_SHIPPING_METHOD; ?></h2>
+ 
+<?php
+    if (sizeof($quotes) > 1 && sizeof($quotes[0]) > 1) {
+?>
+ 
+<div id="checkoutShippingContentChoose" class="important"><?php echo TEXT_CHOOSE_SHIPPING_METHOD; ?></div>
+ 
+>>>>>>> upstream/master
 <?php
     } elseif ($free_shipping == false) {
 ?>
 <div id="checkoutShippingContentChoose" class="important"><?php echo TEXT_ENTER_SHIPPING_INFORMATION; ?></div>
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> upstream/master
 <?php
     }
 ?>
@@ -59,7 +96,11 @@
 ?>
 <div id="freeShip" class="important" ><?php echo FREE_SHIPPING_TITLE; ?>&nbsp;<?php echo $quotes[$i]['icon']; ?></div>
 <div id="defaultSelected"><?php echo sprintf(FREE_SHIPPING_DESCRIPTION, $currencies->format(MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER)) . zen_draw_hidden_field('shipping', 'free_free'); ?></div>
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> upstream/master
 <?php
     } else {
       $radio_buttons = 0;
@@ -71,7 +112,11 @@
 ?>
 <fieldset>
 <legend><?php echo $quotes[$i]['module']; ?>&nbsp;<?php if (isset($quotes[$i]['icon']) && zen_not_null($quotes[$i]['icon'])) { echo $quotes[$i]['icon']; } ?></legend>
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> upstream/master
 <?php
         if (isset($quotes[$i]['error'])) {
 ?>
@@ -85,9 +130,15 @@
               $checked = ($quotes[$i]['id'] . '_' . $quotes[$i]['methods'][$j]['id'] == $_SESSION['shipping']['id']);
             }
             if ( ($checked == true) || ($n == 1 && $n2 == 1) ) {
+<<<<<<< HEAD
 //               echo '      <div id="defaultSelected" class="moduleRowSelected">' . "\n";
 //             } else {
 //               echo '      <div class="moduleRow">' . "\n";
+=======
+              //echo '      <div id="defaultSelected" class="moduleRowSelected">' . "\n";
+            //} else {
+              //echo '      <div class="moduleRow">' . "\n";
+>>>>>>> upstream/master
             }
 ?>
 <?php
@@ -101,7 +152,11 @@
 <?php
             }
 ?>
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> upstream/master
 <?php echo zen_draw_radio_field('shipping', $quotes[$i]['id'] . '_' . $quotes[$i]['methods'][$j]['id'], $checked, 'id="ship-'.$quotes[$i]['id'] . '-' . str_replace(' ', '-', $quotes[$i]['methods'][$j]['id']) .'"'); ?>
 <label for="ship-<?php echo $quotes[$i]['id'] . '-' . str_replace(' ', '-', $quotes[$i]['methods'][$j]['id']); ?>" class="checkboxLabel" ><?php echo $quotes[$i]['methods'][$j]['title']; ?></label>
 <!--</div>-->
@@ -111,7 +166,11 @@
           }
         }
 ?>
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> upstream/master
 </fieldset>
 <?php
     }
@@ -119,7 +178,11 @@
       }
     }
 ?>
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> upstream/master
 <?php
   } else {
 ?>
@@ -132,9 +195,16 @@
 <legend><?php echo TABLE_HEADING_COMMENTS; ?></legend>
 <?php echo zen_draw_textarea_field('comments', '45', '3'); ?>
 </fieldset>
+<<<<<<< HEAD
 
 <div class="buttonRow forward"><?php echo zen_image_submit(BUTTON_IMAGE_CONTINUE_CHECKOUT, BUTTON_CONTINUE_ALT); ?></div>
 <div class="buttonRow back"><?php echo '<strong>' . TITLE_CONTINUE_CHECKOUT_PROCEDURE . '</strong><br />' . TEXT_CONTINUE_CHECKOUT_PROCEDURE; ?></div>
 
+=======
+ 
+<div class="buttonRow forward"><?php echo zen_image_submit(BUTTON_IMAGE_CONTINUE_CHECKOUT, BUTTON_CONTINUE_ALT); ?></div>
+<div class="buttonRow back"><?php echo '<strong>' . TITLE_CONTINUE_CHECKOUT_PROCEDURE . '</strong><br />' . TEXT_CONTINUE_CHECKOUT_PROCEDURE; ?></div>
+ 
+>>>>>>> upstream/master
 </form>
 </div>

@@ -6,7 +6,7 @@
  * @copyright Copyright 2003-2014 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version $Id: header_php.php 4881 2006-11-04 17:51:31Z ajeh $
+ * @version GIT: $Id: Author: DrByte  Modified in v1.5.4 $
  */
 /*
 * This "page" page is the display component of the ez-pages module
@@ -145,7 +145,12 @@ define('NAVBAR_TITLE', $var_pageDetails->fields['pages_title']);
 define('HEADING_TITLE', $var_pageDetails->fields['pages_title']);
 $breadcrumb->add($var_pageDetails->fields['pages_title']);
 
+<<<<<<< HEAD
 // @TODO - confirm whether the following line might be needed. Preliminary testing suggests it's not needed by any current built-in functionality
+=======
+
+// @TODO - confirm whether the following line can be removed. Preliminary testing suggests it's not needed by any current built-in functionality
+>>>>>>> upstream/master
 // require(DIR_WS_MODULES . zen_get_module_directory('require_languages.php'));
 
 

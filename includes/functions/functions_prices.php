@@ -3,10 +3,14 @@
  * functions_prices
  *
  * @package functions
+<<<<<<< HEAD
  * @copyright Copyright 2003-2013 Zen Cart Development Team
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+>>>>>>> upstream/master
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
- * @version $Id: functions_prices.php 18697 2011-05-04 14:35:20Z wilt $
+ * @version $Id: Author: DrByte  Fri Jan 22 10:56:26 2016 +0000 Modified in v1.5.5 $
  */
 
 ////
@@ -179,6 +183,12 @@
       case ((int)$_SESSION['customers_authorization'] == 2):
         // customer is logged in and was changed to must be approved to see prices
         return TEXT_AUTHORIZATION_PENDING_PRICE;
+<<<<<<< HEAD
+=======
+        break;
+        default:
+        // proceed normally
+>>>>>>> upstream/master
         break;
     }
 
@@ -257,7 +267,13 @@
       } else {
         $priceinfo['show_normal_price'] = $show_normal_price = $currencies->display_price($display_normal_price, zen_get_tax_rate($product_check->fields['products_tax_class_id']));
         if ($product_check->fields['product_is_free'] == '1') {
+<<<<<<< HEAD
           $priceinfo['show_normal_price'] = $show_normal_price = '<s>' . $priceinfo['show_normal_price'] . '</s>';
+=======
+          $show_normal_price = '<span class="productFreePrice"><s>' . $currencies->display_price($display_normal_price, zen_get_tax_rate($product_check->fields['products_tax_class_id'])) . '</s></span>';
+        } else {
+          $show_normal_price = '<span class="productBasePrice">' . $currencies->display_price($display_normal_price, zen_get_tax_rate($product_check->fields['products_tax_class_id'])) . '</span>';
+>>>>>>> upstream/master
         }
         $priceinfo['show_special_price'] = $show_special_price = '';
         $priceinfo['show_sale_price'] = $show_sale_price = '';

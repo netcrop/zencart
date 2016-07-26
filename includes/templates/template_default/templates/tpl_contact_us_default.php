@@ -9,7 +9,11 @@
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+<<<<<<< HEAD
  * @version GIT: $Id: Author: DrByte  Modified in v1.6.0 $
+=======
+ * @version $Id: rbarbour zcadditions.com Fri Feb 26 00:03:33 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 ?>
 <div class="centerColumn" id="contactUsDefault">
@@ -62,7 +66,11 @@
 ?>
 
 <label class="inputLabel" for="contactname"><?php echo ENTRY_NAME; ?></label>
+<<<<<<< HEAD
 <?php echo zen_draw_input_field('contactname', $name, ' size="40" id="contactname" placeholder="' . ENTRY_REQUIRED_SYMBOL . '" required autofocus'); ?>
+=======
+<?php echo zen_draw_input_field('contactname', $name, ' size="40" id="contactname" placeholder="' . ENTRY_REQUIRED_SYMBOL . '" required'); ?>
+>>>>>>> upstream/master
 <br class="clearBoth" />
 
 <label class="inputLabel" for="email-address"><?php echo ENTRY_EMAIL; ?></label>

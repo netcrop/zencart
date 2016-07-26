@@ -8,7 +8,11 @@
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+<<<<<<< HEAD
  * @version GIT: $Id: Author: ajeh  Modified in v1.6.0 $
+=======
+ * @version $Id: Author: DrByte  Thu Jan 28 23:20:41 2016 +0100 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
 /**
@@ -249,7 +253,11 @@
       }
 
       // set the reply-to address.  If none set yet, then use Store's default email name/address.
+<<<<<<< HEAD
       // If sending from checkout or contact-us page, use the supplied info
+=======
+      // If sending from checkout or contact-us or tell-a-friend page, use the supplied info
+>>>>>>> upstream/master
       $email_reply_to_address = (isset($email_reply_to_address) && $email_reply_to_address != '') ? $email_reply_to_address : (in_array($module, array('contact_us',  'tell_a_friend', 'checkout_extra')) ? $from_email_address : EMAIL_FROM);
       $email_reply_to_name    = (isset($email_reply_to_name) && $email_reply_to_name != '')    ? $email_reply_to_name    : (in_array($module, array('contact_us',  'tell_a_friend', 'checkout_extra')) ? $from_email_name    : STORE_NAME);
       $mail->AddReplyTo($email_reply_to_address, $email_reply_to_name);

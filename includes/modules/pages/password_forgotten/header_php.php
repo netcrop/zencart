@@ -3,10 +3,17 @@
  * Password Forgotten
  *
  * @package page
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: Modified in V1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Sat Oct 17 21:54:07 2015 -0400 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
 // This should be first line of the script:
@@ -45,8 +52,13 @@ if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
 
   if ($check_customer->RecordCount() > 0) {
 
+<<<<<<< HEAD
     $zco_notifier->notify('NOTIFY_PASSWORD_FORGOTTEN_VALIDATED', $email_address);
 
+=======
+    $zco_notifier->notify('NOTIFY_PASSWORD_FORGOTTEN_VALIDATED', $email_address);
+
+>>>>>>> upstream/master
     $new_password = zen_create_PADSS_password( (ENTRY_PASSWORD_MIN_LENGTH > 0 ? ENTRY_PASSWORD_MIN_LENGTH : 5) );
     $crypted_password = zen_encrypt_password($new_password);
 
@@ -71,9 +83,15 @@ if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
     $zco_notifier->notify('NOTIFY_PASSWORD_FORGOTTEN_NOT_FOUND', $email_address);
   }
 
+<<<<<<< HEAD
   $messageStack->add_session('login', SUCCESS_PASSWORD_SENT, 'success');
 
   zen_redirect(zen_href_link(FILENAME_LOGIN, '', 'SSL'));
+=======
+    $messageStack->add_session('login', SUCCESS_PASSWORD_SENT, 'success');
+
+    zen_redirect(zen_href_link(FILENAME_LOGIN, '', 'SSL'));
+>>>>>>> upstream/master
 }
 
 $breadcrumb->add(NAVBAR_TITLE_1, zen_href_link(FILENAME_LOGIN, '', 'SSL'));

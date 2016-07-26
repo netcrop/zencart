@@ -3,10 +3,17 @@
  * Login Page
  *
  * @package page
+<<<<<<< HEAD
  * @copyright Copyright 2003-2015 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: header_php.php drbyte  Modified in v1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Mon Oct 19 10:48:31 2015 -0400 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
 // This should be first line of the script:
@@ -30,6 +37,18 @@ if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
   $email_address = zen_db_prepare_input($_POST['email_address']);
   $password = zen_db_prepare_input($_POST['password']);
   $loginAuthorized = false;
+<<<<<<< HEAD
+=======
+
+  /* Privacy-policy-read does not need to be checked during "login"
+  if (DISPLAY_PRIVACY_CONDITIONS == 'true') {
+  if (!isset($_POST['privacy_conditions']) || ($_POST['privacy_conditions'] != '1')) {
+  $error = true;
+  $messageStack->add('create_account', ERROR_PRIVACY_STATEMENT_NOT_ACCEPTED, 'error');
+  }
+  }
+  */
+>>>>>>> upstream/master
 
     // Check if email exists
     $check_customer_query = "SELECT customers_id, customers_firstname, customers_lastname, customers_password,
@@ -137,6 +156,10 @@ if (isset($_GET['action']) && ($_GET['action'] == 'process')) {
         // eof: contents merge notice
 
         if (sizeof($_SESSION['navigation']->snapshot) > 0) {
+<<<<<<< HEAD
+=======
+          //    $back = sizeof($_SESSION['navigation']->path)-2;
+>>>>>>> upstream/master
           $origin_href = zen_href_link($_SESSION['navigation']->snapshot['page'], zen_array_to_string($_SESSION['navigation']->snapshot['get'], array(zen_session_name())), $_SESSION['navigation']->snapshot['mode']);
           $_SESSION['navigation']->clear_snapshot();
           zen_redirect($origin_href);

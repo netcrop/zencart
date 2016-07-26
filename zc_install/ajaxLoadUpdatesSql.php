@@ -7,6 +7,10 @@
  * @version $Id: Author: DrByte  Fri Oct 9 15:32:07 2015 -0400 New in v1.5.5 $
  */
 define('IS_ADMIN_FLAG', false);
+<<<<<<< HEAD
+=======
+if (!defined('__DIR__')) define('__DIR__', dirname(__FILE__));
+>>>>>>> upstream/master
 define('DIR_FS_INSTALL', __DIR__ . '/');
 define('DIR_FS_ROOT', realpath(__DIR__ . '/../') . '/');
 
@@ -29,7 +33,10 @@ $updateList = array(
         '1.5.3'=>array('required'=>'1.5.2'),
         '1.5.4'=>array('required'=>'1.5.3'),
         '1.5.5'=>array('required'=>'1.5.4'),
+<<<<<<< HEAD
         '1.6.0'=>array('required'=>'1.5.5'),
+=======
+>>>>>>> upstream/master
         );
 
 $systemChecker = new systemChecker();

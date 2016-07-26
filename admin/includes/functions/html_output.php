@@ -4,7 +4,11 @@
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+<<<<<<< HEAD
  * @version $Id:  Modified in v1.6.0 $
+=======
+ * @version $Id: Author: DrByte  Fri Feb 26 20:52:53 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 
   /**
@@ -99,8 +103,18 @@
 
     // Add the session ID when moving from different HTTP and HTTPS servers, or when SID is defined
     if ( ($add_session_id == true) && ($session_started == true) ) {
+<<<<<<< HEAD
       if (defined('SID') && constant('SID') != '') {
         $link .= $separator . zen_output_string(constant('SID'));
+=======
+      if (defined('SID') && zen_not_null(constant('SID'))) {
+        $sid = constant('SID');
+      } elseif ( ( ($request_type == 'NONSSL') && ($connection == 'SSL') && (ENABLE_SSL_ADMIN == 'true') ) || ( ($request_type == 'SSL') && ($connection == 'NONSSL') ) ) {
+//die($connection);
+        if ($http_domain != $https_domain) {
+          $sid = zen_session_name() . '=' . zen_session_id();
+        }
+>>>>>>> upstream/master
       }
     }
     $link = preg_replace('/(&{2,}|(&amp;)+)/', '&', $link);
@@ -110,6 +124,7 @@
     return $link;
   }
 
+<<<<<<< HEAD
   /**
    * Returns a catalog link formatted for use in a href attribute. This should
    * be used when adding a link to an web resource / page located within the
@@ -240,6 +255,21 @@
       }
       else {
         $link .= 'index.php?main_page=' . $page;
+=======
+  function zen_catalog_href_link($page = '', $parameters = '', $connection = 'NONSSL') {
+    global $zco_notifier;
+    $link = null;
+    $zco_notifier->notify('NOTIFY_SEFU_INTERCEPT_ADMCATHREF', array(), $link, $page, $parameters, $connection);
+    if($link !== null) return $link;
+
+    if ($connection == 'NONSSL') {
+      $link = HTTP_CATALOG_SERVER . DIR_WS_CATALOG;
+    } elseif ($connection == 'SSL') {
+      if (ENABLE_SSL_CATALOG == 'true') {
+        $link = HTTPS_CATALOG_SERVER . DIR_WS_HTTPS_CATALOG;
+      } else {
+        $link = HTTP_CATALOG_SERVER . DIR_WS_CATALOG;
+>>>>>>> upstream/master
       }
     }
     else {
@@ -322,6 +352,52 @@
   }
 
 ////
+<<<<<<< HEAD
+=======
+// javascript to dynamically update the states/provinces list when the country is changed
+// TABLES: zones
+  function zen_js_zone_list($country, $form, $field, $showTextField = true) {
+    global $db;
+    $countries = $db->Execute("select distinct zone_country_id
+                               from " . TABLE_ZONES . "
+                               order by zone_country_id");
+
+    $num_country = 1;
+    $output_string = '';
+    while (!$countries->EOF) {
+      if ($num_country == 1) {
+        $output_string .= '  if (' . $country . ' == "' . $countries->fields['zone_country_id'] . '") {' . "\n";
+      } else {
+        $output_string .= '  } else if (' . $country . ' == "' . $countries->fields['zone_country_id'] . '") {' . "\n";
+      }
+
+      $states = $db->Execute("select zone_name, zone_id
+                              from " . TABLE_ZONES . "
+                              where zone_country_id = '" . $countries->fields['zone_country_id'] . "'
+                              order by zone_name");
+
+
+      $num_state = 1;
+      while (!$states->EOF) {
+        if ($num_state == '1') $output_string .= '    ' . $form . '.' . $field . '.options[0] = new Option("' . PLEASE_SELECT . '", "");' . "\n";
+        $output_string .= '    ' . $form . '.' . $field . '.options[' . $num_state . '] = new Option("' . $states->fields['zone_name'] . '", "' . $states->fields['zone_id'] . '");' . "\n";
+        $num_state++;
+        $states->MoveNext();
+      }
+      $num_country++;
+      $countries->MoveNext();
+    }
+      $output_string .= '  }';
+      if ($showTextField) {
+          $output_string .= ' else {' . "\n" .
+              '    ' . $form . '.' . $field . '.options[0] = new Option("' . TYPE_BELOW . '", "");' . "\n" .
+              '  }' . "\n";
+      }
+    return $output_string;
+  }
+
+////
+>>>>>>> upstream/master
 // Output a form
   function zen_draw_form($name, $action, $parameters = '', $method = 'post', $params = '', $usessl = 'false') {
     $form = '<form name="' . zen_output_string($name) . '" action="';
@@ -489,6 +565,7 @@
     $label = '<label for="' . $for . '" ' . $parameters . '>' . $text . '</label>';
     return $label;
   }
+<<<<<<< HEAD
 
 /**
  * @param string $page
@@ -502,3 +579,5 @@ function zen_ajax_href_link($page = '', $parameters = '', $connection = 'NONSSL'
     $link = str_replace('&amp;', '&', $link);
     return $link;
 }
+=======
+>>>>>>> upstream/master

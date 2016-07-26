@@ -3,10 +3,17 @@
  * canonical link handling
  *
  * @package initSystem
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: Author: DrByte   Modified in v1.6.0
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Wed Dec 30 11:49:27 2015 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 if (!defined('IS_ADMIN_FLAG')) {
   die('Illegal Access');
@@ -57,9 +64,15 @@ switch (true) {
 /**
  * SSL Pages get no special treatment, since they don't usually require being indexed uniquely differently from non-SSL pages
  */
+<<<<<<< HEAD
   // case ($request_type == 'SSL' && substr(HTTP_SERVER, 0, 5) != 'https'):
   //   $canonicalLink = '';
   //   break;
+=======
+  case ($request_type == 'SSL' && substr(HTTP_SERVER, 0, 5) != 'https'):
+    $canonicalLink = '';
+    break;
+>>>>>>> upstream/master
 /**
  * for products (esp those linked to multiple categories):
  */
@@ -69,7 +82,11 @@ switch (true) {
 /**
  * for product listings (ie: "categories"):
  */
+<<<<<<< HEAD
   case ($current_page == FILENAME_DEFAULT && zcRequest::hasGet('cPath')):
+=======
+  case ($current_page == FILENAME_DEFAULT && isset($_GET['cPath'])):
+>>>>>>> upstream/master
     $canonicalLink = zen_href_link($current_page, zen_get_all_get_params($excludeParams), 'NONSSL', false);
 // alternate way, depending on specialized site needs:
 //    $canonicalLink = zen_href_link($current_page,'cPath=' . zen_get_generated_category_path_rev($current_category_id) , 'NONSSL', false);
@@ -77,7 +94,11 @@ switch (true) {
 /**
  * for music filters:
  */
+<<<<<<< HEAD
   case ($current_page == FILENAME_DEFAULT && zcRequest::hasGet('typefilter') && zcRequest::readGet('typefilter') != '' && ( (zcRequest::hasGet('music_genre_id') && zcRequest::readGet('music_genre_id') != '' ) || (zcRequest::has('record_company_id') && zcRequest::readGet('record_company_id') != '' ) ) ):
+=======
+  case ($current_page == FILENAME_DEFAULT && isset($_GET['typefilter']) && $_GET['typefilter'] != '' && ( (isset($_GET['music_genre_id']) && $_GET['music_genre_id'] != '' ) || (isset($_GET['record_company_id']) && $_GET['record_company_id'] != '' ) ) ):
+>>>>>>> upstream/master
     unset($excludeParams[array_search('typefilter', $excludeParams)]);
     $canonicalLink = zen_href_link($current_page, zen_get_all_get_params($excludeParams), 'NONSSL', false);
     break;
@@ -99,11 +120,19 @@ switch (true) {
 /**
  * for manufacturer listings:
  */
+<<<<<<< HEAD
   case ($current_page == FILENAME_DEFAULT && zcRequest::hasGet('manufacturers_id')):
 /**
  * for ez-pages:
  */
   case ($current_page == FILENAME_EZPAGES && zcRequest::hasGet('id')):
+=======
+  case ($current_page == FILENAME_DEFAULT && isset($_GET['manufacturers_id'])):
+/**
+ * for ez-pages:
+ */
+  case ($current_page == FILENAME_EZPAGES && isset($_GET['id'])):
+>>>>>>> upstream/master
 /**
  * all the above cases get treated here:
  */

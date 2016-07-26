@@ -6,10 +6,17 @@
  * Displays final checkout details, cart, payment and shipping info details.
  *
  * @package templateSystem
+<<<<<<< HEAD
  * @copyright Copyright 2003-2015 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: Modified in V1.6.0 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Fri Jan 8 00:33:36 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 ?>
 <div class="centerColumn" id="checkoutConfirmDefault">
@@ -27,11 +34,16 @@
 
     if ($_SESSION['cart']->show_total() != 0) {  ?>
 
+<<<<<<< HEAD
         <div id="checkoutShipto" class="back">
             <h4 id="checkoutConfirmDefaultBillingAddress"><?php echo HEADING_BILLING_ADDRESS; ?></h4>
             <?php if (!$flagDisablePaymentAddressChange) { ?>
                 <div class="buttonRow forward"><?php echo '<a href="' . zen_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL') . '">' . zen_image_button(BUTTON_IMAGE_EDIT_SMALL, BUTTON_EDIT_SMALL_ALT) . '</a>'; ?></div>
             <?php } ?>
+=======
+<h3 id="checkoutConfirmDefaultPayment"><?php echo HEADING_PAYMENT_METHOD; ?></h3>
+<h4 id="checkoutConfirmDefaultPaymentTitle"><?php echo $GLOBALS[$class]->title; ?></h4>
+>>>>>>> upstream/master
 
             <address><?php echo zen_address_format($order->billing['format_id'], $order->billing, 1, ' ', '<br />'); ?></address>
 
@@ -48,6 +60,7 @@
                     ?>
 
 
+<<<<<<< HEAD
                     <div class="important"><?php echo $confirmation['title']; ?></div>
                 <?php
                 }
@@ -188,6 +201,23 @@
 //  }
         ?>
         <hr />
+=======
+<?php
+    }
+?>
+</div>
+<?php
+  }
+?>
+<br class="clearBoth" />
+<hr />
+
+<h2 id="checkoutConfirmDefaultHeadingComments"><?php echo HEADING_ORDER_COMMENTS; ?></h2>
+<div class="buttonRow forward"><?php echo  '<a href="' . zen_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL') . '">' . zen_image_button(BUTTON_IMAGE_EDIT_SMALL, BUTTON_EDIT_SMALL_ALT) . '</a>'; ?></div>
+<div><?php echo (empty($order->info['comments']) ? NO_COMMENTS_TEXT : nl2br(zen_output_string_protected($order->info['comments'])) . zen_draw_hidden_field('comments', $order->info['comments'])); ?></div>
+<br class="clearBoth" />
+<hr />
+>>>>>>> upstream/master
 
         <h4 id="checkoutConfirmDefaultHeadingCart"><?php echo HEADING_PRODUCTS; ?></h4>
 
@@ -203,6 +233,7 @@
         <?php  } //endif flagAnyOutOfStock ?>
 
 
+<<<<<<< HEAD
         <table border="0" width="100%" cellspacing="0" cellpadding="0" id="cartContentsDisplay">
             <tr class="cartTableHeading">
                 <th scope="col" id="ccQuantityHeading" width="30"><?php echo TABLE_HEADING_QUANTITY; ?></th>
@@ -223,6 +254,56 @@
                     <td  class="cartQuantity"><?php echo $order->products[$i]['qty']; ?>&nbsp;x</td>
                     <td class="cartProductDisplay"><?php echo $order->products[$i]['name']; ?>
                         <?php  echo $stock_check[$i]; ?>
+=======
+      <table id="cartContentsDisplay">
+        <tr class="cartTableHeading">
+        <th scope="col" id="ccQuantityHeading"><?php echo TABLE_HEADING_QUANTITY; ?></th>
+        <th scope="col" id="ccProductsHeading"><?php echo TABLE_HEADING_PRODUCTS; ?></th>
+<?php
+  // If there are tax groups, display the tax columns for price breakdown
+  if (sizeof($order->info['tax_groups']) > 1) {
+?>
+          <th scope="col" id="ccTaxHeading"><?php echo HEADING_TAX; ?></th>
+<?php
+  }
+?>
+          <th scope="col" id="ccTotalHeading"><?php echo TABLE_HEADING_TOTAL; ?></th>
+        </tr>
+<?php // now loop thru all products to display quantity and price ?>
+<?php for ($i=0, $n=sizeof($order->products); $i<$n; $i++) { ?>
+        <tr class="<?php echo $order->products[$i]['rowClass']; ?>">
+          <td  class="cartQuantity"><?php echo $order->products[$i]['qty']; ?>&nbsp;x</td>
+          <td class="cartProductDisplay"><?php echo $order->products[$i]['name']; ?>
+          <?php  echo $stock_check[$i]; ?>
+
+<?php // if there are attributes, loop thru them and display one per line
+    if (isset($order->products[$i]['attributes']) && sizeof($order->products[$i]['attributes']) > 0 ) {
+    echo '<ul class="cartAttribsList">';
+      for ($j=0, $n2=sizeof($order->products[$i]['attributes']); $j<$n2; $j++) {
+?>
+      <li><?php echo $order->products[$i]['attributes'][$j]['option'] . ': ' . nl2br(zen_output_string_protected($order->products[$i]['attributes'][$j]['value'])); ?></li>
+<?php
+      } // end loop
+      echo '</ul>';
+    } // endif attribute-info
+?>
+        </td>
+
+<?php // display tax info if exists ?>
+<?php if (sizeof($order->info['tax_groups']) > 1)  { ?>
+        <td class="cartTotalDisplay">
+          <?php echo zen_display_tax_value($order->products[$i]['tax']); ?>%</td>
+<?php    }  // endif tax info display  ?>
+        <td class="cartTotalDisplay">
+          <?php echo $currencies->display_price($order->products[$i]['final_price'], $order->products[$i]['tax'], $order->products[$i]['qty']);
+          if ($order->products[$i]['onetime_charges'] != 0 ) echo '<br /> ' . $currencies->display_price($order->products[$i]['onetime_charges'], $order->products[$i]['tax'], 1);
+?>
+        </td>
+      </tr>
+<?php  }  // end for loopthru all products ?>
+      </table>
+      <hr />
+>>>>>>> upstream/master
 
                         <?php // if there are attributes, loop thru them and display one per line
                         if (isset($order->products[$i]['attributes']) && sizeof($order->products[$i]['attributes']) > 0 ) {
@@ -261,6 +342,7 @@
         }
         ?>
 
+<<<<<<< HEAD
         <?php
         echo zen_draw_form('checkout_confirmation', $formActionLink, 'post', 'id="checkout_confirmation" onsubmit="submitonce();"');
     }
@@ -269,4 +351,6 @@
     <div class="buttonRow forward"><?php echo zen_image_submit(BUTTON_IMAGE_CONFIRM_ORDER, BUTTON_CONFIRM_ORDER_ALT, 'name="btn_submit" id="btn_submit"') ;?></div>
     </form>
     <div class="buttonRow back"><?php echo TITLE_CONTINUE_CHECKOUT_PROCEDURE . '<br />' . TEXT_CONTINUE_CHECKOUT_PROCEDURE; ?></div>
+=======
+>>>>>>> upstream/master
 </div>

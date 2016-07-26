@@ -2,7 +2,11 @@
 # @package Installer
 # @copyright Copyright 2003-2016 Zen Cart Development Team
 # @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+<<<<<<< HEAD
 # @version $Id:  New in v1.6.0 $
+=======
+# @version $Id: Author: DrByte  Sat Jan 9 21:23:05 2016 -0500 New in v1.5.5 $
+>>>>>>> upstream/master
 #
 
 systemChecks:
@@ -22,6 +26,19 @@ systemChecks:
           fileDir: <?php echo DIR_FS_ROOT . 'includes/configure.php' . PHP_EOL; ?>
           changePerms: '0664'
           createFile: TRUE
+<<<<<<< HEAD
+=======
+  checkAdminConfigureFile:
+    runLevel: always
+    errorLevel: FAIL
+    mainErrorText: <?php echo TEXT_ERROR_ADMIN_CONFIGURE .PHP_EOL; ?>
+    methods:
+      CheckWriteableAdminFile:
+        parameters:
+          fileDir: <?php echo 'includes/configure.php' . PHP_EOL; ?>
+          changePerms: '0664'
+          createFile: TRUE
+>>>>>>> upstream/master
   checkPhpVersion:
     runLevel: always
     errorLevel: FAIL
@@ -30,9 +47,15 @@ systemChecks:
       checkPhpVersionMin:
         method: checkPhpVersion
         parameters:
+<<<<<<< HEAD
           version: 5.4.2
           versionTest: ge
           localErrorText: <?php echo sprintf(TEXT_ERROR_PHP_VERSION_MIN, '5.4.2') . PHP_EOL; ?>
+=======
+          version: 5.2.9
+          versionTest: ge
+          localErrorText: <?php echo sprintf(TEXT_ERROR_PHP_VERSION_MIN, '5.2.9') . PHP_EOL; ?>
+>>>>>>> upstream/master
       checkPhpVersionMax:
         method: checkPhpVersion
         parameters:
@@ -42,12 +65,20 @@ systemChecks:
   checkPhpVersionRecommendation:
     runLevel: always
     errorLevel: WARN
+<<<<<<< HEAD
     mainErrorText: <?php echo sprintf(TEXT_ERROR_PHP_VERSION_RECOMMENDED, '5.6') . PHP_EOL; ?>
+=======
+    mainErrorText: <?php echo sprintf(TEXT_ERROR_PHP_VERSION_RECOMMENDED, '5.5') . PHP_EOL; ?>
+>>>>>>> upstream/master
     methods:
       checkPhpVersionRecommended:
         method: checkPhpVersion
         parameters:
+<<<<<<< HEAD
           version: 5.6.0
+=======
+          version: 5.5.0
+>>>>>>> upstream/master
           versionTest: ge
   checkZCversion:
     runLevel: always
@@ -136,6 +167,15 @@ systemChecks:
       checkIniGet1:
         method: checkIniGet
         parameters:
+<<<<<<< HEAD
+=======
+          inigetName: session.use_trans_sid
+          expectedValue: FALSE
+        localErrorText: <?php echo TEXT_ERROR_SESSION_SUPPORT_USE_TRANS_SID . PHP_EOL; ?>
+      checkIniGet2:
+        method: checkIniGet
+        parameters:
+>>>>>>> upstream/master
           inigetName: session.auto_start
           expectedValue: FALSE
         localErrorText: <?php echo TEXT_ERROR_SESSION_SUPPORT_AUTO_START . PHP_EOL; ?>
@@ -225,6 +265,7 @@ systemChecks:
     methods:
       checkHttpsRequest:
 
+<<<<<<< HEAD
 
   checkDBVersion160:
     runLevel: dbVersion
@@ -250,6 +291,8 @@ systemChecks:
             fieldCheck: Type
             expectedResult: 'VARCHAR(64)'
 
+=======
+>>>>>>> upstream/master
   checkDBVersion155:
     runLevel: dbVersion
     errorLevel: WARN

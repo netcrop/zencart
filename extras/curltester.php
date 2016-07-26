@@ -7,9 +7,15 @@
  *   i=1 -- in conjunction with [d] or [r], will show the detailed curlinfo certificate data from the host being connected to. Helpful for advanced debugging.
  *
  * @package utilities
+<<<<<<< HEAD
  * @copyright Copyright 2003-2016 Zen Cart Development Team
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  * @version $Id: Author: DrByte  Wed Mar 16 16:12:21 2016 -0500 Modified in v1.5.5 $
+=======
+ * @copyright Copyright 2003-2016 Zen Cart Development Team
+ * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
+ * @version $Id: Author: DrByte  Wed Mar 16 16:12:21 2016 -0500 Modified in v1.5.5 $
+>>>>>>> upstream/master
  */
 // no caching
 header('Cache-Control: no-cache, no-store, must-revalidate');
@@ -101,6 +107,7 @@ doCurlTest('https://paypal.cardinalcommerce.com/maps/processormodule.asp');
 echo 'Connecting to AuthorizeNet Production Server ...<br>';
 doCurlTest('https://secure.authorize.net/gateway/transact.dll');
 
+<<<<<<< HEAD
 echo 'Connecting to AuthorizeNet Akamai Secondary Production Server ...<br>';
 doCurlTest('https://secure2.authorize.net/gateway/transact.dll');
 
@@ -113,6 +120,17 @@ doCurlTest('https://checkout.globalgatewaye4.firstdata.com/payment');
 echo 'Connecting to Payeezy Processing Server...<br>';
 doCurlTest('https://api.payeezy.com/v1/transactions');
 
+=======
+echo 'Connecting to AuthorizeNet Developer/Sandbox Server ...<br>';
+doCurlTest('https://test.authorize.net/gateway/transact.dll');
+
+echo 'Connecting to First Data GGe4 server (SSL)...<br>';
+doCurlTest('https://checkout.globalgatewaye4.firstdata.com/payment');
+
+echo 'Connecting to Payeezy Processing Server...<br>';
+doCurlTest('https://api.payeezy.com/v1/transactions');
+
+>>>>>>> upstream/master
 echo 'Connecting to Payeezy Sandbox Server...<br>';
 doCurlTest('https://api-cert.payeezy.com/v1/transactions');
 
